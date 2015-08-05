@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Physicalreview" table="physical_review">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="usernumber" column="user_number" />
+		<property name="username" column="user_name" />
+		<property name="reviewcontent" column="review_content" />
+
+		<property name="physicalplan" column="physical_plan" />
+		<property name="state" column="state" />
+		<property name="importdate" column="import_date" />
+
+	</class>
+</hibernate-mapping>

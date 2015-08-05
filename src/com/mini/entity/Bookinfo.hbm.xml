@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Bookinfo" table="table_book_infor">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="isbn10" column="isbn10" />
+		<property name="name" column="name" />		
+		<property name="price" column="price" />
+		<property name="image" column="image" />
+		<property name="auto" column="auto" />
+		<property name="keyword" column="keyword" />		
+		<property name="summary" column="summary" />
+		
+		
+
+	</class>
+</hibernate-mapping>

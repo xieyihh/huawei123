@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Physicalexam" table="physical_exam">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="usernumber" column="user_number" />
+		<property name="username" column="user_name" />
+		<property name="physicalposition" column="physical_position" />
+		<property name="physicalreservedate" column="physical_reservedate" />
+		<property name="physicaldate" column="physical_date" />
+		<property name="physicalstate" column="physical_state" />
+		<property name="physicalplan" column="physical_plan" />
+		<property name="physicalimportdate" column="physical_importdate" />
+		<property name="hasRelatives" column="has_relatives" />
+		<property name="state" column="state" />
+
+	</class>
+</hibernate-mapping>

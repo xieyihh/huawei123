@@ -1,0 +1,76 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		 <!-- 
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		
+		-->
+	 <!-- 
+	    <property name="hibernate.connection.url">jdbc:mysql://119.29.73.32:3306/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		
+	 
+		<property name="hibernate.connection.url">jdbc:mysql://10.66.124.241:3306/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">yan820127@</property>
+		
+		<property name="hibernate.connection.url">jdbc:mysql://554afb8e4cf78.gz.cdb.myqcloud.com:8267/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.username">cdb_outerroot</property>
+		<property name="hibernate.connection.password">yan820127@</property>
+		
+		
+		-->
+		<property name="hibernate.connection.url">jdbc:mysql://119.29.73.32:3306/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="connection.autoReconnect">true</property>
+		<property name="hibernate.c3p0.timeout">10000</property>
+		<property name="hibernate.c3p0.min_size">3</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒-->
+		<property name="hibernate.c3p0.idle_test_period">120</property>
+		<!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
+		<property name="hibernate.c3p0.acquire_increment">2</property>
+		<property name="hibernate.c3p0.maxIdleTime">5</property>
+		<mapping resource="com/mini/entity/Activity.hbm.xml"/>
+		<mapping resource="com/mini/entity/Association.hbm.xml"/>
+		<mapping resource="com/mini/entity/AssociationActivity.hbm.xml"/>
+		<mapping resource="com/mini/entity/Attendee.hbm.xml"/>
+		<mapping resource="com/mini/entity/User.hbm.xml"/>
+		<mapping resource="com/mini/entity/Bus.hbm.xml"/>
+		<mapping resource="com/mini/entity/Topic.hbm.xml"/>
+		<mapping resource="com/mini/entity/Comment.hbm.xml"/>
+		<mapping resource="com/mini/entity/Promotion.hbm.xml"/>
+		<mapping resource="com/mini/entity/Feedback.hbm.xml"/>
+		<mapping resource="com/mini/entity/Bookinfo.hbm.xml"/>
+		<mapping resource="com/mini/entity/ImportBookInfo.hbm.xml"/>
+		<mapping resource="com/mini/entity/BookBorrowinfo.hbm.xml"/>
+		<mapping resource="com/mini/entity/BookNumber.hbm.xml"/>
+		<mapping resource="com/mini/entity/BookType.hbm.xml"/>
+		<mapping resource="com/mini/entity/BookDictionary.hbm.xml"/>
+		<mapping resource="com/mini/entity/BookNice.hbm.xml"/>
+		<mapping resource="com/mini/entity/SecurityCode.hbm.xml"/>
+		<mapping resource="com/mini/entity/Physicalexam.hbm.xml"/>
+		<mapping resource="com/mini/entity/Physicalrelatives.hbm.xml"/>
+		<mapping resource="com/mini/entity/Physicalreview.hbm.xml"/>
+		<mapping resource="com/mini/entity/Physicalinit.hbm.xml"/>
+		<mapping resource="com/mini/entity/UserLevel.hbm.xml"/>
+		<mapping resource="com/mini/entity/UserRolePopedom.hbm.xml"/>
+		<mapping resource="com/mini/entity/UserImage.hbm.xml"/>
+		<mapping resource="com/mini/entity/ActivityStart.hbm.xml"/>
+		<mapping resource="com/mini/entity/ActivityInit.hbm.xml"/>
+		<mapping resource="com/mini/entity/ActivitySignup.hbm.xml"/>
+		<mapping resource="com/mini/entity/ActivityStatus.hbm.xml"/>
+		<mapping resource="com/mini/entity/PhysicalEditRedate.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

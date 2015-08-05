@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="User" table="table_user">
+		<id name="id" column="user_id">
+			<generator class="native" />
+		</id>
+		<property name="name" column="user_name" />
+		<property name="account" column="user_account" />
+		<property name="salt" column="user_salt" />
+		<property name="password" column="user_password" />
+		<property name="number" column="user_number" />
+		<property name="gender" column="user_gender" />
+		<property name="phone" column="user_phone" />
+		<property name="level" column="user_level" />
+		<property name="authority" column="user_authority" />
+		<property name="remark" column="user_remark" />
+	</class>
+</hibernate-mapping>

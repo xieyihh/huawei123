@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Attendee" table="table_attendee">
+		<id name="id" column="attendee_id">
+			<generator class="native" />
+		</id>
+		<property name="activityId" column="attendee_activityId" />
+		<property name="userId" column="attendee_userId" />
+		<property name="user" column="attendee_user" />
+		<property name="property" column="attendee_property" />
+	</class>
+</hibernate-mapping>

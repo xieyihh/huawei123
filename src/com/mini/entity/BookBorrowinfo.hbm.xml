@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+
+	<class name="BookBorrowinfo" table="book_borrow_infor">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="onlysign" column="onlysign" />
+		<property name="borrower" column="borrower" />		
+		<property name="date" column="borrowdate" />
+		<property name="state" column="state" />
+		<property name="backdate" column="backdate" />	
+		<property name="borrowposition" column="borrowposition" />	
+		<property name="backposition" column="backposition" />	
+
+	</class>
+</hibernate-mapping>

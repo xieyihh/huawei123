@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Comment" table="table_comment">
+		<id name="id" column="comment_id">
+			<generator class="native" />
+		</id>
+		<property name="topicId" column="comment_topicId" />
+		<property name="detail" column="comment_detail" />
+		<property name="time" column="comment_time" type="timestamp" />
+		<property name="userId" column="comment_userId" />
+		<property name="userName" column="comment_userName" />
+		<property name="favorAmount" column="comment_favorAmount" />
+		<property name="favorId" column="comment_favorId" />
+		<property name="replyUser" column="comment_replyUser" />
+		<property name="replyDetail" column="comment_replyDetail" />
+	</class>
+</hibernate-mapping>

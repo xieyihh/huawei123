@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Topic" table="table_topic">
+		<id name="id" column="topic_id">
+			<generator class="native" />
+		</id>
+		<property name="title" column="topic_title" />
+		<property name="detail" column="topic_detail" />
+		<property name="foundTime" column="topic_foundTime" type="timestamp" />
+		<property name="founderId" column="topic_founderId" />
+		<property name="founderName" column="topic_founderName" />
+		<property name="favorAmount" column="topic_favorAmount" />
+		<property name="favorId" column="topic_favorId" />
+		<property name="commentAmount" column="topic_commentAmount" />
+		<property name="updateTime" column="topic_updateTime" type="timestamp" />
+	</class>
+</hibernate-mapping>

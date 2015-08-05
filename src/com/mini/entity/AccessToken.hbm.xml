@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.mini.entity">
+	<class name="AccessToken" table="access_token">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="token" column="token" />
+		<property name="expiresIn" column="expiresIn" />
+	</class>
+</hibernate-mapping>
