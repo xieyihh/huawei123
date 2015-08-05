@@ -545,7 +545,7 @@ public class PhysicalexamService {
 		String hqlWhere = " and o.state='0' ";
 		//组织排序
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
-		orderby.put("o.physicalplan", "desc");
+		orderby.put("o.importdate", "desc");
 		List<String> paramsList = new ArrayList<String>();
 		
 		//查询条件，工号，姓名，体检号，预约体检时间，体检时间，体检地点，体检状态，体检批次，是否有家属
@@ -605,6 +605,7 @@ public class PhysicalexamService {
 				physicalreviewForm.setId(String.valueOf(physicalreview.getId()));
 				physicalreviewForm.setReviewcontent(physicalreview.getReviewcontent());
 				physicalreviewForm.setPhysicalimportdate(dateFormat.format(physicalreview.getImportdate()));
+				physicalreviewForm.setPhysicalplan(physical_planarray[Integer.valueOf(physicalreview.getPhysicalplan())-1]);
 				returnlist.add(physicalreviewForm);		
 				continue;
 			}
