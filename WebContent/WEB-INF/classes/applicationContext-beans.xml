@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置系统中的domain层、Dao层、Manager层 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<!-- 配置实体类 -->
+	<bean id="activity" class="com.mini.entity.Activity" />
+	<bean id="association" class="com.mini.entity.Association" />
+	<bean id="associationActivity" class="com.mini.entity.AssociationActivity" />
+	<bean id="attendee" class="com.mini.entity.Attendee" />
+	<bean id="user" class="com.mini.entity.User" />
+	<bean id="bus" class="com.mini.entity.Bus" />
+	<bean id="topic" class="com.mini.entity.Topic" />
+	<bean id="promotion" class="com.mini.entity.Promotion" />
+	<bean id="feedback" class="com.mini.entity.Feedback" />
+	<bean id="bookinfo" class="com.mini.entity.Bookinfo" />
+	<bean id="importBookInfo" class="com.mini.entity.ImportBookInfo" />
+	<bean id="bookBorrowinfo" class="com.mini.entity.BookBorrowinfo" />
+	<bean id="booknumber" class="com.mini.entity.BookNumber" />
+	<bean id="booktype" class="com.mini.entity.BookType" />
+	<bean id="bookdictionary" class="com.mini.entity.Bookdictionary" />
+	<bean id="bookNice" class="com.mini.entity.BookNice" />
+	
+	
+	<!-- 配置dao层 -->
+	<bean id="commonDao" class="com.mini.dao.CommonDao" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置service层 -->
+	<bean id="activityService" class="com.mini.service.ActivityService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="associationService" class="com.mini.service.AssociationService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="associationActivityService" class="com.mini.service.AssociationActivityService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="userService" class="com.mini.service.UserService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="busService" class="com.mini.service.BusService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="topicService" class="com.mini.service.TopicService" >
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="commentService" class="com.mini.service.CommentService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="promotionService" class="com.mini.service.PromotionService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="feedbackService" class="com.mini.service.FeedbackService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>		
+	<!-- ImportBookService sun start -->
+	<bean id="importBookService" class="com.mini.service.ImportBookService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="bookDoubanInforService" class="com.mini.service.BookDoubanInforService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="bookBackstageService" class="com.mini.service.BookBackstageService">
+		<property name="dao" ref="commonDao"></property>
+	</bean>
+	<bean id="levelAop" class="com.mini.aop.LevelAop">
+	</bean>
+</beans>

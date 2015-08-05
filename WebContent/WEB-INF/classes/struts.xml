@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<constant name="struts.multipart.maxSize" value="600000000"/> 
+	<constant name="struts.i18n.encoding" value="UTF8" />
+	<!-- 配置默认包，其他的包都继承这个包 -->
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="login" class="loginInterceptor">
+				<!-- 指定下列这些方法不需要被拦截 -->
+				<param name="excludeMethods">
+					login,loginByAjax,logout,exist,register,addFeedback
+				</param>
+			</interceptor>
+				
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="login"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 配置默认的拦截器 -->
+		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
+	</package>
+	<!-- 系统相关的Action -->
+	<package name="action" extends="default">
+		<global-results>
+			<result name="not_login" type="redirect">/login.jsp</result>
+			<result name="nolevel" type="redirect">/forum.jsp</result>
+		</global-results>
+		<action name="activityAction" class="activityAction">
+		</action>
+		<action name="associationAction" class="associationAction">
+			<result name="detail">/associationDetail.jsp</result>
+		</action>
+		<action name="associationActivityAction" class="associationActivityAction">
+		</action>
+		<action name="userAction" class="userAction">
+			<result name="yes" type="redirect">${prePage}</result>
+			<result name="login_success" type="redirect">/forum.jsp</result>
+			<result name="login_failed">/login.jsp</result>
+			<result name="logout" type="redirect">/login.jsp</result>
+			<result name="register_success">/login.jsp</result>
+			<result name="register_failed">/register.jsp</result>
+		</action>
+		<action name="busAction" class="busAction">
+			<param name="savePath">/upload</param>
+		</action>
+		<action name="topicAction" class="topicAction">
+		</action>
+		<action name="commentAction" class="commentAction">
+		</action>
+		<action name="promotionAction" class="promotionAction">
+		</action>
+		<action name="feedbackAction" class="feedbackAction">
+		</action>
+		<action name="scanbook" class="bookDoubanInfoAction" method="scanbook">
+		<!--  <result name="borrowsuccess">/borrow.jsp</result>-->
+			<result name="borrowsuccess">/page/system/borrowSuccess.jsp</result>
+			<result name="login">/pleaselogin.jsp</result>
+			<result name="backsuccess">/backsuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="notexit">/notexit.jsp</result>
+			<result name="hasborrow">/error.jsp</result>
+		</action>
+		<!-- 
+		<action name="scan" class="bookDoubanInfoAction" method="scan">
+			<result name="success">/bookinfodouban.jsp</result>
+			<result name="list">/showbooklist.jsp</result>
+			<result name="hasborrow">/hasborrow.jsp</result>
+		</action>	
+		 -->	
+		<action name="test" class="bookDoubanInfoAction" method="test">
+			<result name="success">/showbookhome.jsp</result>
+		</action>
+		
+		<action name="importbook" class="importBookAction" method="importbook">
+			<result name="success">/bookinfo.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="importbooktype" class="importBookAction" method="importbooktype">
+			<result name="success">/bookinfo.jsp</result>
+		</action>
+		
+		<action name="showbookinfo" class="importBookAction" method="showbookinfo">
+			<result name="success">/bookinfo.jsp</result>
+		</action>
+		<action name="getdoubaninfor" class="bookDoubanInfoAction" method="getdoubaninfor">
+			<result name="success">/bookinfodoubanindex.jsp</result>
+		</action>
+		<action name="excelAdd" class="bookDoubanInfoAction" method="excelAdd">
+			<result name="success">/textAdd.jsp</result>
+		</action>
+		
+		<action name="downloadbookinfo" class="bookDoubanInfoAction" method="downloadbookinfo">
+			<result name="success">/bookinfodouban.jsp</result>
+			<result name="exit">/exit.jsp</result>
+			<result name="nobook">/nobook.jsp</result>
+		</action>
+		<action name="deletebooknumber" class="bookDoubanInfoAction" method="deletebooknumber">
+		
+		</action>
+		<action name="getoneimportbookinfo" class="bookDoubanInfoAction" method="getoneimportbookinfo">
+			<result name="success">/editbook.jsp</result>		 	
+		</action>	
+
+		<action name="getallbookinfo" class="importBookAction" method="getallbookinfo">
+		<!--  /bookinfo.jsp
+			<result name="success"  >/bookinfo.jsp</result>
+			<result name="list" >/bookinfolist.jsp</result>-->
+		</action>	
+		
+		<action name="pesrsonborrowbook" class="importBookAction" method="pesrsonborrowbook">
+			<result name="success">/borrowbookindex.jsp</result>
+		</action>	
+		
+		<action name="borrowbook" class="importBookAction" method="borrowbook">
+			<result name="success">/borrow.jsp</result>
+		</action>
+		<action name="clickborrowbook" class="importBookAction" method="clickborrowbook">
+			<result name="success">/borrow.jsp</result>
+			<result name="hasborrow">/hasborrow.jsp</result>
+			<result name="login">/pleaselogin.jsp</result>	
+			<result name="chooseplace">/error.jsp</result>	
+		</action>
+		<action name="saveimportbookinfo" class="bookDoubanInfoAction" method="saveimportbookinfo">
+		<!--  -->
+			<result name="success" type="redirect">
+				/bookinfo.jsp
+			</result>
+			
+		</action>
+		<action name="borrowbookByisbn" class="bookDoubanInfoAction" method="borrowbookByisbn">
+			<result name="success">/borrowinfoonlysign.jsp</result>
+			
+		</action>
+		<action name="backbook" class="bookDoubanInfoAction" method="backbook">
+			<result name="success">/backbookindex.jsp</result>
+			
+		</action>
+		<action name="clickbackbook" class="bookDoubanInfoAction" method="clickbackbook">
+			<result name="success">/page/system/backSuccess.jsp</result>
+			<result name="login">/pleaselogin.jsp</result>
+			<result name="notborrow">/notborrow.jsp</result>
+			<result name="chooseplace">/error.jsp</result>	
+					
+		</action>
+		<action name="showbookinfohome" class="showBookAction" method="showbookinfohome">
+			<result name="success">/page/system/showbookhome.jsp</result>
+			<result name="list">/page/system/showbookhomelist.jsp</result>
+		<!--  
+			<result name="success">/showbookindex.jsp</result>
+			<result name="list">/showbooklist.jsp</result>-->
+		</action>	
+		<action name="showbookinfolist" class="showBookAction" method="showbookinfolist">			
+			<result name="success">/page/system/showbookhomelist.jsp</result>
+		</action>
+		<action name="downallbookinfo" class="bookDoubanInfoAction" method="downallbookinfo">
+		 
+		<!-- <result name="success" type="redirect">
+				/bookinfo.jsp
+		</result>
+			<result name="success" type="redirectAction">
+				getallbookinfo?resultjsp=${#request.resultjsp}
+			</result>-->
+			<result name="fail" >
+				/page/system/failbook.jsp
+			</result>
+		</action>
+		<action name="Excelexport" class="importBookAction" method="Excelexport">
+		  
+		<!-- <result name="success"  >
+				/bookinfo.jsp
+			</result> -->	
+		</action>
+			<action name="bookdictionary" class="bookBackstageAction" method="list">
+			<result name="success">dictionaryIndex.jsp</result>
+		</action>
+		<action name="BookDDledit" class="bookBackstageAction" method="bookDDledit">
+			<result name="success">dictionaryEdit.jsp</result>
+		</action>
+		<action name="bookDDlsave" class="bookBackstageAction" method="bookDDlsave">
+			<result name="success" type="redirectAction">
+				<param name="actionname">/bookdictionary</param>
+			</result>
+		</action>
+		<action name="menuleft" class="bookBackstageAction" method="menuleft">
+			<result name="success" >/left.jsp</result>
+		</action>
+		<action name="userborrowhistory" class="bookBackstageAction" method="userborrowhistory">
+			<result name="success" >/page/system/userhistoryindex.jsp</result>
+			<result name="list" >/page/system/userhistorylist.jsp</result>
+		</action>
+		<action name="personborrowhistory" class="bookBackstageAction" method="personborrowhistory">
+			<result name="success" >/page/system/personhistoryindex.jsp</result>
+			<result name="list" >/page/system/userhistorylist.jsp</result>
+		</action>
+		<action name="bookborrowhistory" class="bookBackstageAction" method="bookborrowhistory">
+			<result name="success" >/page/system/bookhistoryindex.jsp</result>
+			
+		</action>
+		<action name="bookremainingamount" class="bookBackstageAction" method="bookremainingamount">
+			<result name="success" >/page/system/bookremainingamount.jsp</result>
+			<result name="list" >/page/system/bookremainingamount.jsp</result>
+		</action>
+		<action name="bookclassifihome" class="showBookAction" method="bookclassifihome">
+			<result name="success">/page/system/bookclassifi.jsp</result>
+
+		</action>
+		<action name="bookclassifilist" class="showBookAction" method="bookclassifilist">			
+			<result name="success">/page/system/bookclassifilist.jsp</result>
+		</action>
+		<action name="bookinformation" class="showBookAction" method="bookinformation">			
+			<result name="success">/page/system/bookInformationUInobutton.jsp</result>
+		</action>
+		<action name="scan" class="showBookAction" method="scan">			
+			<result name="success">/page/system/bookInformationUI.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="borrowhistory" class="showBookAction" method="borrowhistory">			
+			<result name="success">/page/system/personalInformation.jsp</result>
+			<result name="login">/pleaselogin.jsp</result>	
+		</action>
+		<action name="borrowranking" class="showBookAction" method="borrowranking">			
+			<result name="success">/page/system/borrowRankingIndex.jsp</result>
+			<result name="login">/pleaselogin.jsp</result>	
+		</action>
+		<action name="backlogin" class="showBookAction" method="backlogin">			
+			
+		</action>
+		<action name="home" class="showBookAction" method="backhome">			
+			<result name="success">/page/menu//home.jsp</result>	
+			<result name="fail" type="redirect">/forum.jsp</result>
+		</action>
+		<action name="dictionaryshow" class="bookBackstageAction" method="dictionaryshow">
+			<!--  <result name="success" >/page/system/bookhistoryindex.jsp</result>
+			-->
+		</action>
+		<action name="dictionarySave" class="bookBackstageAction" method="dictionarySave">
+			<!--  <result name="success" >/page/system/bookhistoryindex.jsp</result>
+			-->
+		</action>
+		
+			
+	</package>
+	<!-- 处理微信相关请求的Action -->
+	<package name="wechat" extends="struts-default">
+		<action name="wechatAction" class="wechatAction" method="process">
+		</action>
+	</package>
+
+
+	<package name="douban" namespace="/" extends="struts-default">
+		
+	</package>
+	<package name="ceshi" namespace="/" extends="struts-default">
+		<action name="test1" class="com.mini.action.TestAction" method="list">
+			<result name="success">test1.jsp</result>
+		</action>
+	</package>
+	<package name="book" namespace="/" extends="struts-default">
+		
+		 
+	<action name="getbookinfo" class="importBookAction" method="getbookinfo">
+		<result name="success">test1.jsp</result>
+	</action>
+		
+		
+		
+	</package>
+	<package name="doubaninfo" namespace="/" extends="struts-default">
+	
+		<!-- <action name="topmenu" class="showBookAction" method="topmenu">
+		<result name="success" >/page/menu/title.jsp</result>
+	</action> -->
+	<action name="feedbackhome" class="feedbackshowAction" method="feedbackhome">
+			<result name="success">/page/system/feedbackhome.jsp</result>
+		</action>
+	<action name="feedbackexport" class="feedbackshowAction" method="feedbackexport">			
+			
+	</action>
+	<action name="classifi" class="showBookAction" method="classifi">			
+
+	</action>
+	<action name="dateborrowranking" class="showBookAction" method="dateborrowranking">			
+
+	</action>	
+			
+	</package>
+
+	
+</struts>

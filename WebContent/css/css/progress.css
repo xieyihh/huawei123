@@ -1,0 +1,61 @@
+
+#dots {
+	margin-top: 10px;
+}
+.dot {
+  display: inline-block;
+  margin: 0 20px 0px 20px; 
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #5F5F57;
+}
+
+.dot:first-child {
+   -webkit-animation: 1s blink 0s infinite;
+   -webkit-animation-direction: alternate;
+   -ms-animation: 1s blink 0s infinite;
+   -ms-animation-direction: alternate;
+}
+.dot:nth-child(2) {
+   -webkit-animation: 1s blink 1s infinite;
+   -webkit-animation-direction: alternate;
+   -ms-animation: 1s blink 1s infinite;
+   -ms-animation-direction: alternate;
+}
+.dot:nth-child(3) {
+   -webkit-animation: 1s blink 2s infinite;
+   -webkit-animation-direction: alternate;
+   -ms-animation: 1s blink 2s infinite;
+   -ms-animation-direction: alternate;
+}
+
+
+@-webkit-keyframes blink {
+  from {background: ##5F5F57;}
+  to {background: #E4E4E4;}
+}
+
+#progress-bar {
+  margin-top: 10px;
+  height: 20px;
+  width: 300px;
+  background: #E4E4E4;
+}
+#bar {
+  width: 0px;
+  height: 20px;
+  background: #0085D0;
+  -webkit-animation: 5s load 0s 1 ease-out;   
+  -ms-animation: 5s load 0s 1 ease-out;
+}
+
+@-webkit-keyframes load {
+  from {width: 0px;}
+  to {width: 300px;}
+}
+@-ms-keyframes load {
+  from {width: 0px;}
+  to {width: 300px;}
+}
+

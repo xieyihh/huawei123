@@ -1,0 +1,134 @@
+@CHARSET "UTF-8";
+body {
+	font-family: "微软雅黑";
+}
+.background_img {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: -10;
+}
+.main_content {
+	padding: 0;
+	
+	
+}
+ul {
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+}
+/**等待提示框**/
+.loading_dialog .modal-dialog .modal-header {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.loading_dialog .modal-dialog .modal-body .progress-bar {
+	width: 100%;
+}
+.loading_dialog .modal-dialog .modal-body .loading_msg_div {
+	text-align: center;
+	font-size: 16px;
+}
+/****系统通知****/
+.system_msg_dialog .modal-header h4 {
+	margin: 0;
+}
+.system_msg_dialog .modal-body {
+	padding: 10px;
+}
+.system_msg_dialog .modal-body .system_msg_div {
+	font-size: 16px;
+	text-align: center;
+}
+/*****页面上方标题*******/
+.title_div {
+	background-color: #39A337;
+	overflow: hidden;
+	text-align: right;
+}
+.title_div img {
+	max-height: 60px;
+	margin-left: 10%;
+	float: left;
+}
+.title_div .right_title_div {
+	font-size: 18px;
+	color: white;
+	height: 60px;
+	margin-right: 10px;
+}
+.title_div .right_title_div .right_title_span {
+	line-height: 60px;
+}
+.title_div .right_title_div .right_title_span a {
+	color: white;
+	margin-left: 5px;
+}
+.right {
+	text-align: right;
+}
+/*****错误信息*****/
+.msg_div {
+	width: 100%;
+	text-align: center;
+	padding: 5px;
+	font-size: 14px;
+	color: white;
+	background-color: #d9534f;
+	border-radius: .25em;
+	display: none;
+}
+/**用于传递参数的元素，不需要显示***/
+.hide {
+	visibility: hidden;
+}
+/******Bootstrap定制**********/
+.input-group .input-group-addon {
+	background-color: #59C129;
+	color: white;
+	border-color: #59C129;
+}
+.input-group .input-group-addon, .input-group input, .input-group textarea {
+	font-size: 16px;
+}
+.btn, .alert {
+	font-size: 16px;
+}
+.btn-success, .label-success {
+	background-color: #59C129;
+	border-color: #59C129;
+}
+.input-group .input-group-btn .btn {
+	font-size: 14px;
+}
+.alert button span {
+	font-size: 25px;
+}
+.list-group {
+	margin-bottom: 0;
+}
+.list-group .list-group-item {
+	font-size: 18px;
+}
+.panel .panel-heading .panel-title {
+	font-size: 20px;
+}
+.panel .panel-footer {
+	text-align: right;
+}
+.modal .modal-dialog .modal-footer {
+	margin-top: 0px;
+}
+/******PC屏幕适配*******/
+@media (min-width: 768px) {
+	body {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+}
+	

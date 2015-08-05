@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置系统中的Action层 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+           
+	<!-- 配置拦截器 -->
+	<bean id="loginInterceptor" class="com.mini.interceptor.LoginInterceptor" scope="prototype">
+	</bean>
+	<!-- 配置Action -->
+	<bean id="baseAction" class="com.mini.action.BaseAction" scope="prototype">
+	</bean>
+	<bean id="activityAction" class="com.mini.action.ActivityAction" scope="prototype">
+		<property name="service" ref="activityService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean id="doubanAction" class="com.mini.action.DouBanAction" scope="prototype">
+	</bean>
+	
+	<bean id="associationAction" class="com.mini.action.AssociationAction" scope="prototype">
+		<property name="service" ref="associationService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="associationActivityAction" class="com.mini.action.AssociationActivityAction" scope="prototype">
+		<property name="service" ref="associationActivityService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<bean id="userAction" class="com.mini.action.UserAction" scope="prototype">
+		<property name="service" ref="userService"></property>
+	</bean>
+	<bean id="busAction" class="com.mini.action.BusAction" scope="prototype">
+		<property name="service" ref="busService"></property>
+	</bean>
+	<bean id="topicAction" class="com.mini.action.TopicAction" scope="prototype">
+		<property name="service" ref="topicService"></property>
+	</bean>
+	<bean id="commentAction" class="com.mini.action.CommentAction" scope="prototype">
+		<property name="service" ref="commentService"></property>
+	</bean>
+	<bean id="promotionAction" class="com.mini.action.PromotionAction" scope="prototype">
+		<property name="service" ref="promotionService"></property>
+		<property name="photoDirectory" value="file/photo/"></property>
+		<property name="thumbnailWidth" value="1000"></property>
+	</bean>
+	<bean id="wechatAction" class="com.mini.action.WechatAction" scope="prototype">
+	</bean>
+	<bean id="feedbackAction" class="com.mini.action.FeedbackAction" scope="prototype">
+		<property name="service" ref="feedbackService"></property>
+	</bean>
+	
+	<!-- sun start -->
+	<bean id="importBookAction" class="com.mini.action.ImportbookAction" scope="prototype">
+		<property name="service" ref="importBookService"></property>
+	</bean>
+	<bean id="bookDoubanInfoAction" class="com.mini.action.BookDoubanInfoAction" scope="prototype">
+		  <property name="doubanservice" ref="bookDoubanInforService"></property>
+		  <property name="service" ref="importBookService"></property>		
+		    
+	</bean>
+	<bean id="showBookAction" class="com.mini.action.ShowBookAction" scope="prototype">
+		  <property name="doubanservice" ref="bookDoubanInforService"></property>
+		  <property name="service" ref="importBookService"></property>	
+		   <property name="bookservice" ref="bookBackstageService"></property>		  
+	</bean>
+	<bean id="bookBackstageAction" class="com.mini.action.BookBackstageAction" scope="prototype">
+		  <property name="service" ref="bookBackstageService"></property>	
+		  
+	</bean>
+	
+	<bean id="feedbackshowAction" class="com.mini.action.FeedbackShowAction" scope="prototype">
+		<property name="service" ref="feedbackService"></property>
+	</bean>
+</beans>
