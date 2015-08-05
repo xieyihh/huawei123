@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding/.jshintrc=UTF-8
+encoding//WebContent/bookinfodouban.jsp=UTF-8
+encoding//WebContent/borrowbookindex.jsp=UTF-8
+encoding//WebContent/page/menu/title.jsp=UTF-8
+encoding//WebContent/page/system/bookInformationUI.jsp=UTF-8
+encoding//WebContent/test.jsp=UTF-8
+encoding//src/com/mini/util/CsvExport.java=UTF-8
+encoding//src/com/mini/util/ExcelFileGenerator.java=UTF-8
+encoding//src/log4j.properties=UTF-8
+encoding/<project>=UTF-8
