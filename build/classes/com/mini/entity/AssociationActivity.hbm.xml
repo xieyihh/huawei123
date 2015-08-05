@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="AssociationActivity" table="table_associationActivity">
+		<id name="id" column="associationActivity_id">
+			<generator class="native" />
+		</id>
+		<property name="name" column="associationActivity_name" />
+		<property name="description" column="associationActivity_description" />
+		<property name="initiatorId" column="associationActivity_initiatorId" />
+		<property name="initiator" column="associationActivity_initiator" />
+		<property name="date" column="associationActivity_date" />
+		<property name="applyDeadline" column="associationActivity_applyDeadline" />
+		<property name="startDate" column="associationActivity_startDate" />
+		<property name="endDate" column="associationActivity_endDate" />
+		<property name="associationId" column="associationActivity_associationId" />
+		<property name="association" column="associationActivity_association" />
+		<property name="attendees" column="associationActivity_attendees" />
+		<property name="size" column="associationActivity_size" />
+	</class>
+</hibernate-mapping>

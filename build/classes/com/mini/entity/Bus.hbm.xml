@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Bus" table="table_bus">
+		<id name="id" column="bus_id">
+			<generator class="native" />
+		</id>
+		<property name="type" column="bus_type" />
+		<property name="number" column="bus_number" />
+		<property name="time" column="bus_time" />
+		<property name="start" column="bus_start" />
+		<property name="end" column="bus_end" />
+		<property name="line" column="bus_line" />
+		<property name="price" column="bus_price" />
+		<property name="vehicleType" column="bus_vehicleType" />
+		<property name="plateNumber" column="bus_plateNumber" />
+		<property name="driver" column="bus_driver" />
+		<property name="remark" column="bus_remark" />
+	</class>
+</hibernate-mapping>

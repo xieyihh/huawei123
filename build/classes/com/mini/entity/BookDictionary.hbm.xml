@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+
+	<class name="Bookdictionary" table="book_dictionary">
+
+		<id name="secid" column="secid">
+			<generator class="native" />
+		</id>
+		<property name="Keyword" column="Keyword" />
+		<property name="DdlCode" column="DdlCode" />		
+		<property name="DdlName" column="DdlName" />
+
+	</class>
+</hibernate-mapping>

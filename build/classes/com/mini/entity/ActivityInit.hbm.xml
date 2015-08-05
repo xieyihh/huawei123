@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="ActivityInit" table="activity_init">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="flag" column="activity_flag" />
+		<property name="content" column="activity_content" />
+		<property name="activityid" column="activity_id" />
+		<property name="remark" column="remark" />		
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Association" table="table_association">
+		<id name="id" column="association_id">
+			<generator class="native" />
+		</id>
+		<property name="name" column="association_name" />
+		<property name="description" column="association_description" />
+		<property name="date" column="association_date" type="date" />
+		<property name="state" column="association_state" />
+		<property name="founderId" column="association_founderId" />
+		<property name="founder" column="association_founder" />
+		<property name="administrators" column="association_administrators" />
+		<property name="members" column="association_members" />
+		<property name="size" column="association_size" />
+	</class>
+</hibernate-mapping>

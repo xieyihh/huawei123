@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Promotion" table="table_promotion">
+		<id name="id" column="promotion_id">
+			<generator class="native" />
+		</id>
+		<property name="title" column="promotion_title" />
+		<property name="detail" column="promotion_detail" length="1000" />
+		<property name="date" column="promotion_date" />
+		<property name="publisherId" column="promotion_publisherId" />
+		<property name="publisher" column="promotion_publisher" />
+		<property name="photoUrl" column="promotion_photoUrl" />
+		<property name="favorAmount" column="promotion_favorAmount" />
+		<property name="favorId" column="promotion_favorId" />
+		<property name="state" column="promotion_state" />
+	</class>
+</hibernate-mapping>

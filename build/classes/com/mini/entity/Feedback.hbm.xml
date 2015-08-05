@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mini.entity">
+	<class name="Feedback" table="table_feedback">
+		<id name="id" column="feedback_id">
+			<generator class="native" />
+		</id>
+		<property name="name" column="feedback_name" />
+		<property name="number" column="feedback_number" />
+		<property name="content" column="feedback_content" />
+		<property name="time" column="feedback_time" />
+		<property name="state" column="feedback_state" />
+	</class>
+</hibernate-mapping>

@@ -101,22 +101,24 @@
 		/**
 		 * 查看工号相关信息 Dom事件
 		 */
-		$("select#physicalPlanSin").change(function(){
-			var workNumber = $("#workNumber").val();
-			if(workNumber.length<7||workNumber.length>8){
-				return false;
-			}
-			var plan=$("#physicalPlanSin").val();
-			if(plan===""){
-				alert("请选择次体检批次");
-				return false;
-			}
-			
-			checkData(workNumber,plan);
-		});
+//		$("select#physicalPlanSin").change(function(){
+//			var workNumber = $("#workNumber").val();
+//			if(workNumber.length<7||workNumber.length>8){
+//				return false;
+//			}
+//			var plan=$("#physicalPlanSin").val();
+//			if(plan===""){
+//				alert("请选择次体检批次");
+//				return false;
+//			}
+//			
+//			checkData(workNumber,plan);
+//		});
 		var number = $(".main_content form #innerdiv .form-group input[name='workNumber']");
 		var workNumberObject=document.getElementById('workNumber');
+	//	if(workNumberObject.addEventListener){
 		workNumberObject.addEventListener('input', function (){
+				
 				var workNumber = workNumberObject.value;
 				var re = /^\d+$/;
 				if(!re.test(workNumber)){
@@ -128,11 +130,31 @@
 				}else{
 					
 					//http://localhost:8080/mini/getUsernameByusernumber.action?usermunber=2115323&physicalplan=1
-					checkData(workNumber,plan);
+					checkData(workNumber);
 					
 				}
 				
-		},false); 
+		},false);
+//		} else{
+//			workNumberObject.attachEvent('input', function (){
+//				alert(2)
+//				var workNumber = workNumberObject.value;
+//				var re = /^\d+$/;
+//				if(!re.test(workNumber)){
+//					inputPopover(number,"请输入数字", 2); 
+//					return false;
+//				}
+//				if(workNumber.length<7||workNumber.length>8){
+//					return false;
+//				}else{
+//					
+//					//http://localhost:8080/mini/getUsernameByusernumber.action?usermunber=2115323&physicalplan=1
+//					checkData(workNumber);
+//					
+//				}
+//				
+//		});
+//		}
 		/**
 		 * 保存体检信息
 		 */
@@ -229,7 +251,8 @@ function bindData(){
 	}); 
 }	
 
-function checkData(workNumber,plan){
+function checkData(workNumber){
+	//alert(workNumber)
 	$.ajax({ 
 		type: "get", 
 		dataType: "json", 
