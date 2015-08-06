@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding/.jshintrc=UTF-8
+encoding//WebContent/WEB-INF/classes/applicationContext-common.xml=UTF-8
 encoding//WebContent/bookinfodouban.jsp=UTF-8
 encoding//WebContent/borrowbookindex.jsp=UTF-8
 encoding//WebContent/page/menu/title.jsp=UTF-8

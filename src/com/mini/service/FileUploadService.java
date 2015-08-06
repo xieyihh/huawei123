@@ -42,6 +42,16 @@ public class FileUploadService {
 	
 	public String getimageupload(User user, FileUploadlForm fileUploadlForm) throws Exception {
 		if(user==null){
+			//说明没有登录
+			UserImage useriamge=new UserImage();
+            useriamge.setUsernumber(fileUploadlForm.getUsernumber());
+            useriamge.setFeedbackname(fileUploadlForm.getFeedbackname());
+            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
+
+            
+            
+            useriamge.setFeedbacktime(new Date());
+            dao.save(useriamge);  
 			return "noUser";
 		}else{
 			UserImage useriamge=null;

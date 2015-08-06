@@ -13,7 +13,28 @@ public class FileUploadlForm {
 	private String imagename;    //文件名   
     private String imagedata;        //文件路径
     
+	private String name;			//姓名
+	private String number;		//工号
+	private String content;		//反馈内容
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getImagename() {
 		return imagename;
 	}
