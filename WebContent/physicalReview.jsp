@@ -26,7 +26,7 @@
 	<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="bootstrap/bootstrap.min.js"></script>
    <script src="bootstrap/jquery.min.js"></script>
-   <script type="text/javascript" src="js/myJs/physicalReview.js?v1.2.7"></script>
+   <script type="text/javascript" src="js/myJs/physicalReview.js?v1.3.2"></script>
 	 <!-- 日历 -->
 <script type="text/javascript" src="My97DatePicker/WdatePicker.js?v1.1" ></script>
 

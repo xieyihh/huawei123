@@ -124,7 +124,7 @@
 				
 				$(this).html('<img src="img/save.gif" border="0" title="保存">');
 				$('#reviewcontent'+listNum+'').text('');
-				var input = '<textarea  id="content" value=' + old +'>';
+				var input = '<textarea  id="content" >'+ old +'</textarea>';
 				$('#reviewcontent'+listNum+'').append(input);
 				
 					
