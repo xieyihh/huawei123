@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -45,49 +46,51 @@ public class FileUploadService {
 		}else{	
 			UserImage useriamge=null;
 			String filenameflag="";//本次上传的标志位
-
-			String[] imagename=fileUploadlForm.getImagename().split("%;-%");
-			String[] imagedata=fileUploadlForm.getImagedata().split("%;-%");
-			System.out.println(imagename);
-			if(imagename==null||imagename.length==0){
-				useriamge=new UserImage();
-	            useriamge.setUsernumber(user.getNumber());
-	            useriamge.setFeedbackname(user.getName());
-	            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
-	            useriamge.setFeedbacktime(new Date());
-	            dao.save(useriamge);  
-	        	return "success";
+			if(!StringUtils.isBlank(fileUploadlForm.getImagename())){
+				String[] imagename=fileUploadlForm.getImagename().split("%;-%");
+				String[] imagedata=fileUploadlForm.getImagedata().split("%;-%");
+				System.out.println(imagename);
+				if(imagename==null||imagename.length==0){
+					useriamge=new UserImage();
+		            useriamge.setUsernumber(user.getNumber());
+		            useriamge.setFeedbackname(user.getName());
+		            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
+		            useriamge.setFeedbacktime(new Date());
+		            dao.save(useriamge);  
+		        	return "success";
+				}
+				for(int i=0;i<imagename.length;i++){
+					 String path="c:/image/problemimage/";
+					 File dir = new File(path);
+			        	// 创建文件夹
+		        	 if (!dir.exists()) {
+		        		dir.mkdirs();
+		        	 }
+		        	String prefix=imagename[i].substring(imagename[i].lastIndexOf(".")+1);
+//		        	 String prefix="png";
+//		        	String filename="/problemimage/"+user.getNumber()+UUID.randomUUID()+"."+prefix;
+		        	String filename=user.getNumber()+UUID.randomUUID()+"."+prefix;
+		        	File newfile = new File(path+filename);
+		        	
+		        	if(!newfile.exists()){
+		        		newfile.createNewFile();
+	        	    }
+		        	String imageData=imagedata[i];
+		        	imageData = imageData.substring(30);
+		        	imageData = URLDecoder.decode(imageData,"UTF-8");
+//		        	System.out.println(filename);
+		        	//System.out.println(imageData);
+		        	byte[] data = decode(imageData);
+		    		// 写入到文件
+		        	FileOutputStream  fo = new FileOutputStream(newfile);	 
+		        	fo.write(data);
+		        	fo.flush();
+		        	fo.close();
+		        	filename="/problemimage/"+filename;
+		        	filenameflag=filenameflag+filename+";"   ;      
+				 }
 			}
-			for(int i=0;i<imagename.length;i++){
-				 String path="D:/image/problemimage/";
-				 File dir = new File(path);
-		        	// 创建文件夹
-	        	 if (!dir.exists()) {
-	        		dir.mkdirs();
-	        	 }
-	        	String prefix=imagename[i].substring(imagename[i].lastIndexOf(".")+1);
-//	        	 String prefix="png";
-//	        	String filename="/problemimage/"+user.getNumber()+UUID.randomUUID()+"."+prefix;
-	        	String filename=user.getNumber()+UUID.randomUUID()+"."+prefix;
-	        	File newfile = new File(path+filename);
-	        	
-	        	if(!newfile.exists()){
-	        		newfile.createNewFile();
-        	    }
-	        	String imageData=imagedata[i];
-	        	imageData = imageData.substring(30);
-	        	imageData = URLDecoder.decode(imageData,"UTF-8");
-//	        	System.out.println(filename);
-	        	//System.out.println(imageData);
-	        	byte[] data = decode(imageData);
-	    		// 写入到文件
-	        	FileOutputStream  fo = new FileOutputStream(newfile);	 
-	        	fo.write(data);
-	        	fo.flush();
-	        	fo.close();
-	        	filename="/problemimage/"+filename;
-	        	filenameflag=filenameflag+filename+";"   ;      
-			 }
+			
 		     useriamge=new UserImage();
              useriamge.setImagename(filenameflag);
              useriamge.setUsernumber(user.getNumber());

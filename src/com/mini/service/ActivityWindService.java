@@ -183,7 +183,7 @@ public class ActivityWindService {
 		ActivityStart activityStartimage=null;
 		String[] imagename=activityWindForm.getImagename();
 		String[] imagedata=activityWindForm.getImagedata();
-		String path="D:/image/activitystart/";
+		String path="c:/image/activitystart/";
 		if(imagename.length!=imagedata.length){
 			return "error";
 		}
@@ -372,7 +372,7 @@ public class ActivityWindService {
 				ActivitySignup activitySignup=new ActivitySignup();
 				activitySignup.setActivityid(Integer.valueOf(activityWindForm.getActivityName()));
 				//保存文本路径
-				String path="D:/image/initfile/";
+				String path="c:/image/initfile/";
 				File dir = new File(path);
 	        	// 创建文件夹
 	        	if (!dir.exists()) {
