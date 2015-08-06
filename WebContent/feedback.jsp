@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				text-align: center;
 			}
 			.main_content .logo_div img {
-				max-width: 40%;
+				max-width: 30%;
 			}
 			.main_content .input-group, .main_content .submit_div {
 				margin-top: 10px;
@@ -108,6 +108,10 @@ margin-left:105px;
  background-color:#fff;
 height:130px;
  }
+ .btn{
+ margin-bottom:10px;
+ }
+ <!--电脑-->
 @media (min-width: 768px){
 .closeimg
 {
@@ -156,6 +160,9 @@ margin-left:120px;
  .photos{
  background-color:#fff;
  height:100px;
+ }
+  .btn{
+ margin-bottom:10px;
  }
 } 
 
