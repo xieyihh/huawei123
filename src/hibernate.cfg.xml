@@ -25,7 +25,7 @@
 		
 		
 		-->
-		<property name="hibernate.connection.url">jdbc:mysql://119.29.73.32:3306/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		 <property name="hibernate.connection.url">jdbc:mysql://119.29.73.32:3306/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">root</property>
 		

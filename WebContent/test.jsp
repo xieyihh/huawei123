@@ -19,6 +19,7 @@
 <form name="Form1" id="Form1" method="post">
 <input type="file" id="file" name="file"/>&nbsp;&nbsp;  
 <input type="button"  value="导入Excel" onclick="checkchar()"/>  
+<img alt="" src="problemimage/1.jpg">
 </form>
 </body>
 </html>
