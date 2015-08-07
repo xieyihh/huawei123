@@ -1,6 +1,8 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
 
-
+<% String basePath = request.getContextPath(); 
+System.out.print(basePath);
+%>
 <!DOCTYPE html>	
 <html>
 <head>
@@ -11,9 +13,12 @@
  
   <script src="bootstrap/jquery.min.js"></script>
  
-  <script type="text/javascript" src="js/wchat/book.js?v1.1.1"></script>
+  <script type="text/javascript" src="js/wchat/book.js?v1.1.4"></script>
   <!--<script type="text/javascript" src="../../js/wchat/jquery.mobile-1.4.2.min.js"></script>-->
   <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript">
+  var basePath ='<%=basePath%>';
+  </script>
 <style type="text/css">
 html,body {            
 	width:100%;            
