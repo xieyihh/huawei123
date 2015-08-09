@@ -137,48 +137,48 @@ public class ImportBookService  {
         	if(StringUtils.isBlank(isbn)){
         		//数据信息有错误
         		errline.add(line);
-        		break;
+        		continue;
         	}
         	String name=data[1].trim();
         	if(StringUtils.isBlank(name)){
         		//数据信息有错误
         		errline.add(line);
-        		break;
+        		continue;
         	}
         	
         	String position=data[2].trim();
         	if(StringUtils.isBlank(position)){
         		//数据信息有错误
         		errline.add(line);
-        		break;
+        		continue;
         	}
         	String number=data[3].trim();
         	if(StringUtils.isBlank(number)){
         		//数据信息有错误
         		errline.add(line);
-        		break;
+        		continue;
         	}
         	String source=data[4].trim();
         	if(StringUtils.isBlank(source)){
         		//数据信息有错误
         		errline.add(line);
-        		break;
+        		continue;
         	}
         	String positionnumber=this.setBookPosition(ddlname_position,position);
 			if(positionnumber.equals("error")){
 				errline.add(line);
-				break;
+				continue;
 			}	
 			String classifi=data[5].trim();
         	if(StringUtils.isBlank(classifi)){
         		//数据信息有错误
         		errline.add(line);
-        		break;
+        		continue;
         	}
         	String classfinumber=this.setBookPosition(ddlname_classfi,classifi);
 			if(classfinumber.equals("error")){
 				errline.add(line);
-        		break;
+				continue;
 			}
 			//进行数据更新       	
         	int res=dao.count(BookNumber.class,"isbn",isbn);
