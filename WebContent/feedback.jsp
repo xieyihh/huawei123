@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/jsMuti/ajaxfileupload.js"></script>
 
-		 <script type="text/javascript" src="js/feedback.js?v2.1.3"></script>
+		 <script type="text/javascript" src="js/feedback.js?v2.1.4"></script>
 
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/body.css?1">

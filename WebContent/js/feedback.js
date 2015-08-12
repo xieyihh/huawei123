@@ -67,6 +67,12 @@ $(function(){
 		if(!validateInputList(inputList)) {
 			return false;
 		}
+		var numberObj=$("#feedback_div .input-group input[name='number']");
+		if(!numberObj.val().match(/\d{8}/g)){
+			inputPopover(numberObj, "工号必须为8位数字", 2);
+			return false;
+			
+		}
 		var files=[];
 		var picname=[];
 		var fileNum=0;
