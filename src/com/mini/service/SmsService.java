@@ -135,10 +135,6 @@ public class SmsService {
 	 * @return
 	 */
 	public String feedBackSendSms(FeedbackImageForm feedbackImageForm) {
-		//发送短信不能超过60个字
-		if(feedbackImageForm.getSmsContent().length()>60){
-			return "overlength";
-		}
 		SmsServer smsServer=new SmsServer();
 		 //发送短信，保存积分
 		//UserImage feedback=(UserImage)dao.get(UserImage.class, Integer.valueOf(feedbackImageForm.getId()));
@@ -147,8 +143,8 @@ public class SmsService {
 		dao.updateByQuery(hql,feedbackImageForm.getSmsContent(),Integer.valueOf(feedbackImageForm.getJifen())
 				,Integer.valueOf(feedbackImageForm.getId()) );
 		String result;
-		try {
-			result = smsServer.SendSms(feedbackImageForm.getPhonenumber(), feedbackImageForm.getSmsContent());
+		try {			
+			result = smsServer.SendSms(feedbackImageForm.getPhonenumber(),"感谢您对吾爱吾家建议平台的支持,您的反馈建议处理如下："+ feedbackImageForm.getSmsContent());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return "error";
