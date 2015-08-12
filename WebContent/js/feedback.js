@@ -116,7 +116,7 @@ $(function(){
 			        				if(data.message==="success") {
 			        					$(".uploadimg").css('display','none');
 			    	  					inputList.val("");
-			        					msg = "反馈信息提交成功，等待管理员处理";
+			        					msg = "有问题，不用愁，建议平台帮您答！”感谢您的宝贵建议，问题处理结果我们将尽快通知您！请持续关注我们！";
 			        				}else{
 			        					msg = "反馈信息提交失败，请稍后重试";
 			        				}
