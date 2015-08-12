@@ -139,9 +139,8 @@ public class SmsService {
 		 //发送短信，保存积分
 		//UserImage feedback=(UserImage)dao.get(UserImage.class, Integer.valueOf(feedbackImageForm.getId()));
 		
-		String hql="Update UserImage a Set a.smsContent=?,a.jifen=? where a.id=?";
-		dao.updateByQuery(hql,feedbackImageForm.getSmsContent(),Integer.valueOf(feedbackImageForm.getJifen())
-				,Integer.valueOf(feedbackImageForm.getId()) );
+		String hql="Update UserImage a Set a.smsContent=?, where a.id=?";
+		dao.updateByQuery(hql,feedbackImageForm.getSmsContent(),Integer.valueOf(feedbackImageForm.getId()) );
 		String result;
 		try {			
 			result = smsServer.SendSms(feedbackImageForm.getPhonenumber(),"感谢您对吾爱吾家建议平台的支持,您的反馈建议处理如下："+ feedbackImageForm.getSmsContent());

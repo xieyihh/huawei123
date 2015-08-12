@@ -250,6 +250,7 @@ public class FeedbackService {
 			feedbackImagereturn.setFeedbackname(userImage.getFeedbackname());
 			feedbackImagereturn.setFeedbacktime(dateFormat.format(userImage.getFeedbacktime()));
 			feedbackImagereturn.setSmsContent(userImage.getSmsContent());
+			feedbackImagereturn.setJifen(String.valueOf(userImage.getJifen()));
 			String userhql="From User a where a.number=?";
 			User user=(User)dao.get(userhql, userImage.getUsernumber());
 			if(user!=null){
@@ -274,11 +275,19 @@ public class FeedbackService {
 	 * @return
 	 */
 	public String addJifen(FeedbackImageForm feedbackImageForm) {
-		String hql="Update UserImage a Set a.jifen=? where a.id=?";
-		dao.updateByQuery(hql,Integer.valueOf(feedbackImageForm.getJifen())
-				,Integer.valueOf(feedbackImageForm.getId()) );
-
-		return "success";
+		try {
+			String hql="Update UserImage a Set a.jifen=? where a.id=?";
+			int result=dao.updateByQuery(hql,Integer.valueOf(feedbackImageForm.getJifen())
+					,Integer.valueOf(feedbackImageForm.getId()) );
+			if(result==0){
+				return "error";
+			}else
+				return "success";
+			
+		} catch (Exception e) {
+			
+		}
+		
 	}
 	
 }

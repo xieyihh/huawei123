@@ -79,8 +79,8 @@ public class CommonDao extends HibernateDaoSupport {
 	 * @param objects 参数
 	 */
 	@SuppressWarnings("unchecked")
-	public void updateByQuery(final String queryString, final Object... objects) {
-		getHibernateTemplate().execute(new HibernateCallback() {
+	public int updateByQuery(final String queryString, final Object... objects) {
+		return getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) {
 				Query query = session.createQuery(queryString);
 				if (objects != null) {
@@ -88,8 +88,8 @@ public class CommonDao extends HibernateDaoSupport {
 						query.setParameter(i, objects[i]);
 					}
 				}
-				query.executeUpdate();
-				return null;
+				
+				return query.executeUpdate();
 			}
 		});
 	}

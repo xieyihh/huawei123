@@ -49,7 +49,7 @@ public class FileUploadService {
             useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
 
             
-            
+            useriamge.setJifen(0);
             useriamge.setFeedbacktime(new Date());
             dao.save(useriamge);  
 			return "noUser";
@@ -62,6 +62,7 @@ public class FileUploadService {
 	            useriamge.setFeedbackname(user.getName());
 	            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
 	            useriamge.setFeedbacktime(new Date());
+	            useriamge.setJifen(0);
 	            dao.save(useriamge);  
 	        	return "success";			
 				
@@ -75,6 +76,7 @@ public class FileUploadService {
 		            useriamge.setFeedbackname(user.getName());
 		            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
 		            useriamge.setFeedbacktime(new Date());
+		            useriamge.setJifen(0);
 		            dao.save(useriamge);  
 		        	return "success";
 				}
@@ -110,6 +112,7 @@ public class FileUploadService {
 	            useriamge.setFeedbackname(user.getName());
 	            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
 	            useriamge.setFeedbacktime(new Date());
+	            useriamge.setJifen(0);
 	            dao.save(useriamge);
 	            return "success";
 			}
