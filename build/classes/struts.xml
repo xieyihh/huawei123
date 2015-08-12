@@ -43,13 +43,13 @@
 			<result name="logout" type="redirect">/login.jsp</result>
 			<result name="register_success">/login.jsp</result>
 			<result name="register_failed">/register.jsp</result>
-			<result name="nicknamePage">/forum.jsp</result>
+			<result name="nicknamePage">/addNickname.jsp</result>
 			
 		</action>
 		<action name="saveNickname" class="userAction" method="saveNickname">
 			<result name="success" type="redirect">${prePage}</result>	
 			<result name="error">/error.jsp</result>
-			<result name="login_success" type="redirect">/addNickname.jsp</result>		
+			<result name="login_success" type="redirect">/forum.jsp</result>		
 		</action>
 		<action name="busAction" class="busAction">
 			<param name="savePath">/upload</param>

@@ -583,7 +583,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		ActionContext context = ActionContext.getContext();
 		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
 		User ouruser=(User)session.get("user");
-		String result=service.saveNickname(ouruser);
+		String result=service.saveNickname(ouruser,this.user.getNickname());
 		if(result.equals("success")){
 			//获取跳转到登陆界面之前的页面地址，由拦截器提供
 	        prePage = (String) session.get("prePage");
@@ -596,7 +596,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	        	return "success";
 	        }
 			
-		}else{
+		}else{	
 			getRequest().setAttribute("errormsg", "保存不成功");
 			return "error";
 		}
