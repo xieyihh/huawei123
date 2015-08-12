@@ -113,11 +113,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="input-group component">
 					<span class="input-group-addon">工号</span>
-					<input type="number" class="form-control" name="number" placeholder="请输入您的8位工号" style="width:80%;">
+					<input type="text" class="form-control" name="number" placeholder="请输入您的8位工号" style="width:80%;">
 				</div>
 				<div class="input-group component">
 					<span class="input-group-addon">电话</span>
-					<input type="number" class="form-control" name="phone" placeholder="请输入您的电话号码" style="width:80%;">
+					<input type="text" class="form-control" name="phone" placeholder="请输入您的电话号码" style="width:80%;">
 				</div>
 				<div class="input-group component">
 					<span class="input-group-addon">备注</span>

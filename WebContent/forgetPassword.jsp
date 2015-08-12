@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<form  method="post" >
 				<div class="input-group component">
 					<span class="input-group-addon">电话</span>
-					<input type="number" class="form-control" name="phone" placeholder="请输入您的电话号码" autofocus="autofocus">
+					<input type="text" class="form-control" name="phone" placeholder="请输入您的电话号码" autofocus="autofocus">
 				</div>
 				
 				<div class="input-group component">
