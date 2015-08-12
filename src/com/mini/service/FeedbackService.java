@@ -219,7 +219,7 @@ public class FeedbackService {
 		String hqlWhere = "  ";
 		//组织排序
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
-		orderby.put("o.feedbacktime", "asc");
+		orderby.put("o.feedbacktime", "desc");
 		List<String> paramsList = new ArrayList<String>();		
 
 		if(StringUtils.isNotBlank(feedbackImageForm.getUsernumber())){
@@ -285,7 +285,7 @@ public class FeedbackService {
 				return "success";
 			
 		} catch (Exception e) {
-			
+			return "error";
 		}
 		
 	}
