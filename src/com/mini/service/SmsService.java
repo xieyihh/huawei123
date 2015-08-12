@@ -139,7 +139,7 @@ public class SmsService {
 		 //发送短信，保存积分
 		//UserImage feedback=(UserImage)dao.get(UserImage.class, Integer.valueOf(feedbackImageForm.getId()));
 		
-		String hql="Update UserImage a Set a.smsContent=?, where a.id=?";
+		String hql="Update UserImage a Set a.smsContent=? where a.id=?";
 		dao.updateByQuery(hql,feedbackImageForm.getSmsContent(),Integer.valueOf(feedbackImageForm.getId()) );
 		String result;
 		try {			
