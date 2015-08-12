@@ -182,6 +182,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
 		this.user = new User();
 		session.put("user", tempUser);
+
 		if(StringUtils.isBlank(tempUser.getNickname())){
 			//跳转到填写昵称界面			
 			return "nicknamePage";
@@ -581,8 +582,8 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	public String  saveNickname() {
 		ActionContext context = ActionContext.getContext();
 		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
-
-		String result=service.saveNickname(user);
+		User ouruser=(User)session.get("user");
+		String result=service.saveNickname(ouruser);
 		if(result.equals("success")){
 			//获取跳转到登陆界面之前的页面地址，由拦截器提供
 	        prePage = (String) session.get("prePage");
@@ -592,7 +593,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	        	//不是拦截器跳转到登陆页面的，直接访问的登陆页面
 	        	return LOGIN_SUCCESS;
 	        }else{
-	        	return "yes";
+	        	return "success";
 	        }
 			
 		}else{

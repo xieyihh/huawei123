@@ -223,7 +223,7 @@ public class UserService {
 	public String saveNickname(User user) {
 		String hql="Update User a Set a.nickname=? where a.number=?";
 		int result=dao.updateByQuery(hql, user.getNickname(),user.getNumber());
-		if(result!=0){
+		if(result!=1){
 			return "error";
 		}else{
 			return "success";
