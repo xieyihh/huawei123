@@ -24,6 +24,7 @@ import com.mini.entity.Feedback;
 import com.mini.entity.ImportBookInfo;
 import com.mini.entity.Physicalexam;
 import com.mini.entity.Physicalreview;
+import com.mini.entity.User;
 import com.mini.entity.UserImage;
 import com.mini.form.FeedbackForm;
 import com.mini.form.FeedbackImageForm;
@@ -206,7 +207,10 @@ public class FeedbackService {
 		int pageNum=1;
 		int totalRows=0;
 //		
-		pageSize=Integer.valueOf(feedbackImageForm.getPageSize());
+		if(StringUtils.isNotBlank(feedbackImageForm.getPageSize())){
+			pageSize=Integer.valueOf(feedbackImageForm.getPageSize());
+		}
+		
 		if(StringUtils.isNotBlank(feedbackImageForm.getCurrentPage())){
 			pageNum=Integer.valueOf(feedbackImageForm.getCurrentPage());
 		}
@@ -245,7 +249,11 @@ public class FeedbackService {
 			feedbackImagereturn.setFeedbackcontent(userImage.getFeedbackcontent());
 			feedbackImagereturn.setFeedbackname(userImage.getFeedbackname());
 			feedbackImagereturn.setFeedbacktime(dateFormat.format(userImage.getFeedbacktime()));
-			
+			String userhql="From User a where a.number=?";
+			User user=(User)dao.get(userhql, userImage.getUsernumber());
+			if(user!=null){
+				feedbackImagereturn.setPhonenumber(user.getPhone());
+			}			
 			if(userImage.getImagename()!=null&&userImage.getImagename().contains(";")){
 				feedbackImagereturn.setImagename(userImage.getImagename().split(";"));
 

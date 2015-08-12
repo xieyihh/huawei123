@@ -16,7 +16,16 @@ public class FeedbackImageForm {
 	private String totalResults;//总记录数
 	private String currentPage;//当前页数
 	private String pageSize;//每页的记录数
+	private String phonenumber;
 	
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
 	public String getTotalResults() {
 		return totalResults;
 	}
