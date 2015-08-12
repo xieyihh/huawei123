@@ -17,6 +17,7 @@ import com.mini.entity.Feedback;
 import com.mini.form.FeedbackForm;
 import com.mini.form.FeedbackImageForm;
 import com.mini.service.FeedbackService;
+import com.mini.service.SmsService;
 import com.mini.util.ExcelFileGenerator;
 import com.mini.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
@@ -29,8 +30,21 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 	private static final long serialVersionUID = -6872667406307155523L;
 	private FeedbackImageForm feedbackImageForm  = new FeedbackImageForm();
 	private FeedbackService service;
-
+	private SmsService smsService;
 	
+	public FeedbackImageForm getFeedbackImageForm() {
+		return feedbackImageForm;
+	}
+	public void setFeedbackImageForm(FeedbackImageForm feedbackImageForm) {
+		this.feedbackImageForm = feedbackImageForm;
+	}
+	
+	public SmsService getSmsService() {
+		return smsService;
+	}
+	public void setSmsService(SmsService smsService) {
+		this.smsService = smsService;
+	}
 	public FeedbackService getService() {
 		return service;
 	}
@@ -51,6 +65,23 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 	public void getFeedbackImage(){
 		JSONObject result=service.getFeedbackImage(feedbackImageForm);
 		returnObject(result);
+	}
+	/**
+	 * 对用户的反馈发送短信
+	 */
+	public void feedBackSendSms(){
+		String result=smsService.feedBackSendSms(feedbackImageForm);
+		
+		if(result.equals("success")){
+			returnObject(result);
+		}else{
+			if(result.equals("overlength")){
+				resultError("201", "overlength");
+			}else{
+				resultError("202", "error");
+			}
+		}
+		
 	}
 	
 	

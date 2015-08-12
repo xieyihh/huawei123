@@ -14,6 +14,7 @@
 		<property name="feedbackname" column="feedback_name" />
 		<property name="feedbackcontent" column="feedback_content" />
 		<property name="feedbacktime" column="feedback_time" />
-
+		<property name="smsContent" column="sms_content" />
+		<property name="jifen" column="jifen" />
 	</class>
 </hibernate-mapping>

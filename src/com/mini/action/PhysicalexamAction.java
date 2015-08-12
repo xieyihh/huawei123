@@ -17,6 +17,7 @@ import net.sf.json.JSONObject;
 import com.mini.entity.User;
 import com.mini.form.PhysicalexamForm;
 import com.mini.service.PhysicalexamService;
+import com.mini.service.SmsService;
 import com.mini.util.CsvExport;
 import com.mini.util.ExcelFileGenerator;
 import com.mini.util.InitString;
@@ -32,6 +33,15 @@ import com.opensymphony.xwork2.ModelDriven;
 public class PhysicalexamAction extends BaseAction implements ModelDriven<PhysicalexamForm> {
 	private PhysicalexamForm physicalexamForm=new PhysicalexamForm();
 	private PhysicalexamService service;
+	
+	
+	public PhysicalexamForm getPhysicalexamForm() {
+		return physicalexamForm;
+	}
+	public void setPhysicalexamForm(PhysicalexamForm physicalexamForm) {
+		this.physicalexamForm = physicalexamForm;
+	}
+	
 	@Override
 	public PhysicalexamForm getModel() {
 		return this.physicalexamForm;

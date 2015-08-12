@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 /**
- * 体检亲属
+ * 带图片的反馈信息
  * 
  */
 public class UserImage {
@@ -16,10 +16,24 @@ public class UserImage {
 	private String upflag;	/* 上传标志 */
 	
 	private String feedbackname;			//姓名
-	private String feedbackcontent;		//工号
+	private String feedbackcontent;		//反馈内容
 
 	private Date feedbacktime;	//反馈时间
+	private String smsContent;		//短信内容
+	private int jifen;		//积分
 	
+	public int getJifen() {
+		return jifen;
+	}
+	public void setJifen(int jifen) {
+		this.jifen = jifen;
+	}
+	public String getSmsContent() {
+		return smsContent;
+	}
+	public void setSmsContent(String smsContent) {
+		this.smsContent = smsContent;
+	}
 	public String getFeedbackname() {
 		return feedbackname;
 	}

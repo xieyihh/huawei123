@@ -91,6 +91,7 @@
 	</bean>
 	<bean id="feedbackImageAction" class="com.mini.action.FeedbackImageAction" scope="prototype">
 		<property name="service" ref="feedbackService"></property>
+		<property name="smsService" ref="smsService"></property>
 	</bean>
 	<bean id="activityWindAction" class="com.mini.action.ActivityWindAction" scope="prototype">
 	<property name="service" ref="activityWindService"></property>

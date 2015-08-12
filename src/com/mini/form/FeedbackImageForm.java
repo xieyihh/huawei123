@@ -17,7 +17,25 @@ public class FeedbackImageForm {
 	private String currentPage;//当前页数
 	private String pageSize;//每页的记录数
 	private String phonenumber;
+	private String smsContent;
+	private String jifen;
 	
+	public String getJifen() {
+		return jifen;
+	}
+
+	public void setJifen(String jifen) {
+		this.jifen = jifen;
+	}
+
+	public String getSmsContent() {
+		return smsContent;
+	}
+
+	public void setSmsContent(String smsContent) {
+		this.smsContent = smsContent;
+	}
+
 	public String getPhonenumber() {
 		return phonenumber;
 	}

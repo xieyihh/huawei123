@@ -423,6 +423,8 @@
 	</action>
 	<action name="getFeedbackImage" class="feedbackImageAction" method="getFeedbackImage">
 	</action>
+	<action name="feedBackSendSms" class="feedbackImageAction" method="feedBackSendSms">
+	</action>
 
    <action name="fileUploadAction" class="fileAction" method="imageupload">
             <result type="json" name="success">

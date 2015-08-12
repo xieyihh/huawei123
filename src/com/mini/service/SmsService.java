@@ -6,10 +6,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import net.sf.json.JSONObject;
+
 import com.mini.dao.CommonDao;
 import com.mini.entity.SecurityCode;
 import com.mini.entity.User;
+import com.mini.entity.UserImage;
 import com.mini.form.DuanXinForm;
+import com.mini.form.FeedbackImageForm;
 import com.mini.util.PswUtil;
 import com.mini.util.SmsServer;
 
@@ -41,7 +45,7 @@ public class SmsService {
 		 //用户存在，则生成验证码
 		 //生成一个四位数的验证码		 
 		 String code=generateWord();
-		 System.out.println(code);		 
+		 //System.out.println(code);		 
 		 SecurityCode securityCode=new SecurityCode();
 		 securityCode.setCode(code);
 		 securityCode.setPhone(phonenumber);
@@ -124,6 +128,35 @@ public class SmsService {
 		dao.updateByQuery(hql,password,salt,user.getId());
 
 		return "success";
+	}
+	/**
+	 * 对用户的反馈发送短信
+	 * @param feedbackImageForm
+	 * @return
+	 */
+	public String feedBackSendSms(FeedbackImageForm feedbackImageForm) {
+		//发送短信不能超过60个字
+		if(feedbackImageForm.getSmsContent().length()>60){
+			return "overlength";
+		}
+		SmsServer smsServer=new SmsServer();
+		 //发送短信，保存积分
+		//UserImage feedback=(UserImage)dao.get(UserImage.class, Integer.valueOf(feedbackImageForm.getId()));
+		
+		String hql="Update UserImage a Set a.smsContent=?,a.jifen=? where a.id=?";
+		dao.updateByQuery(hql,feedbackImageForm.getSmsContent(),Integer.valueOf(feedbackImageForm.getJifen())
+				,Integer.valueOf(feedbackImageForm.getId()) );
+		String result;
+		try {
+			result = smsServer.SendSms(feedbackImageForm.getPhonenumber(), feedbackImageForm.getSmsContent());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return "error";
+		}
+		 if(result.equals("success")){
+			 return "success";
+		 }
+		return "error";
 	}
 	
 	

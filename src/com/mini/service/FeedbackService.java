@@ -249,6 +249,7 @@ public class FeedbackService {
 			feedbackImagereturn.setFeedbackcontent(userImage.getFeedbackcontent());
 			feedbackImagereturn.setFeedbackname(userImage.getFeedbackname());
 			feedbackImagereturn.setFeedbacktime(dateFormat.format(userImage.getFeedbacktime()));
+			feedbackImagereturn.setSmsContent(userImage.getSmsContent());
 			String userhql="From User a where a.number=?";
 			User user=(User)dao.get(userhql, userImage.getUsernumber());
 			if(user!=null){
@@ -267,4 +268,5 @@ public class FeedbackService {
 		result.put("feedbackInfo", returnlist);
 		return result;
 	}
+	
 }

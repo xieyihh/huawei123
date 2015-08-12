@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 
 
 /*
-功能:		 PHP HTTP接口 发送短信
+功能:		 HTTP接口 发送短信
 
 说明:		http://api.duanxin.cm/?ac=send&username=用户账号&password=MD5位32密码&phone=号码&content=内容
 状态:
