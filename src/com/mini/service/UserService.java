@@ -218,11 +218,12 @@ public class UserService {
 	/**
 	 * 保存昵称
 	 * @param user
+	 * @param nickname 
 	 * @return
 	 */
-	public String saveNickname(User user) {
+	public String saveNickname(User user, String nickname) {
 		String hql="Update User a Set a.nickname=? where a.number=?";
-		int result=dao.updateByQuery(hql, user.getNickname(),user.getNumber());
+		int result=dao.updateByQuery(hql, nickname,user.getNumber());
 		if(result!=1){
 			return "error";
 		}else{
