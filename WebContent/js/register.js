@@ -63,6 +63,7 @@ function check() {
 	//检查账号是否已经存在
 	var account = $(".main_content #register_form .input-group input[name='account']");
 	var number = $(".main_content #register_form .input-group input[name='number']");
+	var nickname = $(".main_content #register_form .input-group input[name='nickname']");
 	if(!number.val().match(/\d{8}/g)){
 		inputPopover(number, "工号必须为8位数字", 2);
 		return false;
@@ -74,10 +75,11 @@ function check() {
     	inputPopover(phonenumber, msg, 2);
 		 return false;
 	}
-	var exist = checkExist(account.val(), number.val());
+	var exist = checkExist(account.val(), number.val(),nickname.val());
 	if(exist) {
 		return false;
 	}
+	//检查昵称是否存在
 	
 	
 	//修改缓存中的登录用户名，清除登录密码
@@ -85,11 +87,12 @@ function check() {
 	localStorage.password = "";
 	return true;
 }
+
 /**
  * 判断账号和工号是否已经存在
  * @param account
  */
-function checkExist(account, number) {
+function checkExist(account, number,nickname) {
 	var exist = false;
 	$.ajax({
 		url : "userAction!exist.action",
@@ -97,7 +100,8 @@ function checkExist(account, number) {
 		async : false,
 		data : {
 			account : account,
-			number : number
+			number : number,
+			nickname:nickname
 		},
 		dataType : "json",
 		success : function(data) {

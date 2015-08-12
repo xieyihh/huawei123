@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>
 		<base href="<%=basePath%>">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Mini~新用户注册</title>
+		<title>Mini~用户添加昵称</title>
 		<meta http-equiv="description" content="Mini新用户注册页面">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<meta http-equiv="Cache-Control" content="no-cache">
@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/body.js"></script>
-		<script type="text/javascript" src="js/register.js?v1.1"></script>
+		<script type="text/javascript" src="js/addNickname.js?v1.1.4"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<style type="text/css">
@@ -66,6 +66,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				height:10px;
 				width:10px;
 				}
+			#addnickname_form{
+			width:100%;
+			}
 			@media (max-width: 800px){
 				.modal-dialog {
 				position: absolute;
@@ -75,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				bottom: 10px;
 				}
 			}
-			
+		
 		</style>
 	</head>
 	<body>
@@ -86,43 +89,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="logo_div">
 				<img alt="logo" src="img/logo.png">
 			</div>
-			<form id="register_form" action="userAction!register.action" method="post" onsubmit="return check()">
+			<form id="addnickname_form" action="saveNickname.action" method="post" onsubmit="return check()">
 				<div class="input-group component" >
 					<span class="input-group-addon">姓名</span>
-					<input type="text" class="form-control" name="name" placeholder="请输入您的真实姓名" autofocus="autofocus"style="width:80%;">
-				</div>
-				<div class="input-group component" >
-					<span class="input-group-addon">昵称</span>
-					<input type="text" class="form-control" name="nickname" placeholder="请输入您的昵称" autofocus="autofocus"style="width:80%;">
-				</div>
-				<div class="input-group component">
-					<span class="input-group-addon">账号</span>
-					<input type="text" class="form-control" name="account" placeholder="请输入您的微信号"style="width:80%;">
-				</div>
-				<div class="input-group component">
-					<span class="input-group-addon">密码</span>
-					<input type="password" class="form-control" name="password" placeholder="请输入您的密码"style="width:80%;float:left" id="password" onfocus="showDemand()"onblur="showOK1()">
-					
-				</div>
-				<div id="demand" style="float:right;"></div>
-				<div class="input-group component">
-					<span class="input-group-addon">确认</span>
-					
-					<input type="password" class="form-control" placeholder="请确认您的密码" style="width:80%;border-bottom-right-radius:4px;border-top-right-radius: 4px;"name="confirmPassword"  id="confirmPassword" onfocus="showNO()" onblur="showOK()">
-					<img name="checkPassword2" id="checkPassword2"  class="check img-circle" />
+					<input type="text" class="form-control" name="name" readonly style="width:95%;">
 				</div>
 				<div class="input-group component">
 					<span class="input-group-addon">工号</span>
-					<input type="number" class="form-control" name="number" placeholder="请输入您的8位工号" style="width:80%;">
+					<input type="number" class="form-control" name="number" readonly style="width:95%;">
 				</div>
-				<div class="input-group component">
-					<span class="input-group-addon">电话</span>
-					<input type="number" class="form-control" name="phone" placeholder="请输入您的电话号码" style="width:80%;">
+				<div class="input-group component" >
+					<span class="input-group-addon">昵称</span>
+					<input type="text" class="form-control" name="nickname" placeholder="请输入您的昵称" autofocus="autofocus"style="width:95%;">
 				</div>
-				<div class="input-group component">
-					<span class="input-group-addon">备注</span>
-					<input type="text" class="form-control" name="remark" placeholder="备注信息，可选" style="width:80%;">
-				</div>
+				
+				
+				
 				
 				<div class="submit_div component">
 					<input type="submit" class="btn btn-success" value="提&nbsp;&nbsp;交" style="width:80%;">
