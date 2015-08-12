@@ -268,5 +268,17 @@ public class FeedbackService {
 		result.put("feedbackInfo", returnlist);
 		return result;
 	}
+	/**
+	 * 对反馈建议进行打分
+	 * @param feedbackImageForm
+	 * @return
+	 */
+	public String addJifen(FeedbackImageForm feedbackImageForm) {
+		String hql="Update UserImage a Set a.jifen=? where a.id=?";
+		dao.updateByQuery(hql,Integer.valueOf(feedbackImageForm.getJifen())
+				,Integer.valueOf(feedbackImageForm.getId()) );
+
+		return "success";
+	}
 	
 }

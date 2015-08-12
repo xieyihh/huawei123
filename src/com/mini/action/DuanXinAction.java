@@ -47,9 +47,7 @@ public class DuanXinAction extends BaseAction implements ModelDriven<DuanXinForm
 		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
 		User user = (User) session.get("user");
 		String result=service.savesecuritycode(duanXinForm,user);
-//		if(result.equals("user_not_exit")){
-//			resultError("100","noUser");
-//		}
+
 		if(!result.equals("success")){
 			//用户不存在
 			resultError("100","noUser");
@@ -60,7 +58,6 @@ public class DuanXinAction extends BaseAction implements ModelDriven<DuanXinForm
 	 * 判断验证码是否正确
 	 */
 	public void Judgecode(){
-
 		String result=service.getJudgesecuritycode(duanXinForm);
 		if(result.equals("error")){
 			//用户不存在

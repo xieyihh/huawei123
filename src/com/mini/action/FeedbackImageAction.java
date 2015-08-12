@@ -83,6 +83,18 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 		}
 		
 	}
+	/**
+	 * 对反馈建议进行打分
+	 */
+	public void addJifen(){
+		String result=service.addJifen(feedbackImageForm);
+		if(result.equals("success")){
+			returnObject(result);
+		}else{
+			resultError("404", "error");
+		}
+		
+	}
 	
 	
 	
