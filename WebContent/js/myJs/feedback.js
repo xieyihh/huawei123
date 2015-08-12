@@ -50,7 +50,7 @@
 					var date=time.replace(/\-/g,'.');
 					var feedback="";
 					if(item.phonenumber!==""){
-						feedback ='<tr>'+
+						feedback ='<tr id="tr'+item.id+'">'+
 										'<td class="master">'+
 											'<div class="content" id="content'+item.id+'">'+
 												'<div class="txt">'+item.feedbackcontent +'</div>'+
@@ -85,11 +85,11 @@
 										
 										'</td>'+
 										'<td style="width:10%">'+
-											'<button type="button" id="Reply" >短信回复</button>'+
+											'<button type="button" id="Reply'+item.id+'" >短信回复</button>'+
 										'</td>'+
-									'</tr>';
+								'</tr>';
 					}else{
-						feedback ='<tr>'+
+						feedback ='<tr  id="tr'+item.id+'">'+
 						'<td class="master">'+
 							'<div class="content" id="content'+item.id+'">'+
 								'<div class="txt">'+item.feedbackcontent +'</div>'+
@@ -124,12 +124,17 @@
 					if(item.phonenumber!==""){
 						if(item.jifen!=0){
 							$('td#score'+item.id).append('<span>'+item.jifen+'分</span>');
-							
-							$('a#stars'+item.jifen+''+item.id)[0].click();
+							setScore(item.id,item.jifen);
+							//$('a#stars'+item.jifen+''+item.id)[0].click();
 						}else{
 							$('td#score'+item.id).append('<span>请打分</span>');
 						}
+						if(item.smsContent!==""){
+							$('#content'+item.id).append('<div class="txt">[回复：]'+item.smsContent+'</div>');
+							$('#Reply'+item.id).attr('disabled',true);
+						}
 					}
+					
 					if(item.imagename.length!==0){
 						var photo ='<div class="photos">'+
 										'<ul class="photos-thumb" id="ul'+item.id+'">'+
@@ -361,26 +366,7 @@
 		
 				var num=stars.substring(5,6);
 				id=stars.slice(6);
-				 $('a#stars1'+id+'').removeClass("scorechecked1"); 
-				 $('a#stars2'+id+'').removeClass("scorechecked2");
-				 $('a#stars3'+id+'').removeClass("scorechecked3"); 
-				 $('a#stars4'+id+'').removeClass("scorechecked4"); 
-				 $('a#stars5'+id+'').removeClass("scorechecked5"); 
-				if(num==1){
-					 $('a#stars1'+id+'').addClass("scorechecked1"); 
-				}
-				if(num==2){
-					$('a#stars2'+id+'').addClass("scorechecked2"); 
-				}
-				if(num==3){
-					$('a#stars3'+id+'').addClass("scorechecked3"); 
-				}
-				if(num==4){
-					$('a#stars4'+id+'').addClass("scorechecked4"); 
-				}
-				if(num==5){
-					$('a#stars5'+id+'').addClass("scorechecked5"); 
-				}
+				setScore(id,num);
 			//alert(num)
 				$.ajax({ 
 					type: "get", 
@@ -400,5 +386,81 @@
 			
 			
 		});
+		/*
+		 * 编辑短信内容窗口
+		 */
+		$(document).on("click","[id^='Reply']",function(){//修改成这样的写法
+			
+			var id=$(this).attr("id").toString().slice(5);
+			$('#tr'+id+' td').css('border-bottom','0px');
+			var Editmessage='<tr id="editTr'+id+'" style="width:100%">'+
+								'<td colspan="4">'+
+									'<textarea rows="6" style="width:80%;margin-left:4%;"id="msg'+id+'"></textarea>'+
+								'</td>'+
+								'<td >'+
+									'<button type="button" id="saveMsg'+id+'" >发送短信</button>'+
+								'</td>'+
+							'</tr>';
+			$('#tr'+id+'').after(Editmessage);
+			
+		});
+		/*
+		 * 发送短信
+		 */
+		$(document).on("click","[id^='saveMsg']",function(){//修改成这样的写法
+			
+			var id=$(this).attr("id").toString().slice(7);
+			if($('#msg'+id+'').val()==""){
+				alert("请填写短信内容");
+				return false;
+			}
+			var data={
+					id:id,
+					phonenumber:$('#tr'+id+' td:nth-child(2) div p:nth-child(3)').attr('title'),
+					smsContent:$('#msg'+id+'').val(),	
+					usernumber:$('#tr'+id+' td:nth-child(2) div p:nth-child(2)').attr('title')
+			}
+			//alert(data.id+";"+data.phonenumber+";"+data.smsContent+";"+data.usernumber);
+			$.ajax({ 
+				type: "get", 
+				dataType: "json", 
+				url: "feedBackSendSms.action", 
+				data: data, //"wherePageCount" + where,个人建议不用这种方式 
+				async: false, 
+				success: function(msg) { 
+					if(msg.message==="success"){
+						alert('短信回复成功')
+						bindData()
+					}else{
+						alert('短信回复失败')
+					}
+				}, 
+				error:function(msg){
+					alert(msg); 
+				}
+				}); 
+		});
 });
 	
+	function setScore(id ,num){
+		 $('a#stars1'+id+'').removeClass("scorechecked1"); 
+		 $('a#stars2'+id+'').removeClass("scorechecked2");
+		 $('a#stars3'+id+'').removeClass("scorechecked3"); 
+		 $('a#stars4'+id+'').removeClass("scorechecked4"); 
+		 $('a#stars5'+id+'').removeClass("scorechecked5"); 
+		if(num==1){
+			 $('a#stars1'+id+'').addClass("scorechecked1"); 
+		}
+		if(num==2){
+			$('a#stars2'+id+'').addClass("scorechecked2"); 
+		}
+		if(num==3){
+			$('a#stars3'+id+'').addClass("scorechecked3"); 
+		}
+		if(num==4){
+			$('a#stars4'+id+'').addClass("scorechecked4"); 
+		}
+		if(num==5){
+			$('a#stars5'+id+'').addClass("scorechecked5"); 
+		}
+	}

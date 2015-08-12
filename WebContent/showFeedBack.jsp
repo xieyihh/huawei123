@@ -8,7 +8,7 @@
 <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
    <script src="bootstrap/jquery.min.js"></script>
    <script src="bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/myJs/feedback.js?v1.4.0"></script>
+    <script type="text/javascript" src="js/myJs/feedback.js?v1.4.0.5"></script>
   <style type="text/css">
 	
 	a{
