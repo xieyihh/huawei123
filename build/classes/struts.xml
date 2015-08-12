@@ -49,7 +49,7 @@
 		<action name="saveNickname" class="userAction" method="saveNickname">
 			<result name="success" type="redirect">${prePage}</result>	
 			<result name="error">/error.jsp</result>
-			<result name="login_success" type="redirect">/forum.jsp</result>		
+			<result name="login_success" type="redirect">/addNickname.jsp</result>		
 		</action>
 		<action name="busAction" class="busAction">
 			<param name="savePath">/upload</param>
