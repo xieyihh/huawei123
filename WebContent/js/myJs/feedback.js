@@ -32,9 +32,9 @@
 			ajaxStart: function() { $("#load").show(); }, 
 			complete: function() { $("#load").hide(); }, //AJAX请求完成时隐藏loading提示 
 			success: function(msg) {//msg为返回的数据，在这里做数据绑定 
-				try{
-					var text = JSON.stringify(msg);
-					var myData = JSON.parse(text);
+//				try{
+//					var text = JSON.stringify(msg);
+//					var myData = JSON.parse(text);
 				if (msg.length !== 0) { 
 					var t = document.getElementById("feedbackInfo"); //获取展示数据的表格 
 					while (t.rows.length !== 0) { 
@@ -48,7 +48,9 @@
 				$.each(info, function(i, item) {
 					var time=item.feedbacktime;
 					var date=time.replace(/\-/g,'.');
-					var feedback ='<tr>'+
+					var feedback="";
+					if(item.phonenumber!==""){
+						feedback ='<tr>'+
 										'<td class="master">'+
 											'<div class="content" id="content'+item.id+'">'+
 												'<div class="txt">'+item.feedbackcontent +'</div>'+
@@ -56,7 +58,7 @@
 											'</div>'+
 											'<div class="rate-date">'+date +'</div>'+
 										'</td>'+
-										'<td style="width:10%">'+
+										'<td style="width:15%">'+
 											'<div class="sku" >'+
 												'<p title='+item.feedbackname+'>'+
 													'<span>姓名：</span>'+item.feedbackname+
@@ -64,10 +66,70 @@
 												'<p title='+item.usernumber+'>'+
 													'<span>工号：</span>'+item.usernumber+
 												'</p>'+
+												'<p title='+item.phonenumber+'>'+
+													'<span>电话：</span>'+item.phonenumber+
+												'</p>'+
 											'</div>'+
 										'</td>'+
-								'</tr>';
+										'<td style="width:13%">'+
+											'<div id="starBg'+item.id+'" class="star_bg">'+                   	
+												'<a href="#" id="stars1'+item.id+'" class="star star_1" title="1"></a>'+
+												'<a href="#" id="stars2'+item.id+'" class="star star_2" title="2"></a>'+
+												'<a href="#" id="stars3'+item.id+'"class="star star_3" title="3"></a>'+
+												'<a href="#" id="stars4'+item.id+'" class="star star_4" title="4"></a>'+
+											  	'<a href="#" id="stars5'+item.id+'"class="star star_5" title="5"></a>'+
+											  	
+											  '</div>'+
+										'</td>'+
+										'<td style="width:6%" id="score'+item.id+'">'+
+										
+										'</td>'+
+										'<td style="width:10%">'+
+											'<button type="button" id="Reply" >短信回复</button>'+
+										'</td>'+
+									'</tr>';
+					}else{
+						feedback ='<tr>'+
+						'<td class="master">'+
+							'<div class="content" id="content'+item.id+'">'+
+								'<div class="txt">'+item.feedbackcontent +'</div>'+
+								
+							'</div>'+
+							'<div class="rate-date">'+date +'</div>'+
+						'</td>'+
+						'<td style="width:15%">'+
+							'<div class="sku" >'+
+								'<p title='+item.feedbackname+'>'+
+									'<span>姓名：</span>'+item.feedbackname+
+								'</p>'+
+								'<p title='+item.usernumber+'>'+
+									'<span>工号：</span>'+item.usernumber+
+								'</p>'+
+								
+							'</div>'+
+						'</td>'+
+						'<td style="width:13%">'+
+							
+						'</td>'+
+						'<td style="width:6%" id="score'+item.id+'">'+
+						
+						'</td>'+
+						'<td style="width:10%">'+
+							'<button type="button" id="Reply" disabled>短信回复</button>'+
+						'</td>'+
+					'</tr>';
+					}
+					
 					$("#feedbackInfo").append(feedback);
+					if(item.phonenumber!==""){
+						if(item.jifen!=0){
+							$('td#score'+item.id).append('<span>'+item.jifen+'分</span>');
+							
+							$('a#stars'+item.jifen+''+item.id)[0].click();
+						}else{
+							$('td#score'+item.id).append('<span>请打分</span>');
+						}
+					}
 					if(item.imagename.length!==0){
 						var photo ='<div class="photos">'+
 										'<ul class="photos-thumb" id="ul'+item.id+'">'+
@@ -89,9 +151,9 @@
 				
 				
 				 bindPager();
-				}catch(error){
-					alert('返回json不合法')
-				}
+//				}catch(error){
+//					alert('返回json不合法')
+//				}
 			}, 
 			error: function() { 
 				var t = document.getElementById("feedbackInfo"); //获取展示数据的表格 
@@ -240,6 +302,103 @@
 			
 			oldliid=liid;
 			oldview=view;
+		});
+		$(document).on("mouseenter","[id^='stars']",function(){//修改成这样的写法
+			
+			var num=$(this).attr("id").toString().substring(5,6);
+			var id=$(this).attr("id").toString().slice(6);
+			
+			if(num==1){
+				 $(this).addClass("starhover1"); 
+			}
+			if(num==2){
+				 $(this).addClass("starhover2"); 
+			}
+			if(num==3){
+				 $(this).addClass("starhover3"); 
+			}
+			if(num==4){
+				 $(this).addClass("starhover4"); 
+			}
+			if(num==5){
+				 $(this).addClass("starhover5"); 
+			}
+		});
+		$(document).on("mouseleave","[id^='stars']",function(){ 
+			//alert($(this).attr("id").toString())
+			var num=$(this).attr("id").toString().substring(5,6);
+			var id=$(this).attr("id").toString().slice(6);
+			if(num==1){
+				 $(this).removeClass("starhover1");  
+			}
+			if(num==2){
+				 $(this).removeClass("starhover2");  
+			}
+			if(num==3){
+				 $(this).removeClass("starhover3");  
+			}
+			if(num==4){
+				 $(this).removeClass("starhover4");  
+			}
+			if(num==5){
+				 $(this).removeClass("starhover5");  
+			}
+	        
+		  });
+		$(document).on("mouseenter","[id^='starBg']",function(){//修改成这样的写法
+			var id=$(this).attr("id").toString();
+
+			$('#'+id+' a').addClass("starbghover"); 
+			
+		});
+		$(document).on("mouseleave","[id^='starBg']",function(){//修改成这样的写法
+			var id=$(this).attr("id").toString();
+			 $('#'+id+' a').removeClass("starbghover"); 
+		
+	});
+		$(document).on("click","[id^='stars']",function(){ 
+			var stars=$(this).attr("id").toString();
+		
+				var num=stars.substring(5,6);
+				id=stars.slice(6);
+				 $('a#stars1'+id+'').removeClass("scorechecked1"); 
+				 $('a#stars2'+id+'').removeClass("scorechecked2");
+				 $('a#stars3'+id+'').removeClass("scorechecked3"); 
+				 $('a#stars4'+id+'').removeClass("scorechecked4"); 
+				 $('a#stars5'+id+'').removeClass("scorechecked5"); 
+				if(num==1){
+					 $('a#stars1'+id+'').addClass("scorechecked1"); 
+				}
+				if(num==2){
+					$('a#stars2'+id+'').addClass("scorechecked2"); 
+				}
+				if(num==3){
+					$('a#stars3'+id+'').addClass("scorechecked3"); 
+				}
+				if(num==4){
+					$('a#stars4'+id+'').addClass("scorechecked4"); 
+				}
+				if(num==5){
+					$('a#stars5'+id+'').addClass("scorechecked5"); 
+				}
+			//alert(num)
+				$.ajax({ 
+					type: "get", 
+					dataType: "json", 
+					url: "addJifen.action", 
+					data: {"id":id,"jifen":num}, //"wherePageCount" + where,个人建议不用这种方式 
+					async: false, 
+					success: function(msg) { 
+						if(msg.message==="success"){
+							$('td#score'+id+' span').html(num+"分");
+						}
+					}, 
+					error:function(msg){
+						alert(msg); 
+					}
+					}); 
+			
+			
 		});
 });
 	

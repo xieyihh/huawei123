@@ -8,7 +8,7 @@
 <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
    <script src="bootstrap/jquery.min.js"></script>
    <script src="bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/myJs/feedback.js?v1.2.1"></script>
+    <script type="text/javascript" src="js/myJs/feedback.js?v1.4.0"></script>
   <style type="text/css">
 	
 	a{
@@ -81,6 +81,83 @@ overflow: hidden;}
 .rate-date{
 clear: both;
 color: #ccc;}
+
+/* 星星点灯照亮我的家门 */
+.star_bg {
+    width: 120px; height: 20px;
+    background: url(img/star.png) repeat-x;
+    position: relative;
+    overflow: hidden;
+}
+.star {
+    height: 100%; width: 24px;
+    line-height: 6em;
+    position: absolute;
+    z-index: 3;
+}
+.star_1 { left: 0; }
+.star_2 { left: 24px; }
+.star_3 { left: 48px; }
+.star_4 { left: 72px; }
+.star_5 { left: 96px; }
+
+.starhover1 {    
+    background: url(img/star.png) repeat-x 0 -20px!important;
+    left: 0; z-index: 2;
+    width: 24px;
+}
+.starhover2 {    
+    background: url(img/star.png) repeat-x 0 -20px!important;
+    left: 0; z-index: 2;
+    width: 48px;
+}
+.starhover3 {    
+    background: url(img/star.png) repeat-x 0 -20px!important;
+    left: 0; z-index: 2;
+    width: 72px;
+}
+.starhover4 {    
+    background: url(img/star.png) repeat-x 0 -20px!important;
+    left: 0; z-index: 2;
+    width: 96px;
+}
+.starhover5 {    
+    background: url(img/star.png) repeat-x 0 -20px!important;
+    left: 0; z-index: 2;
+    width: 120px;
+}
+.scorechecked1 {    
+     background: url(img/star.png) repeat-x 0 -20px;
+    left: 0; z-index: 1;
+    width: 24px;
+}
+.scorechecked2 {    
+    background: url(img/star.png) repeat-x 0 -20px;
+    left: 0; z-index: 1;
+    width: 48px;
+}
+.scorechecked3 {    
+     background: url(img/star.png) repeat-x 0 -20px;
+    left: 0; z-index: 1;
+    width: 72px;
+}
+.scorechecked4 {    
+    background: url(img/star.png) repeat-x 0 -20px;
+    left: 0; z-index: 1;
+    width: 96px;
+}
+.scorechecked5 {    
+    background: url(img/star.png) repeat-x 0 -20px;
+    left: 0; z-index: 1;
+    width: 120px;
+}
+.starbghover{  background-image: none; }
+
+.star_checked {    
+    background: url(star.png) repeat-x 0 -20px;
+    left: 0; z-index: 1;
+}
+
 </style>
 </head>
 <body>
