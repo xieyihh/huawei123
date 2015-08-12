@@ -105,17 +105,19 @@ public class UserService {
 	/**
 	 * 根据账号和工号查找用户
 	 * @param number
+	 * @param nickname 
 	 * @return
 	 */
-	public User findByAccountAndNumber(String account, String number) {
-		String hql = "From User u where u.account=? Or u.number=?";
+	public User findByAccountAndNumber(String account, String number, String nickname) {
+		String hql = "From User u where u.account=? Or u.number=? Or u.nickname=?";
 		@SuppressWarnings("unchecked")
-		List<User> list = dao.find(hql, account, number);
+		List<User> list = dao.find(hql, account, number,nickname);
 		if(list.isEmpty()) {
 			return null;
 		}
 		return list.get(0);
 	}
+	
 	/**
 	 * 根据ID查找用户
 	 * @param id
@@ -212,5 +214,20 @@ public class UserService {
 			return null;
 		}
 		return list.get(0);
+	}
+	/**
+	 * 保存昵称
+	 * @param user
+	 * @return
+	 */
+	public String saveNickname(User user) {
+		String hql="Update User a Set a.nickname=? where a.number=?";
+		int result=dao.updateByQuery(hql, user.getNickname(),user.getNumber());
+		if(result!=0){
+			return "error";
+		}else{
+			return "success";
+		}
+		
 	}
 }

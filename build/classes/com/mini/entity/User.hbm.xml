@@ -17,5 +17,6 @@
 		<property name="level" column="user_level" />
 		<property name="authority" column="user_authority" />
 		<property name="remark" column="user_remark" />
+		<property name="nickname" column="nickname" />
 	</class>
 </hibernate-mapping>

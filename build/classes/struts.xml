@@ -44,6 +44,10 @@
 			<result name="register_success">/login.jsp</result>
 			<result name="register_failed">/register.jsp</result>
 		</action>
+		<action name="saveNickname" class="userAction" method="saveNickname">
+			<result name="success" type="redirect">${prePage}</result>	
+			<result name="error">/error.jsp</result>		
+		</action>
 		<action name="busAction" class="busAction">
 			<param name="savePath">/upload</param>
 		</action>

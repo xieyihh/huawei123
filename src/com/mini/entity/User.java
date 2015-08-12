@@ -16,7 +16,14 @@ public class User {
 	private Integer level;					//用户身份~0：普通用户；1：模块管理员；2：超级管理员
 	private String authority;		//权限，如association&activity&表示拥有协会和大型活动两个模块的管理员权限
 	private String remark;		//备注
+	private String nickname;		//备注
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getId() {
 		return id;
 	}

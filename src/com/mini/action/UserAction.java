@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -168,9 +169,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	 * @return
 	 */
 	public String login() {
-		//System.out.println(this.user.getAccount());
-		
-		User tempUser = service.findByAccount(this.user.getAccount());
+		User tempUser = service.findByAccount(this.user.getAccount());		
 		//System.out.println(this.user.getPassword()+";"+tempUser.getSalt());
 		//System.out.println(PswUtil.str2Sha1(this.user.getPassword(), tempUser.getSalt()));
 		if(tempUser == null || 
@@ -183,17 +182,22 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
 		this.user = new User();
 		session.put("user", tempUser);
+		if(StringUtils.isBlank(tempUser.getNickname())){
+			//跳转到填写昵称界面			
+			return "nicknamePage";
+		}else{
+			//获取跳转到登陆界面之前的页面地址，由拦截器提供
+	        prePage = (String) session.get("prePage");
+	        //清除session中的数据
+	        session.remove("prePage");
+	        if(prePage==null){
+	        	//不是拦截器跳转到登陆页面的，直接访问的登陆页面
+	        	return LOGIN_SUCCESS;
+	        }else{
+	        	return "yes";
+	        }
+		}
 		
-		//获取跳转到登陆界面之前的页面地址，由拦截器提供
-        prePage = (String) session.get("prePage");
-        //清除session中的数据
-        session.remove("prePage");
-        if(prePage==null){
-        	//不是拦截器跳转到登陆页面的，直接访问的登陆页面
-        	return LOGIN_SUCCESS;
-        }else{
-        	return "yes";
-        }
 		
 	}
 	/**
@@ -237,7 +241,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	 * 判断账号是否已经存在
 	 */
 	public void exist() {
-		User tempUser = service.findByAccountAndNumber(this.user.getAccount(), this.user.getNumber());
+		User tempUser = service.findByAccountAndNumber(this.user.getAccount(), this.user.getNumber(),this.user.getNickname());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(tempUser != null) {
 			map.put("exist", true);
@@ -245,8 +249,14 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 				map.put("field", "account");
 				map.put("name", "账号");
 			} else {
-				map.put("field", "number");
-				map.put("name", "工号");
+				if(tempUser.getNumber().equals(this.user.getNumber())){
+					map.put("field", "number");
+					map.put("name", "工号");
+				}else{
+					map.put("field", "nickname");
+					map.put("name", "昵称");
+				}
+				
 			}
 		} else {
 			map.put("exist", false);
@@ -561,8 +571,35 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 			JSONObject result=new JSONObject();
 			result.put("userinfo", userform);
 			returnObject(result);
+		}	
+	}
+	/**
+	 * 获取员工姓名和工号
+	 * @param row
+	 * @param style
+	 */
+	public String  saveNickname() {
+		ActionContext context = ActionContext.getContext();
+		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
+
+		String result=service.saveNickname(user);
+		if(result.equals("success")){
+			//获取跳转到登陆界面之前的页面地址，由拦截器提供
+	        prePage = (String) session.get("prePage");
+	        //清除session中的数据
+	        session.remove("prePage");
+	        if(prePage==null){
+	        	//不是拦截器跳转到登陆页面的，直接访问的登陆页面
+	        	return LOGIN_SUCCESS;
+	        }else{
+	        	return "yes";
+	        }
+			
+		}else{
+			getRequest().setAttribute("errormsg", "保存不成功");
+			return "error";
 		}
 		
-		
 	}
+	
 }
