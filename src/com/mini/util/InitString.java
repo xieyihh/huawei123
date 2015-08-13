@@ -14,5 +14,5 @@ public class InitString {
 	public static String PHYSICAL_applystate="1"; 
 	public static String Book_exporthead="isbn号(请设置为文本格式),书名,图书来源,二维码,所属平台,导入时间,数量,唯一编号"; 
 	public static String Book_importhead="图书编号(请设置为文本格式),图书名称,所属书库,在馆数量,图书来源,分类"; 
-	
+	public static String FEED_BACKTITLE="姓名,工号,反馈内容,反馈时间,回复内容 ";
 }

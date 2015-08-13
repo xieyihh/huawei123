@@ -42,17 +42,24 @@ public class DuanXinAction extends BaseAction implements ModelDriven<DuanXinForm
 	 * 发送验证码给手机端
 	 * @throws Exception 
 	 */
-	public void Sendsecuritycode() throws Exception{
+	public void Sendsecuritycode() {
 		ActionContext context = ActionContext.getContext();
 		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
 		User user = (User) session.get("user");
-		String result=service.savesecuritycode(duanXinForm,user);
-
-		if(!result.equals("success")){
-			//用户不存在
+		String result;
+		try {
+			result = service.savesecuritycode(duanXinForm,user);
+			if(!result.equals("success")){
+				//用户不存在
+				resultError("100","noUser");
+			}
+			returnObject("success");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			resultError("100","noUser");
 		}
-		returnObject("success");
+
+		
 	}
 	/**
 	 * 判断验证码是否正确

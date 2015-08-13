@@ -18,7 +18,9 @@ import com.mini.form.FeedbackForm;
 import com.mini.form.FeedbackImageForm;
 import com.mini.service.FeedbackService;
 import com.mini.service.SmsService;
+import com.mini.util.CsvExport;
 import com.mini.util.ExcelFileGenerator;
+import com.mini.util.InitString;
 import com.mini.util.PageModel;
 import com.opensymphony.xwork2.ModelDriven;
 /**
@@ -65,6 +67,38 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 	public void getFeedbackImage(){
 		JSONObject result=service.getFeedbackImage(feedbackImageForm);
 		returnObject(result);
+	}
+	/**
+	 * 导出带图片的反馈信息
+	 */
+	public void exportFeedbackImage(){
+		
+		ArrayList<String> filedData = service.exportFeedbackImage(feedbackImageForm);	
+		if(filedData==null){
+			filedData=new ArrayList<String>();
+		}
+		HttpServletResponse response=getResponse();
+		OutputStream out;
+		try {
+			out = response.getOutputStream();
+			response.reset();
+			response.setHeader("Content-disposition", "attachment;filename=\""+ new String(("反馈信息.csv").getBytes("GBK"),"ISO-8859-1") + "\"");    
+
+			//设置导出Excel报表的导出形式
+			response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+			//设置导出Excel报表的导出形式
+			response.setContentType("text/plain;charset=utf-8");
+			CsvExport csvout=new CsvExport(InitString.FEED_BACKTITLE, filedData);
+			csvout.createCsv(out);
+			out.flush();
+			//关闭输出流
+			if(out!=null){
+				out.close();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			resultError("404", "error");
+		}		
 	}
 	/**
 	 * 对用户的反馈发送短信

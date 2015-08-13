@@ -259,6 +259,7 @@
 		<action name="feedbackhome" class="feedbackshowAction" method="feedbackhome">
 			<result name="success">/page/system/feedbackhome.jsp</result>
 		</action>
+	
 	<action name="feedbackexport" class="feedbackshowAction" method="feedbackexport">			
 			
 	</action>
@@ -431,6 +432,8 @@
 	<action name="getFeedbackImage" class="feedbackImageAction" method="getFeedbackImage">
 	</action>
 	<action name="feedBackSendSms" class="feedbackImageAction" method="feedBackSendSms">
+	</action>
+	<action name="exportFeedbackImage" class="feedbackImageAction" method="exportFeedbackImage">
 	</action>
 	<action name="addJifen" class="feedbackImageAction" method="addJifen">
 	</action>

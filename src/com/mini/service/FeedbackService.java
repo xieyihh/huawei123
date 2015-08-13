@@ -289,5 +289,68 @@ public class FeedbackService {
 		}
 		
 	}
+	/**
+	 * 导出反馈信息
+	 * @param feedbackImageForm
+	 * @param request 
+	 * @return
+	 */
+	public ArrayList<String> exportFeedbackImage(FeedbackImageForm feedbackImageForm) {
+		
+		//查询某段时间内的反馈信息
+		String hqlWhere = " ";
+		//组织排序
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+		orderby.put("o.feedbacktime", "desc");
+		List<String> paramsList = new ArrayList<String>();
+
+		if(StringUtils.isNotBlank(feedbackImageForm.getUsernumber())){
+			hqlWhere += " and o.usernumber like ?";
+			paramsList.add("%" + feedbackImageForm.getUsernumber() + "%");
+			
+		}
+		if(StringUtils.isNotBlank(feedbackImageForm.getFeedbackname())){
+			hqlWhere += " and o.feedbackname like ?";
+			paramsList.add("%" + feedbackImageForm.getFeedbackname() + "%");			
+		}	
+		//预约体检时间
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		if(StringUtils.isNotBlank(feedbackImageForm.getStarttime())){ 
+			hqlWhere += "and o.feedbacktime between DATE_FORMAT(?,'%Y-%m-%d') and DATE_FORMAT( ?,'%Y-%m-%d') ";
+			paramsList.add(feedbackImageForm.getStarttime());	
+			paramsList.add(feedbackImageForm.getEndtime());
+		}
+		Object [] params = paramsList.toArray();		
+		List<UserImage> feedbackImagelist=dao.findPage(UserImage.class, hqlWhere, params, orderby);
+		StringBuffer line=null;
+		ArrayList<String> filedData = new ArrayList<String>();
+		//姓名,工号,反馈内容,反馈时间,回复内容 
+		 
+		for(UserImage userImage:feedbackImagelist){
+			line=new StringBuffer();
+			line.append(userImage.getFeedbackname()+",");
+			line.append(userImage.getUsernumber()+",");
+			String backcontent=userImage.getFeedbackcontent();
+			if(backcontent!=null&&backcontent.contains(",")){
+				backcontent=userImage.getFeedbackcontent().replace(",", "，");
+			}
+			if(backcontent==null){
+				backcontent="";
+			}
+			line.append(backcontent+",");
+			line.append(bartDateFormat.format(userImage.getFeedbacktime())+",");
+			String smscontent=userImage.getSmsContent();
+			if(smscontent!=null&&smscontent.contains(",")){
+				smscontent=userImage.getSmsContent().replace(",", "，");
+			}
+			if(smscontent==null){
+				smscontent="";
+			}
+			line.append(smscontent+",");
+			filedData.add(line.toString());
+		}
+		
+		return filedData;
+	}
 	
 }

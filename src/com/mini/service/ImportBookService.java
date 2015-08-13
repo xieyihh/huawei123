@@ -1113,8 +1113,7 @@ public class ImportBookService  {
 			line.append(ddlname_position[Integer.valueOf(returlist.get(i).getPosition())-1]);
 			line.append(",");
 			line.append(importBookInfo.getImportdate());
-			line.append(",");
-				
+			line.append(",");				
 			BookNumber bookNumber=(BookNumber) dao.get(old_hql,importBookInfo.getIsbn10());		
 			//数量
 			line.append(String.valueOf(bookNumber.getNumber()));
@@ -1135,8 +1134,8 @@ public class ImportBookService  {
 			
 			filedData.add(line.toString());
 		}
-		long time2=System.currentTimeMillis();
-		System.out.println(time2-time1);
+		//long time2=System.currentTimeMillis();
+		//System.out.println(time2-time1);
 		return filedData;
 	}
 	/**
