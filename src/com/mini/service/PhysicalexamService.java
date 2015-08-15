@@ -1364,7 +1364,9 @@ public class PhysicalexamService {
 		//当前页数
 		int pageNum=1;
 		int totalRows=0;
-		pageSize=Integer.valueOf(physicalexamform.getPageSize());
+		if(StringUtils.isNotBlank(physicalexamform.getPageSize())){
+			pageSize=Integer.valueOf(physicalexamform.getPageSize());
+		}
 		if(StringUtils.isNotBlank(physicalexamform.getCurrentPage())){
 			pageNum=Integer.valueOf(physicalexamform.getCurrentPage());
 		}
