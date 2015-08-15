@@ -173,20 +173,20 @@ color: #ccc;}
 			
 				 <div class="form-group inputfix"  >
 				    <label class="sr-only" for="usernumber">工号</label>
-				    <input type="text" class="form-control" id="usernumber" placeholder="工号"/>
+				    <input type="text" class="form-control"name="usernumber" id="usernumber" placeholder="工号"/>
 				 </div>
 				 <div class="form-group inputfix">
 				    <label class="sr-only" for="feedbackname">姓名</label>
-				    <input type="text" class="form-control" id="feedbackname" placeholder="姓名"/>
+				    <input type="text" class="form-control" name="feedbackname" id="feedbackname" placeholder="姓名"/>
 				 </div>
 				
 				 <div class="form-group inputfix">
 				    <label class="sr-only" for="starttime">开始日期</label>
-				    <input type="text" class="form-control" id="starttime" placeholder="开始日期"onfocus="WdatePicker({skin:'ext',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"/>
+				    <input type="text" class="form-control" name="starttime" id="starttime" placeholder="开始日期"onfocus="WdatePicker({skin:'ext',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"/>
 				 </div>		
 				<div class="form-group inputfix">
 				    <label class="sr-only" for="endtime">截止日期</label>
-				    <input type="text" class="form-control" id="endtime" placeholder="截止日期" onfocus="WdatePicker({skin:'ext',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"/>
+				    <input type="text" class="form-control" name="endtime" id="endtime" placeholder="截止日期" onfocus="WdatePicker({skin:'ext',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"/>
 				 </div>	
 				
 				<button type="submit" class="btn btn-success " id="exportinfo">导出</button>

@@ -15,6 +15,7 @@ $(function() {
 					var userTips='<div class="panel-body" style="margin-top:30px">' +
 									'<div class="input-group">'+
 										'<span class="input-group-addon " >'+msg.context.physicalinit.physicalplan+'</span>'+
+									//'<span class="input-group-addon " >如您未查阅到体检安排时间（含家属），请确认注册时，个人信息（微信号和工号）输入正确，谢谢！如您未查阅到体检安排时间（含家属），请确认注册时，个人信息（微信号和工号）输入正确，谢谢！</span>'+
 									'</div>'+
 								'</div>';
 					$('#user_info_panel').append(userTips);

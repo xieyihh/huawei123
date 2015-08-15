@@ -31,7 +31,7 @@
 			type: "get", //使用get方法访问后台 
 			dataType: "json", //返回json格式的数据 
 			url: "getFeedbackImage.action", //要访问的后台地址 
-			data: { "pageSize": pageSize ,"currentPage": pageIndex,}, //要发送的数据 
+			data: { "pageSize": pageSize ,"currentPage": pageIndex,'usernumber':usernumber,'feedbackname':feedbackname,'starttime':starttime,'endtime':endtime}, //要发送的数据 
 			ajaxStart: function() { $("#load").show(); }, 
 			complete: function() { $("#load").hide(); }, //AJAX请求完成时隐藏loading提示 
 			success: function(msg) {//msg为返回的数据，在这里做数据绑定 
@@ -254,7 +254,7 @@
 			 endtime=$("input#endtime").val();	
 					
 				
-			pageSize=1;
+			 pageIndex=1;
 			bindData(); 
 		});  
 		

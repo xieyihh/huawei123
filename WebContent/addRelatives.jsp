@@ -18,7 +18,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<meta name="author" content="雷晓冰">
 		<jsp:include page="base.jsp" flush="true"></jsp:include>
-		<script  src="js/wchat/addRelatives.js?v1.2.4"></script>
+		<script  src="js/wchat/addRelatives.js?v1.2.2"></script>
 		<style type="text/css">
 			.panel .panel-heading .panel-title .glyphicon {
 				float: right;
@@ -35,6 +35,11 @@
 			/********显示管理员详细信息的对话框*********/
 			#administrator_detail_dialog .modal-body .input-group {
 				margin-bottom: 10px;
+			}
+			.input-group-addon{
+			line-height: 2em;
+			white-space: normal;
+			display: inline;
 			}
 		</style>
 	</head>
