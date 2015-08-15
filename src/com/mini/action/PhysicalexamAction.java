@@ -160,7 +160,10 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 	 * 修改用户的正式体检时间
 	 */
 	public void savePhysicaldate(){
-		String result=service.savePhysicaldate(physicalexamForm);
+		ActionContext context = ActionContext.getContext();
+		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
+		User user = (User) session.get("user");
+		String result=service.savePhysicaldate(physicalexamForm,user);
 		if(result.equals("success")){
 			returnObject("保存成功");
 		}else{
@@ -505,6 +508,29 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 		}else{
 			resultError("104", "error");
 		}
+		
+	}
+	/**
+	 * 保存用户不在名单中的人
+	 * @throws ParseException
+	 */
+	public void savePhysicalUserNoInfor() {
+		ActionContext context = ActionContext.getContext();
+		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
+		User user = (User) session.get("user");
+		String result;
+		try {
+			result = service.savePhysicalUserNoInfor(physicalexamForm,user);
+			if(result.equals("success")){
+				returnObject("success");
+			}else{
+				resultError("104", "error");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			resultError("104", "error");
+		}
+		
 		
 	}
 	

@@ -72,5 +72,6 @@
 		<mapping resource="com/mini/entity/ActivitySignup.hbm.xml"/>
 		<mapping resource="com/mini/entity/ActivityStatus.hbm.xml"/>
 		<mapping resource="com/mini/entity/PhysicalEditRedate.hbm.xml"/>
+		<mapping resource="com/mini/entity/PhysicalNoinfor.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

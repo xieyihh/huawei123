@@ -19,6 +19,7 @@ public class PhysicalexamForm {
 	private String usernumber;	/* 体检人员工号 */
 	private String username;	/* 体检人员姓名 */
 	private String physicalposition;		/* 体检地点 */
+	private String remark;	/* 备注 */
 	
 	
 	private String physicalreservedate;				/* 体检预约时间 */
@@ -40,7 +41,12 @@ public class PhysicalexamForm {
 	private String ExpectphysicalDate;		/* 体检日期修改 */
 	private String ExpectState;		/* 申请体检日期的状态 */
 	private String flag;		/* 申请体检日期的状态 */
-	
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public String getFlag() {
 		return flag;
 	}

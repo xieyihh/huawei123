@@ -37,6 +37,7 @@ import com.mini.entity.Bookdictionary;
 import com.mini.entity.Bookinfo;
 import com.mini.entity.ImportBookInfo;
 import com.mini.entity.PhysicalEditRedate;
+import com.mini.entity.PhysicalNoinfor;
 import com.mini.entity.Physicalexam;
 import com.mini.entity.Physicalinit;
 import com.mini.entity.Physicalrelatives;
@@ -453,6 +454,8 @@ public class PhysicalexamService {
 		String position="中南";
 		if(user.getAccount().equals("yiyuan")){
 			position="中南";
+		}else{
+			position="同济";
 		}
 		String positionresult=this.getpositonnumber(physical_positionarray, position);
 		if(positionresult.equals("error")){
@@ -1160,7 +1163,7 @@ public class PhysicalexamService {
 		String hql="From Physicalexam a Where a.usernumber like ? and state='0' and a.physicalplan=? ";
 		List<Physicalexam> physicalexamlist=dao.find(hql,'%'+physicalexamForm.getUsernumber()+'%',physicalexamForm.getPhysicalplan());
 		List<PhysicalexamForm> returnlist=new ArrayList<PhysicalexamForm>();
-		if(physicalexamlist==null){
+		if(physicalexamlist==null||physicalexamlist.size()==0){
 			//用户不存在
 			return null;
 		}
@@ -1330,6 +1333,29 @@ public class PhysicalexamService {
 		dao.updateByQuery(hql, physicalexamForm.getReviewcontent(), Integer.valueOf(physicalexamForm.getId()));
 		return "success";
 	
+	}
+	public String savePhysicalUserNoInfor(PhysicalexamForm physicalexamForm, User user)throws Exception {
+		String inithql="From Physicalinit a Where a.id=?";
+		Physicalinit physicalinit=(Physicalinit) dao.get(inithql, 1);	
+		
+		PhysicalNoinfor physicalNoinfor=new PhysicalNoinfor();
+		physicalNoinfor.setUsername(physicalexamForm.getUsername());
+		physicalNoinfor.setUsernumber(physicalexamForm.getUsernumber());
+		physicalNoinfor.setPhysicalplan(physicalinit.getPhysicalplan());
+		physicalNoinfor.setRemark(physicalexamForm.getRemark());
+		String position="中南";
+		if(user.getAccount().equals("yiyuan")){
+			position="中南";
+		}else{
+			position="同济";
+		}
+		String[] physical_positionarray=findddlname(physical_position);
+		String positionresult=this.getpositonnumber(physical_positionarray, position);
+		physicalNoinfor.setPhysicalposition(positionresult);
+		physicalNoinfor.setPhysicaldate(new Date());
+		physicalNoinfor.setState("0");
+		dao.save(physicalNoinfor);
+		return "success";
 	}
 	
 	
