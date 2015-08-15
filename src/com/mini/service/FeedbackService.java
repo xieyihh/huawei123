@@ -29,6 +29,7 @@ import com.mini.entity.UserImage;
 import com.mini.form.FeedbackForm;
 import com.mini.form.FeedbackImageForm;
 import com.mini.form.ImportBookForm;
+import com.mini.form.JifenRankingForm;
 import com.mini.form.PhysicalexamForm;
 import com.mini.util.PageModel;
 import com.mini.util.PagerTool;
@@ -362,12 +363,36 @@ public class FeedbackService {
 	 * @param feedbackImageForm
 	 * @return
 	 */
-	public String getFeedBackRanking(FeedbackImageForm feedbackImageForm) {
+	public JSONObject getFeedBackRanking(FeedbackImageForm feedbackImageForm) {
+		PagerTool pagerTool=new PagerTool();
+		int totalRows=0;
+		//当前页数
+		int pageNum=1;
+		if(feedbackImageForm.getPageSize()!=null){
+			pageSize=Integer.valueOf(feedbackImageForm.getPageSize());
+		}		
+		if(StringUtils.isNotBlank(feedbackImageForm.getCurrentPage())){
+			pageNum=Integer.valueOf(feedbackImageForm.getCurrentPage());
+		}
+		pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
+		int pagestart=(pagerTool.getCurrentPage() - 1) * pagerTool.getPageSize();
 		String mysql="SELECT SUM(a.jifen),a.user_number,b.nickname from  user_image a,table_user b "
-				+ "where b.user_number=a.user_number group by a.user_number ";
+				+ "where b.user_number=a.user_number group by a.user_number limit "+pagestart+","+pageSize;
 		List<Object[]> list=dao.nativesql(mysql);
-		
-		return null;
+		List<JifenRankingForm> returnlist=new ArrayList<JifenRankingForm>();
+		JSONObject result=new JSONObject();
+		JifenRankingForm returnform=null;
+		for(int i=0;i<list.size();i++){
+			returnform=new JifenRankingForm();
+			returnform.setJifen(list.get(i)[0].toString());
+			returnform.setRank(String.valueOf(i+1));
+			returnform.setNickname(list.get(i)[2].toString());
+			returnlist.add(returnform);			
+		}			
+		result.put("totalRows", totalRows);
+		result.put("totalPages", pagerTool.getTotalPages());
+		result.put("rankinfor", returnlist);
+		return result;
 	}
 	
 }
