@@ -151,7 +151,7 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 	public void getUsernameByusernumberlike() throws Exception{
 		JSONObject result=service.getUsernameByusernumberlike(physicalexamForm);
 		if(result==null){
-			resultError("100", "用户不存在");
+			resultError("100", "Nouser");
 		}else{
 			returnObject(result);
 		}
