@@ -357,5 +357,17 @@ public class FeedbackService {
 		
 		return filedData;
 	}
+	/**
+	 * 根据目前的打分获取排名
+	 * @param feedbackImageForm
+	 * @return
+	 */
+	public String getFeedBackRanking(FeedbackImageForm feedbackImageForm) {
+		String mysql="SELECT SUM(a.jifen),a.user_number,b.nickname from  user_image a,table_user b "
+				+ "where b.user_number=a.user_number group by a.user_number ";
+		List<Object[]> list=dao.nativesql(mysql);
+		
+		return null;
+	}
 	
 }

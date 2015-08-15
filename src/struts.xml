@@ -79,7 +79,8 @@
 		</action>	
 		 -->	
 
-		
+		<action name="searchphsicalinit" class="phsicalexamAction" method="searchphsicalinit">				
+		</action>
 		<action name="importbook" class="importBookAction" method="importbook">
 			<result name="success">/bookinfo.jsp</result>
 			<result name="error">/error.jsp</result>
@@ -119,7 +120,19 @@
 		<action name="pesrsonborrowbook" class="importBookAction" method="pesrsonborrowbook">
 			<result name="success">/borrowbookindex.jsp</result>
 		</action>	
-		
+		<action name="getFeedbackImage" class="feedbackImageAction" method="getFeedbackImage">
+		</action>
+		<action name="getFeedBackRanking" class="feedbackImageAction" method="getFeedBackRanking">
+		</action>
+		<action name="feedbakcjsp" class="feedbackImageAction" method="feedbakcjsp">
+			<result name="success">/feedback.jsp</result>
+		</action>
+		<action name="feedBackSendSms" class="feedbackImageAction" method="feedBackSendSms">
+		</action>
+		<action name="exportFeedbackImage" class="feedbackImageAction" method="exportFeedbackImage">
+		</action>
+		<action name="addJifen" class="feedbackImageAction" method="addJifen">
+		</action>
 		<action name="borrowbook" class="importBookAction" method="borrowbook">
 			<result name="success">/borrow.jsp</result>
 		</action>
@@ -130,7 +143,6 @@
 			<result name="chooseplace">/error.jsp</result>	
 		</action>
 		<action name="saveimportbookinfo" class="bookDoubanInfoAction" method="saveimportbookinfo">
-		<!--  -->
 			<result name="success" type="redirect">
 				/bookinfo.jsp
 			</result>
@@ -168,28 +180,15 @@
 			<result name="success">/page/system/showbookhomelist.jsp</result>
 		</action>
 		<action name="downallbookinfo" class="bookDoubanInfoAction" method="downallbookinfo">
-		 
-		<!-- <result name="success" type="redirect">
-				/bookinfo.jsp
-		</result>
-			<result name="success" type="redirectAction">
-				getallbookinfo?resultjsp=${#request.resultjsp}
-			</result>-->
 			<result name="fail" >
 				/page/system/failbook.jsp
 			</result>
 		</action>
 		<action name="Excelexport" class="importBookAction" method="Excelexport">
-		  
-
 		</action>
 		<action name="downloadimportbooktemplates" class="importBookAction" method="downloadimportbooktemplates">
-		  
-
 		</action>
-		
-		
-			<action name="bookdictionary" class="bookBackstageAction" method="list">
+		<action name="bookdictionary" class="bookBackstageAction" method="list">
 			<result name="success">dictionaryIndex.jsp</result>
 		</action>
 		<action name="BookDDledit" class="bookBackstageAction" method="bookDDledit">
@@ -249,12 +248,9 @@
 			<result name="fail" type="redirect">/forum.jsp</result>
 		</action>
 		<action name="dictionaryshow" class="bookBackstageAction" method="dictionaryshow">
-			<!--  <result name="success" >/page/system/bookhistoryindex.jsp</result>
-			-->
 		</action>
 		<action name="dictionarySave" class="bookBackstageAction" method="dictionarySave">
-			<!--  <result name="success" >/page/system/bookhistoryindex.jsp</result>
-			-->
+
 		</action>
 		<action name="feedbackhome" class="feedbackshowAction" method="feedbackhome">
 			<result name="success">/page/system/feedbackhome.jsp</result>
@@ -273,8 +269,7 @@
 	
 	<action name="phsicalexamsearch" class="phsicalexamAction" method="phsicalexamsearch">				
 	</action>
-	<action name="searchphsicalinit" class="phsicalexamAction" method="searchphsicalinit">				
-	</action>
+
 	<action name="savePhysicalreviewBymanager" class="phsicalexamAction" method="savePhysicalreviewBymanager">				
 	</action>
 	
@@ -429,14 +424,7 @@
 	</action>
 	<action name="getuserinfo" class="userAction" method="getuserinfo">				
 	</action>
-	<action name="getFeedbackImage" class="feedbackImageAction" method="getFeedbackImage">
-	</action>
-	<action name="feedBackSendSms" class="feedbackImageAction" method="feedBackSendSms">
-	</action>
-	<action name="exportFeedbackImage" class="feedbackImageAction" method="exportFeedbackImage">
-	</action>
-	<action name="addJifen" class="feedbackImageAction" method="addJifen">
-	</action>
+	
 
    <action name="fileUploadAction" class="fileAction" method="imageupload">
             <result type="json" name="success">
@@ -449,7 +437,7 @@
                     text/html
                 </param>
             </result>
-        </action>
+   </action>
 
 	
 	</package>

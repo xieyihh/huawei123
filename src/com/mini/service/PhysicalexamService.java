@@ -447,10 +447,17 @@ public class PhysicalexamService {
 		if(physicalexam.getPhysicaldate()!=null){
 			return "hasimport";
 		}
-		String physicalstate="1";//已体检
-		String hql="Update Physicalexam a Set a.physicaldate=? , a.physicalstate=? where a.id=?  ";
-		dao.updateByQuery(hql,new Date(),physicalstate,Integer.valueOf(physicalexamForm.getId()));
-		return "success";
+		
+		String[] physical_positionarray=findddlname(physical_position);	
+		String positionresult=this.getpositonnumber(physical_positionarray, physicalexamForm.getPhysicalposition());
+		if(positionresult.equals("error")){
+			return "error";
+		}else{
+			String hql="Update Physicalexam a Set a.physicaldate=? , a.physicalstate=?,a.physicalposition=? where a.id=?  ";
+			dao.updateByQuery(hql,new Date(),InitString.physicalstate_hasexam,positionresult,Integer.valueOf(physicalexamForm.getId()));
+			return "success";
+		}
+		
 	}
 	/**
 	 * 批量导入用户用户修改的体检时间
@@ -1294,9 +1301,10 @@ public class PhysicalexamService {
 	/**
 	 * 查询体检的初始化信息
 	 * @param physicalexamForm
+	 * @param user 
 	 * @return
 	 */
-	public JSONObject searchphsicalinit(PhysicalexamForm physicalexamForm) {
+	public JSONObject searchphsicalinit(PhysicalexamForm physicalexamForm, User user) {
 		List<Physicalinit> list=dao.find(Physicalinit.class);
 		Physicalinit physicalinit=(Physicalinit)dao.get(Physicalinit.class, 1);
 		String[] physical_planarray=findddlname(physical_plan);
@@ -1304,6 +1312,11 @@ public class PhysicalexamService {
 		JSONObject result = new JSONObject();
 		returnform.setPhysicalplan(physical_planarray[Integer.valueOf(physicalinit.getPhysicalplan())-1]);
 		result.put("physicalinit",returnform);
+		if(user.getAccount().equals("tongji")){
+			result.put("position", "同济");
+		}else{
+			result.put("position", "中南");
+		}
 		return result;
 	}
 	public String savePhysicalreviewBymanager(PhysicalexamForm physicalexamForm) {
@@ -1313,6 +1326,7 @@ public class PhysicalexamService {
 		return "success";
 	
 	}
+	
 	
 	
 	
