@@ -121,7 +121,12 @@ function showSystemMsg(msg, time) {
 function validateInputList(inputList) {
 	for(var i=0; i<inputList.length; i++) {
 		if(inputList.eq(i).val() == "") {
-			var msg = inputList.eq(i).parent().find("span").html() + "不能为空";
+			var msg="";
+			if(inputList.eq(i).parent().find("span").html()){
+				msg = inputList.eq(i).parent().find("span").html() + "不能为空";
+			}else{
+				msg = inputList.eq(i).parent().find("label").html() + "不能为空";	
+			}
 			
 			inputPopover(inputList.eq(i), msg, 2);
 			return false;

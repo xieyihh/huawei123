@@ -216,7 +216,54 @@
 				}
 				}); 
 });
-		
+		/**
+		 * 保存不在数据库中的员工体检信息
+		 */
+		$("#saveUser").click(function() {
+			$("input#workNumber").val("");
+			var inputList = $(".nouser form #innerdiv .form-group input");
+			var validateResult = validateInputList(inputList);
+			if(!validateResult) {
+				return false;
+			}
+			var number = $(".nouser form #innerdiv .form-group input[name='usernumber']");
+			var workNumber = $("input#usernumber").val(); 
+//			if(workNumber===""){
+//				inputPopover(number,"请输入工号", 2); 
+//				return false;
+//			}
+			
+			if(workNumber.length!==8){
+				inputPopover(number,"请填写8位工号!", 2); 
+				return false;
+			}	
+			
+			//$('table#userinfo').css('display','none')	;
+			var data={
+					"usernumber": workNumber,
+					"username":$("input#username").val(),
+					"remark":$("input#remark").val()
+			};
+			$.ajax({ 
+				type: "post", 
+				dataType: "json", 
+				url: "savePhysicalUserNoInfor.action", 
+				data: data, //"wherePageCount" + where,个人建议不用这种方式 
+				async: false, 
+				success: function(msg) {
+					if(msg.message!=="success"){
+						alert("保存失败");
+						return false;
+					}else{
+						$('div.nouser').css('display','none');
+						alert("保存成功");
+					}
+				}, 
+				error:function(msg){
+					
+				}
+				}); 
+		});
 		
 		$("button#downloadPhysicaldateTemplates").click(function() { 
 			
@@ -260,7 +307,7 @@ function checkData(workNumber){
 		data: {"usernumber": workNumber}, //"wherePageCount" + where,个人建议不用这种方式 
 		async: false, 
 		success: function(msg) {
-			if(msg.message==="noUser"){
+			if(msg.message==="Nouser"){
 				$('table#userinfo').css('display','none')	;
 				$('div.nouser').css('display','block');
 			}else if(msg.message==="success"){

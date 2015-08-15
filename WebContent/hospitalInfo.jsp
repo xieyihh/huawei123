@@ -15,8 +15,8 @@
   
 		<script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/body.js"></script>
-   	<script type="text/javascript" src="js/myJs/hospitalPhysical.js?v1.2.4"></script>
+		<script type="text/javascript" src="js/body.js?v1.1"></script>
+   	<script type="text/javascript" src="js/myJs/hospitalPhysical.js?v1.3.0"></script>
 
    <script type="text/javascript">
   
@@ -134,9 +134,9 @@ margin-top:50px;}
 					    <label class="sr-only" for="remark">备注信息</label>
 					    <input type="text" class="form-control" name="remark" id="remark" placeholder="备注信息"/>
 					 </div>
-				<button type="submit" class="btn btn-primary "  >保存个别体检信息</button>
+				<button type="button" class="btn btn-primary " id="saveUser" >保存个别体检信息</button>
 			</div>
-  		</form><br>
+  		</form>
   		</div>
 		
 		</div>		 
