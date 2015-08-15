@@ -99,7 +99,7 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 				out.close();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			resultError("404", "error");
 		}		
 	}
@@ -136,12 +136,8 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 	 * 获取目前的建议排行
 	 */
 	public void getFeedBackRanking(){
-		String result=service.getFeedBackRanking(feedbackImageForm);
-		if(result.equals("success")){
-			returnObject(result);
-		}else{
-			resultError("404", "error");
-		}
+		JSONObject result=service.getFeedBackRanking(feedbackImageForm);
+		returnObject(result);
 		
 	}
 	

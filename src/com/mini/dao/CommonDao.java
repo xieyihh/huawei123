@@ -2,6 +2,7 @@ package com.mini.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1062,6 +1063,11 @@ public class CommonDao extends HibernateDaoSupport {
 	//查询本地的sql
 	public List<Object[]> nativesql(String sql){
 		List<Object[]> result=this.getSession().createSQLQuery(sql).list();
+		return result;
+		
+	}
+	public BigInteger  nativecountsql(String sql){
+		BigInteger  result=(BigInteger ) this.getSession().createSQLQuery(sql).list().get(0);
 		return result;
 		
 	}
