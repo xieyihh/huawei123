@@ -229,9 +229,14 @@ public class FeedbackService {
 		}
 		if(StringUtils.isNotBlank(feedbackImageForm.getFeedbackname())){
 			hqlWhere += " and o.feedbackname like ?";
-			paramsList.add("%" + feedbackImageForm.getFeedbackname() + "%");
-			
+			paramsList.add("%" + feedbackImageForm.getFeedbackname() + "%");			
 		}	
+		//预约体检时间
+		if(StringUtils.isNotBlank(feedbackImageForm.getStarttime())&&StringUtils.isNotBlank(feedbackImageForm.getEndtime())){ 
+			hqlWhere += "and o.feedbacktime between DATE_FORMAT(?,'%Y-%m-%d') and DATE_FORMAT( ?,'%Y-%m-%d') ";
+			paramsList.add(feedbackImageForm.getStarttime());	
+			paramsList.add(feedbackImageForm.getEndtime());
+		}
 				
 		Object [] params = paramsList.toArray();
 		
@@ -315,7 +320,7 @@ public class FeedbackService {
 		}	
 		//预约体检时间
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		if(StringUtils.isNotBlank(feedbackImageForm.getStarttime())){ 
+		if(StringUtils.isNotBlank(feedbackImageForm.getStarttime())&&StringUtils.isNotBlank(feedbackImageForm.getEndtime())){ 
 			hqlWhere += "and o.feedbacktime between DATE_FORMAT(?,'%Y-%m-%d') and DATE_FORMAT( ?,'%Y-%m-%d') ";
 			paramsList.add(feedbackImageForm.getStarttime());	
 			paramsList.add(feedbackImageForm.getEndtime());
