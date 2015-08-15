@@ -52,9 +52,9 @@
 								'<div class="form-group" style="margin-right:0px">'+
 									'<p class="form-control-static"  >体检日期：' +msg.context.physicalexamForm.physicaldate+'&nbsp;&nbsp;</p>'+
 								'</div>'+
-//								'<div class="form-group" style="margin-right:0px">'+
-//									'<p class="form-control-static"  >体检号：' +physicalnumber+'&nbsp;&nbsp;</p>'+
-//								'</div>'+
+								'<div class="form-group" style="margin-right:0px">'+
+									'<p class="form-control-static"  >体检地点：' +msg.context.physicalexamForm.physicalposition+'&nbsp;&nbsp;</p>'+
+								'</div>'+
 							 '</div>';
 					$('#groups').append(name);
 					}
@@ -117,7 +117,7 @@ function bindData(){
 		data: { }, //要发送的数据 
 		success: function(msg) {//msg为返回的数据，在这里做数据绑定 
 			$('#physicalPlan').text("体检批次："+msg.context.physicalinit.physicalplan);
-			
+			$('#physicalPosition').text("体检地点："+msg.context.position);
 		}, 
 		error: function() { 
 			

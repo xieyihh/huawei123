@@ -26,7 +26,7 @@
 	<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="bootstrap/bootstrap.min.js"></script>
    <script src="bootstrap/jquery.min.js"></script>
-   <script type="text/javascript" src="js/myJs/physical.js?v1.1.4"></script>
+   <script type="text/javascript" src="js/myJs/physical.js?v1.1.5"></script>
   <!-- 日历 -->
 <script type="text/javascript" src="My97DatePicker/WdatePicker.js?v1.1" ></script>
    <script type="text/javascript">
@@ -193,10 +193,10 @@ padding: 4px 12px;}
 								  <th width="15%">体检地点</th>
 								  <th width="15%">安排体检日期</th>
 								  <th width="15%">实际体检日期</th>
-								  <th width="5%">体检状态</th>
-								  <th width="10%">体检批次</th>
+								  <th width="10%">体检状态</th>
+								  <th width="15%">体检批次</th>
 								  <th width="10%">家属体检</th>					  
-								  <th width="10%">操作</th>
+								 <!-- <th width="10%">操作</th>-->
 			  			</tr>
 					</thead>
 					<tbody id="tb_body"> </tbody> 
