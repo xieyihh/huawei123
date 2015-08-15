@@ -38,13 +38,13 @@
 	//查询 
 		$("input#searchbutton").click(function() { 
 			first="check";
-			var name = $("input#bookname").val(); 
-			if(name=="查询书籍"){
+			var name = $("input#nickname").val(); 
+			if(name=="昵称书籍"){
 				name="";
 			}
 			//alert(name);
 			if (name != null && name != NaN) { 
-				bookName=name; 
+				nickname=name; 
 			} 
 			
 			pageIndex = 1; 
@@ -63,13 +63,13 @@
 			$.ajax({ 
 				type: "get", //使用get方法访问后台 
 				dataType: "json", //返回json格式的数据 
-				url:"phonebooksearch.action", //要访问的后台地址 
-				data: { "currentPage": pageIndex ,"nickname":nickname}, //要发送的数据 
+				url:"getFeedBackRanking.action", //要访问的后台地址 
+				data: { "pageNum": pageIndex ,"nickname":nickname}, //要发送的数据 
 				success: function(msg) {//msg为返回的数据，在这里做数据绑定 
 					
 					if(first==="first"||first==="check"){
 						if (msg.length != 0) { 
-							$("#module").empty();
+							$("#tb_body").empty();
 							//Height=$("#module").height();
 						} 
 						
@@ -81,12 +81,12 @@
 					}else{
 						
 						$('#booknull').hide();
-						$.each(msg.context.booklist, function(i, item) {
+						$.each(msg.context.rankinfor, function(i, item) {
 							
 							var list='<tr>'+
-											'<td >' + item.usernumber + '</td>'+
-											'<td >' + item.username + '</td>'+
-											'<td >' + item.physicalposition + '</td>'+
+											'<td >' + item.nickname + '</td>'+
+											'<td >' + item.jifen + '</td>'+
+											'<td >' + item.rank + '</td>'+
 										'</tr>';
 							
 							$("#tb_body").append(list);
@@ -128,10 +128,7 @@
 					
 				}, 
 				error: function() { 
-//					var t = document.getElementById("booklist"); //获取展示数据的表格 
-//					while (t.rows.length != 0) { 
-//						t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除   
-//					} 
+
 					alert("加载数据失败"); 
 				} 
 			}); 
