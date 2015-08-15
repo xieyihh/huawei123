@@ -406,8 +406,8 @@ public class PhysicalexamService {
 	 * @return
 	 */
 	public String deletephysicalreservedate(PhysicalexamForm physicalexamForm) {
-		String hql="Update Physicalexam a Set a.state=? where a.id=? ";
-		dao.updateByQuery(hql, "2",Integer.valueOf(physicalexamForm.getId()));
+//		String hql="Update Physicalexam a Set a.state=? where a.id=? ";
+//		dao.updateByQuery(hql, "2",Integer.valueOf(physicalexamForm.getId()));
 		return "success";
 	}
 	/**
@@ -437,9 +437,10 @@ public class PhysicalexamService {
 	/**
 	 * 修改用户的正式体检时间
 	 * @param physicalexamForm
+	 * @param user 
 	 * @return
 	 */
-	public String savePhysicaldate(PhysicalexamForm physicalexamForm) {
+	public String savePhysicaldate(PhysicalexamForm physicalexamForm, User user) {
 		Physicalinit physicalinit=(com.mini.entity.Physicalinit) dao.get(Physicalinit.class, 1);
 		physicalexamForm.setPhysicalplan(physicalinit.getPhysicalplan());
 		String hashql="From Physicalexam a where a.id=?";
@@ -449,7 +450,11 @@ public class PhysicalexamService {
 		}
 		
 		String[] physical_positionarray=findddlname(physical_position);	
-		String positionresult=this.getpositonnumber(physical_positionarray, physicalexamForm.getPhysicalposition());
+		String position="中南";
+		if(user.getAccount().equals("yiyuan")){
+			position="中南";
+		}
+		String positionresult=this.getpositonnumber(physical_positionarray, position);
 		if(positionresult.equals("error")){
 			return "error";
 		}else{
