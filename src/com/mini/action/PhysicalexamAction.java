@@ -242,7 +242,10 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 	 * 查询体检的初始化信息
 	 */
 	public void searchphsicalinit(){
-		JSONObject result=service.searchphsicalinit(physicalexamForm);
+		ActionContext context = ActionContext.getContext();
+		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
+		User user = (User) session.get("user");
+		JSONObject result=service.searchphsicalinit(physicalexamForm,user);
 		returnObject(result);
 	}
 	/**

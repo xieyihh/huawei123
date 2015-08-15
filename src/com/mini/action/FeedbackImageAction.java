@@ -64,6 +64,9 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 	/**
 	 * 获取用户反馈的一些信息带图片
 	 */
+	public String feedbakcjsp(){
+		return "success";
+	}
 	public void getFeedbackImage(){
 		JSONObject result=service.getFeedbackImage(feedbackImageForm);
 		returnObject(result);
@@ -122,6 +125,18 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 	 */
 	public void addJifen(){
 		String result=service.addJifen(feedbackImageForm);
+		if(result.equals("success")){
+			returnObject(result);
+		}else{
+			resultError("404", "error");
+		}
+		
+	}
+	/**
+	 * 获取目前的建议排行
+	 */
+	public void getFeedBackRanking(){
+		String result=service.getFeedBackRanking(feedbackImageForm);
 		if(result.equals("success")){
 			returnObject(result);
 		}else{
