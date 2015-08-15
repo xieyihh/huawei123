@@ -452,11 +452,12 @@ public class PhysicalexamService {
 		
 		String[] physical_positionarray=findddlname(physical_position);	
 		String position="中南";
-		if(user.getAccount().equals("yiyuan")){
-			position="中南";
-		}else{
+		if(user.getAccount().equals("tongji")){
 			position="同济";
+		}else{			
+			position="中南";
 		}
+		
 		String positionresult=this.getpositonnumber(physical_positionarray, position);
 		if(positionresult.equals("error")){
 			return "error";
