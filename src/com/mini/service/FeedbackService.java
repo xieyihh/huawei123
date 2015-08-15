@@ -1,5 +1,6 @@
 package com.mini.service;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -376,6 +377,10 @@ public class FeedbackService {
 		}
 		pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
 		int pagestart=(pagerTool.getCurrentPage() - 1) * pagerTool.getPageSize();
+		String countsql="SELECT count(*) from (SELECT a.user_number as a from  user_image a,table_user b "
+				+ "where b.user_number=a.user_number group by a.user_number ) as total ";
+		BigInteger  countlist=(BigInteger ) dao.nativecountsql(countsql);
+		
 		String mysql="SELECT SUM(a.jifen),a.user_number,b.nickname from  user_image a,table_user b "
 				+ "where b.user_number=a.user_number group by a.user_number limit "+pagestart+","+pageSize;
 		List<Object[]> list=dao.nativesql(mysql);
@@ -388,7 +393,9 @@ public class FeedbackService {
 			returnform.setRank(String.valueOf(i+1));
 			returnform.setNickname(list.get(i)[2].toString());
 			returnlist.add(returnform);			
-		}			
+		}	
+		totalRows=countlist.intValue();
+		pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
 		result.put("totalRows", totalRows);
 		result.put("totalPages", pagerTool.getTotalPages());
 		result.put("rankinfor", returnlist);
