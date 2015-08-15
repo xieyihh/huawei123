@@ -1,6 +1,9 @@
 	var pageIndex = 1; //页索引 
 	var pageSize=10;
-	
+	var usernumber=	"";
+	var feedbackname="";
+	var starttime="";
+	var endtime="";
 	var oldliid="";
 	var oldview="";
 	function bindPager() { 
@@ -28,7 +31,7 @@
 			type: "get", //使用get方法访问后台 
 			dataType: "json", //返回json格式的数据 
 			url: "getFeedbackImage.action", //要访问的后台地址 
-			data: { "pageSize": pageSize ,"currentPage": pageIndex }, //要发送的数据 
+			data: { "pageSize": pageSize ,"currentPage": pageIndex,}, //要发送的数据 
 			ajaxStart: function() { $("#load").show(); }, 
 			complete: function() { $("#load").hide(); }, //AJAX请求完成时隐藏loading提示 
 			success: function(msg) {//msg为返回的数据，在这里做数据绑定 
@@ -241,6 +244,20 @@
 				//alert(pageIndex);
 			} 
 			});
+		
+		//查询 
+		$("button#btnSearch").click(function() { 
+		
+			 usernumber=	$("input#usernumber").val();
+			 feedbackname= $("input#feedbackname").val();
+			 starttime= $("input#starttime").val();
+			 endtime=$("input#endtime").val();	
+					
+				
+			pageSize=1;
+			bindData(); 
+		});  
+		
 		$(document).on("click","[id^='img']",function(){//修改成这样的写法
 			
 			var liid=$(this).attr("id").toString();

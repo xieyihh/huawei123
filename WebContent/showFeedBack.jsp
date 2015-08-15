@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,7 +8,9 @@
 <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
    <script src="bootstrap/jquery.min.js"></script>
    <script src="bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/myJs/feedback.js?v1.4.0.5"></script>
+    <script type="text/javascript" src="js/myJs/feedback.js?v1.4.1.5"></script>
+     <!-- 日历 -->
+<script type="text/javascript" src="My97DatePicker/WdatePicker.js?v1.1" ></script>
   <style type="text/css">
 	
 	a{
@@ -166,6 +168,31 @@ color: #ccc;}
 		<h1>【反馈信息】</h1>
 	</div>
 	<div style="width:80%;margin:0 auto;">
+	
+		<form id="feedbackForm" name="feedbackForm" action="exportFeedbackImage.action" method="get" class="form-inline"style="width:95%;margin:0 auto;margin-bottom:20px;">	
+			
+				 <div class="form-group inputfix"  >
+				    <label class="sr-only" for="usernumber">工号</label>
+				    <input type="text" class="form-control" id="usernumber" placeholder="工号"/>
+				 </div>
+				 <div class="form-group inputfix">
+				    <label class="sr-only" for="feedbackname">姓名</label>
+				    <input type="text" class="form-control" id="feedbackname" placeholder="姓名"/>
+				 </div>
+				
+				 <div class="form-group inputfix">
+				    <label class="sr-only" for="starttime">开始日期</label>
+				    <input type="text" class="form-control" id="starttime" placeholder="开始日期"onfocus="WdatePicker({skin:'ext',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"/>
+				 </div>		
+				<div class="form-group inputfix">
+				    <label class="sr-only" for="endtime">截止日期</label>
+				    <input type="text" class="form-control" id="endtime" placeholder="截止日期" onfocus="WdatePicker({skin:'ext',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"/>
+				 </div>	
+				
+				<button type="submit" class="btn btn-success " id="exportinfo">导出</button>
+				<button type="button" class="btn btn-primary " id="btnSearch">查询</button>
+				
+				 </form>
 			<table style="width:100%;margin:0 auto;border:0 cellpadding:0 cellspacing:1 "  class="tableone ">
 						
 							<tbody id="feedbackInfo"> </tbody> 
