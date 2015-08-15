@@ -170,6 +170,7 @@ public class PhysicalexamService {
 	private void ChangePhysicalState() throws ParseException {
 		//判断当前日期和体检预约日期进行比较，看哪个比较大
 		String hql="From Physicalexam o where o.state='0' and o.physicalstate=? ";
+		@SuppressWarnings("unchecked")
 		List<Physicalexam> physicalexamlist=dao.find(hql,"3");
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");	
 		Date dateTime2 = dateFormat.parse(dateFormat.format(new Date()));
@@ -275,6 +276,7 @@ public class PhysicalexamService {
 		Object [] params = paramsList.toArray();	//组织排序		
 		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
 		orderby.put("o.DdlCode", "asc");
+		@SuppressWarnings("unchecked")
 		List<Bookdictionary> list=dao.findCollectionByConditionNoPage(Bookdictionary.class,hqlWhere, params, orderby);
 
 		String[] result=new String[list.size()];
@@ -532,6 +534,7 @@ public class PhysicalexamService {
 		Physicalinit physicalinit=(com.mini.entity.Physicalinit) dao.get(Physicalinit.class, 1);
 		physicalexamForm.setPhysicalplan(physicalinit.getPhysicalplan());
 		String hql="From Physicalreview a Where a.usernumber = ? and state='0' and a.physicalplan=? ";
+		@SuppressWarnings("unchecked")
 		List<Physicalreview> list=dao.find(hql,physicalexamForm.getUsernumber(),physicalexamForm.getPhysicalplan());
 		if(list!=null&&list.size()!=0){
 			return "haveimport";
@@ -769,6 +772,7 @@ public class PhysicalexamService {
 		List<Physicalinit> returnlist=dao.find(Physicalinit.class);
 		//设置状态，是申请体检还是已经拒绝还是已经同意还是没有申请
 		hql="From PhysicalEditRedate where usernumber=? and physicalplan=?";
+		@SuppressWarnings("unchecked")
 		List<PhysicalEditRedate> exceptdatelist=dao.find(hql, physicalexam.getUsernumber(),returnlist.get(0).getPhysicalplan());
 		
 		if(exceptdatelist==null||exceptdatelist.size()==0){
@@ -878,6 +882,7 @@ public class PhysicalexamService {
 		Physicalinit physicalinit=(Physicalinit) dao.get(inithql, 1);		
 	
 		String shql="From Physicalrelatives a Where a.usernumber = ?  and a.physicalplan=? and state='0' ";
+		@SuppressWarnings("unchecked")
 		List<Physicalrelatives> list=dao.find(shql, user.getNumber(),physicalinit.getPhysicalplan());
 		if(list==null||list.size()==0){
 			//说明都删除完
@@ -1427,6 +1432,58 @@ public class PhysicalexamService {
 		result.put("physical_state", physical_statearray);
 		result.put("physical_position", physical_positionarray);
 		return result;
+	}
+	public ArrayList<String> exportPhysicalNoifor(
+			PhysicalexamForm physicalexamform, HttpServletRequest request) {
+
+		String hqlWhere = " and state='0' ";
+		//组织排序
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+		orderby.put("o.physicaldate", "desc");
+		List<String> paramsList = new ArrayList<String>();		
+		if(StringUtils.isNotBlank(physicalexamform.getUsernumber())){
+			hqlWhere += " and o.usernumber like ?";
+			paramsList.add("%" + physicalexamform.getUsernumber() + "%");			
+		}
+		if(StringUtils.isNotBlank(physicalexamform.getUsername())){
+			hqlWhere += " and o.username like ?";
+			paramsList.add("%" + physicalexamform.getUsername() + "%");			
+		}
+		if(StringUtils.isNotBlank(physicalexamform.getPhysicaldate())){			 
+			hqlWhere += " and DATE_FORMAT( o.physicaldate,'%Y-%m-%d')=? ";
+			paramsList.add(physicalexamform.getPhysicaldate());			
+		}
+		//体检地点
+		if(StringUtils.isNotBlank(physicalexamform.getPhysicalposition())&&(!physicalexamform.getPhysicalposition().equals("0"))){
+			hqlWhere += " and o.physicalposition=?";			
+			paramsList.add( physicalexamform.getPhysicalposition());			
+		}
+		//体检批次,为0查询所有
+		if(StringUtils.isNotBlank(physicalexamform.getPhysicalplan())&&(!physicalexamform.getPhysicalplan().equals("0"))){
+			hqlWhere += " and o.physicalplan=?";			
+			paramsList.add( physicalexamform.getPhysicalplan());			
+		}
+		Object [] params = paramsList.toArray();
+		@SuppressWarnings("unchecked")
+		List<PhysicalNoinfor> physicalNoinforlist=dao.findPage(PhysicalNoinfor.class, hqlWhere, params, orderby);
+		List<PhysicalexamForm> returnlist=new ArrayList<PhysicalexamForm>();
+		String[] physical_planarray=findddlname(physical_plan);
+		String[] physical_positionarray=findddlname(physical_position);
+		ArrayList<String> filedData=new ArrayList<String>();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");	
+		StringBuffer line=null;
+		for(PhysicalNoinfor physicalNoinfor:physicalNoinforlist){
+			line=new StringBuffer();
+			line.append(physicalNoinfor.getUsername()+",");
+			line.append(physicalNoinfor.getUsernumber()+",");
+			line.append(dateFormat.format(physicalNoinfor.getPhysicaldate())+",");
+			line.append(physical_planarray[Integer.valueOf(physicalNoinfor.getPhysicalplan())-1]+",");
+			line.append(physical_positionarray[Integer.valueOf(physicalNoinfor.getPhysicalposition())-1]+",");
+			line.append(physicalNoinfor.getRemark()+",");
+			filedData.add(line.toString());
+
+		}
+		return filedData;
 	}
 	
 	

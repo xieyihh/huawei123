@@ -302,7 +302,7 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 		try {
 			result = service.getuserphsicalrelativesOnback(physicalexamForm);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		returnObject(result);
@@ -527,7 +527,7 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 				resultError("104", "error");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			resultError("104", "error");
 		}
 		
@@ -544,10 +544,41 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 			result = service.searchPhysicalNoifor(physicalexamForm);
 			returnObject(result);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			resultError("104", "error");
 		}
 		
+		
+	}
+	/**
+	 * 体检信息导出为excel模式
+	 * @return
+	 * @throws Exception
+	 */
+	public void exportPhysicalNoifor() throws Exception{
+		String titles="工号,姓名,体检日期,体检批次,体检地点,备注";	
+		ArrayList<String> filedData =service.exportPhysicalNoifor(physicalexamForm,getRequest());
+		if(filedData==null){
+			filedData=new ArrayList<String>();
+		}
+		HttpServletResponse response=getResponse();
+		OutputStream out = response.getOutputStream();
+		//重置输出流
+		response.reset();
+		response.setHeader("Content-disposition", "attachment;filename=\""+ new String(("无工号人员体检信息.csv").getBytes("GBK"),"ISO-8859-1") + "\"");    
+
+		//设置导出Excel报表的导出形式
+		response.setContentType("text/plain;charset=utf-8");
+		CsvExport csvout=new CsvExport(titles, filedData);
+
+		csvout.createCsv(out);
+		 
+		System.setOut(new PrintStream(out));
+		out.flush();
+		//关闭输出流
+		if(out!=null){
+			out.close();
+		}
 		
 	}
 	
