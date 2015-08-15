@@ -366,20 +366,22 @@
 					$.each(msg.context.physicallist, function(i, item) {
 						
 						var bodyContent='<tr>'+
-											'<td width="10%" id="number'+item.id+'" >' + item.usernumber + '</td>'+
-											'<td width="10%" id="name'+item.id+'">' + item.username + '</td>'+
-											'<td width="15%" >' + item.physicalposition + '</td>'+
-											'<td width="15%"  >' + item.physicalreservedate + '</td>'+//id="changeDate'+item.id+'"
-											'<td width="15%">' +item.physicaldate + '</td>'+
-											'<td width="5%">' + item.physicalstate + '</td>'+
-											'<td width="10%" id="plan'+item.id+'" >' + item.physicalplan + ' </td>';
+											'<td  id="number'+item.id+'" >' + item.usernumber + '</td>'+
+											'<td  id="name'+item.id+'">' + item.username + '</td>'+
+											'<td  >' + item.physicalposition + '</td>'+
+											'<td  >' + item.physicalreservedate + '</td>'+//id="changeDate'+item.id+'"
+											'<td >' +item.physicaldate + '</td>'+
+											'<td >' + item.physicalstate + '</td>'+
+											'<td  id="plan'+item.id+'" >' + item.physicalplan + ' </td>';
 						//" </td><td width=\"10%\">" + item.physicalnumber+
 						if(item.hasRelatives=="无"){
-							 bodyContent+='<td width="10%">'+item.hasRelatives+'</td>';
+							 bodyContent+='<td >'+item.hasRelatives+'</td>';
 						}else{
-							bodyContent+='<td width="10%"><a id="relative'+item.id+'" >' + "查看家属详情" + ' </a></td>';
+							bodyContent+='<td ><a id="relative'+item.id+'" >' + "查看家属详情" + ' </a></td>';
 						}
-						bodyContent+='<td width="10%"><a id="delete'+item.id+'" > <img src="img/delete.gif" border="0" title="删除"></a> </td></tr>'
+						bodyContent+=
+							//'<td width="10%"><a id="delete'+item.id+'" > <img src="img/delete.gif" border="0" title="删除"></a> </td>'+
+						'</tr>';
 						$("#tb_body").append(bodyContent); 
 						/*<td width="10%"><a id="edit'+list+'" >' + "编辑" + ' </a></td>
 						 * $("#tb_body").append("<tr><td>" + 12+ "</td><td>" + 12 + " </td><td>" +12+ 

@@ -242,7 +242,7 @@ function bindData(){
 		data: { }, //要发送的数据 
 		success: function(msg) {//msg为返回的数据，在这里做数据绑定 
 			$('#physicalPlan').text("体检批次："+msg.context.physicalinit.physicalplan);
-			
+			$('#physicalPosition').text("体检地点："+msg.context.position);
 		}, 
 		error: function() { 
 			
@@ -260,11 +260,11 @@ function checkData(workNumber){
 		data: {"usernumber": workNumber}, //"wherePageCount" + where,个人建议不用这种方式 
 		async: false, 
 		success: function(msg) {
-			if(msg.message!=="success"){
-				alert(msg.message);
-				return false;
-			}else{
-				
+			if(msg.message==="noUser"){
+				$('table#userinfo').css('display','none')	;
+				$('div.nouser').css('display','block');
+			}else if(msg.message==="success"){
+				$('div.nouser').css('display','none');
 				if (msg.length !== 0) { 
 					var t = document.getElementById("tb_body"); //获取展示数据的表格 
 					while (t.rows.length !== 0) { 
@@ -276,12 +276,12 @@ function checkData(workNumber){
 					$('table#userinfo').css('display','inline-table')	;
 					$.each(msg.context.physicalexamForm, function(i, item) {
 						var bodyContent='<tr id="number'+item.usernumber+'">'+
-											'<td width="15%" >' + item.usernumber + '</td>'+
-											'<td width="20%" >' + item.username + '</td>' +
+											'<td  >' + item.usernumber + '</td>'+
+											'<td  >' + item.username + '</td>' +
 										//	'<td width="20%">' + item.physicalnumber+ '</td>'+
-											'<td width="20%" >' + item.physicalposition + '</td>'+
-											'<td width="25%" >' + item.physicalreservedate + '</td>' + 
-											'<td width="20%">' + item.physicalstate + '</td>'+
+										//	'<td width="20%" >' + item.physicalposition + '</td>'+
+											'<td  >' + item.physicalreservedate + '</td>' + 
+											'<td  >' + item.physicalstate + '</td>'+
 										'</tr>';
 						
 						
@@ -292,6 +292,9 @@ function checkData(workNumber){
 				}else{
 					$('table#userinfo').css('display','none')	;
 				}
+			}else{
+				alert(msg.message);
+				return false;
 			}
 		}, 
 		error:function(msg){

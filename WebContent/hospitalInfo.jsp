@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/body.js"></script>
-   	<script type="text/javascript" src="js/myJs/hospitalPhysical.js?v1.2.5"></script>
+   	<script type="text/javascript" src="js/myJs/hospitalPhysical.js?v1.2.4"></script>
 
    <script type="text/javascript">
   
@@ -61,6 +61,9 @@ margin-top:8px;
  font-size: 14px;}
 .space{
 width:100%;height:100px}
+.nouser{
+display:none;
+margin-top:50px;}
 </style>
 
 
@@ -77,14 +80,17 @@ width:100%;height:100px}
   			<form  class="form-inline" style="width: 95%;margin: 0 auto;margin-top:20px">
   				<div id="innerdiv"style="width:85%;margin:0 auto;">
 	  				<div class="form-group" style="color:#bbb;width:100%">
-					    <p class="form-control-static"  >输入工号，核对姓名信息、体检批次，再保存体检信息</p>
+					    <p class="form-control-static"  >输入工号，核对姓名信息、体检批次、医院，再保存体检信息</p>
 					 </div>
   				
-					 <div class="form-group" style="margin-right:0px">
+					 <div class="form-group" style="margin-right:20px">
 					 
 					    <p class="form-control-static"  id="physicalPlan"  ></p>
 					  </div>
+					  <div class="form-group" style="margin-right:0px">
 					 
+					    <p class="form-control-static"  id="physicalPosition"  ></p>
+					  </div>
 					 <div class="form-group" >
 					    <label class="sr-only" for="workNumber">工号</label>
 					    <input type="text" class="form-control" name="workNumber" id="workNumber" placeholder="工号"/>
@@ -94,21 +100,44 @@ width:100%;height:100px}
 				<table id="userinfo" style="display:none;width:90%;border:0 cellpadding:0 cellspacing:1;padding:0;margin-top:10px "  class="tableone ">
 					 <thead >
 						  <tr class="title" >
-						  		  <th width="15%">工号</th>
-								  <th width="20%">姓名</th>
-								 <!--   <th width="20%">体检号</th>-->
-								  <th width="20%">体检地点</th>
-								  <th width="25%">安排体检日期</th>
-								  <th width="20%">体检状态</th>
+						  		  <th width="20%">工号</th>
+								  <th width="25%">姓名</th>
+								 <!--   <th width="20%">体检号</th>
+								  <th width="20%">体检地点</th>-->
+								  <th width="30%">安排体检日期</th>
+								  <th width="25%">体检状态</th>
 								 			  
 			  			</tr>
 					</thead>
 					<tbody id="tb_body"> </tbody> 
 				</table>
+				
 			</div>
   		</form><br>
   		
-  		
+  		<div class=" nouser">
+  			
+  			<form  class="form-inline" action="savePhysicalUserNoInfor.action " method="post"style="width: 95%;margin: 0 auto;margin-top:20px">
+  				<div id="innerdiv"style="width:85%;margin:0 auto;">
+	  				<div class="form-group" style="color:#bbb;width:100%">
+					    <p class="form-control-static"  >此员工体检信息不在现有数据库中，请在下面手动添加并保存</p>
+					 </div>
+  					<div class="form-group" >
+					    <label class="sr-only" for="usernumber">工号</label>
+					    <input type="text" class="form-control" name="usernumber" id="usernumber" placeholder="工号"/>
+					 </div>
+					<div class="form-group" >
+					    <label class="sr-only" for="username">姓名</label>
+					    <input type="text" class="form-control" name="username" id="username" placeholder="姓名"/>
+					 </div>
+					 <div class="form-group" >
+					    <label class="sr-only" for="remark">备注信息</label>
+					    <input type="text" class="form-control" name="remark" id="remark" placeholder="备注信息"/>
+					 </div>
+				<button type="submit" class="btn btn-primary "  >保存个别体检信息</button>
+			</div>
+  		</form><br>
+  		</div>
 		
 		</div>		 
 	</body>

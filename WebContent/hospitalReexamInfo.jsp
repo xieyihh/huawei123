@@ -11,7 +11,7 @@
 	<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="bootstrap/bootstrap.min.js"></script>
    <script src="bootstrap/jquery.min.js"></script>
-   <script type="text/javascript" src="js/myJs/hospitalReexam.js?v1.2.3"></script>
+   <script type="text/javascript" src="js/myJs/hospitalReexam.js?v1.2.4"></script>
  
    <script type="text/javascript">
   
@@ -68,9 +68,14 @@ margin-top:8px;
   			<div style="width:85%;margin:0 auto;">
   			
   			<div id="groups">
-				 <div class="form-group" style="margin-right:0px">
-				    <p class="form-control-static" id="physicalPlan"  ></p>
-				  </div>
+				 <div class="form-group" style="margin-right:20px">
+					 
+					    <p class="form-control-static"  id="physicalPlan"  ></p>
+					  </div>
+					  <div class="form-group" style="margin-right:0px">
+					 
+					    <p class="form-control-static"  id="physicalPosition"  ></p>
+					  </div>
 				
 				 <div class="form-group" >
 				    <label class="sr-only" for="workNumber">工号</label>
