@@ -86,6 +86,8 @@
 		</action>
 		<action name="savePhysicalUserNoInfor" class="phsicalexamAction" method="savePhysicalUserNoInfor">				
 		</action>
+		<action name="searchPhysicalNoifor" class="phsicalexamAction" method="searchPhysicalNoifor">				
+		</action>
 		<action name="importbook" class="importBookAction" method="importbook">
 			<result name="success">/bookinfo.jsp</result>
 			<result name="error">/error.jsp</result>
