@@ -18,7 +18,7 @@ public class Physicalexam {
 	private String physicalplan;/*体检批次 */
 	private String hasRelatives;/*是否有亲属 */
 	private Date physicalimportdate;	/*导入时间 */
-	private String  state;	/*导入时间 */
+	private String  state;	/*导入时间 *///2代表已删除
 	
 	public String getState() {
 		return state;

@@ -447,10 +447,17 @@ public class PhysicalexamService {
 		if(physicalexam.getPhysicaldate()!=null){
 			return "hasimport";
 		}
-		String physicalstate="1";//已体检
-		String hql="Update Physicalexam a Set a.physicaldate=? , a.physicalstate=? where a.id=?  ";
-		dao.updateByQuery(hql,new Date(),physicalstate,Integer.valueOf(physicalexamForm.getId()));
-		return "success";
+		
+		String[] physical_positionarray=findddlname(physical_position);	
+		String positionresult=this.getpositonnumber(physical_positionarray, physicalexamForm.getPhysicalposition());
+		if(positionresult.equals("error")){
+			return "error";
+		}else{
+			String hql="Update Physicalexam a Set a.physicaldate=? , a.physicalstate=?,a.physicalposition=? where a.id=?  ";
+			dao.updateByQuery(hql,new Date(),InitString.physicalstate_hasexam,positionresult,Integer.valueOf(physicalexamForm.getId()));
+			return "success";
+		}
+		
 	}
 	/**
 	 * 批量导入用户用户修改的体检时间
