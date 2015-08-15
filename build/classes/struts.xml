@@ -81,6 +81,8 @@
 
 		<action name="searchphsicalinit" class="phsicalexamAction" method="searchphsicalinit">				
 		</action>
+		<action name="searchPhysicalNoifor" class="phsicalexamAction" method="searchPhysicalNoifor">				
+		</action>
 		<action name="savePhysicalUserNoInfor" class="phsicalexamAction" method="savePhysicalUserNoInfor">				
 		</action>
 		<action name="importbook" class="importBookAction" method="importbook">

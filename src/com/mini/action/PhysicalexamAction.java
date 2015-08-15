@@ -533,5 +533,22 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 		
 		
 	}
+	/**
+	 * 查询不在名单中的用户
+	 * @throws ParseException
+	 */
+	public void searchPhysicalNoifor() {
+
+		JSONObject result;
+		try {
+			result = service.searchPhysicalNoifor(physicalexamForm);
+			returnObject(result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			resultError("104", "error");
+		}
+		
+		
+	}
 	
 }

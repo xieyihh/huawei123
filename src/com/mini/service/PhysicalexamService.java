@@ -1358,6 +1358,74 @@ public class PhysicalexamService {
 		dao.save(physicalNoinfor);
 		return "success";
 	}
+	public JSONObject searchPhysicalNoifor(PhysicalexamForm physicalexamform) {
+		//如果体检过期的就要进行设置为体检过期
+		PagerTool pagerTool=new PagerTool();
+		//当前页数
+		int pageNum=1;
+		int totalRows=0;
+		pageSize=Integer.valueOf(physicalexamform.getPageSize());
+		if(StringUtils.isNotBlank(physicalexamform.getCurrentPage())){
+			pageNum=Integer.valueOf(physicalexamform.getCurrentPage());
+		}
+		pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
+		String hqlWhere = " and state='0' ";
+		//组织排序
+		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+		orderby.put("o.physicaldate", "desc");
+		List<String> paramsList = new ArrayList<String>();		
+		if(StringUtils.isNotBlank(physicalexamform.getUsernumber())){
+			hqlWhere += " and o.usernumber like ?";
+			paramsList.add("%" + physicalexamform.getUsernumber() + "%");			
+		}
+		if(StringUtils.isNotBlank(physicalexamform.getUsername())){
+			hqlWhere += " and o.username like ?";
+			paramsList.add("%" + physicalexamform.getUsername() + "%");			
+		}
+		if(StringUtils.isNotBlank(physicalexamform.getPhysicaldate())){			 
+			hqlWhere += " and DATE_FORMAT( o.physicaldate,'%Y-%m-%d')=? ";
+			paramsList.add(physicalexamform.getPhysicaldate());			
+		}
+		//体检地点
+		if(StringUtils.isNotBlank(physicalexamform.getPhysicalposition())&&(!physicalexamform.getPhysicalposition().equals("0"))){
+			hqlWhere += " and o.physicalposition=?";			
+			paramsList.add( physicalexamform.getPhysicalposition());			
+		}
+		//体检批次,为0查询所有
+		if(StringUtils.isNotBlank(physicalexamform.getPhysicalplan())&&(!physicalexamform.getPhysicalplan().equals("0"))){
+			hqlWhere += " and o.physicalplan=?";			
+			paramsList.add( physicalexamform.getPhysicalplan());			
+		}
+		Object [] params = paramsList.toArray();
+		@SuppressWarnings("unchecked")
+		List<PhysicalNoinfor> physicalNoinforlist=dao.findPage(PhysicalNoinfor.class, hqlWhere, params, orderby, pagerTool);
+		List<PhysicalexamForm> returnlist=new ArrayList<PhysicalexamForm>();
+		String[] physical_planarray=findddlname(physical_plan);
+		String[] physical_statearray=findddlname(physical_state);
+		String[] physical_positionarray=findddlname(physical_position);
+		PhysicalexamForm returnform=null;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");	
+		for(PhysicalNoinfor physicalNoinfor:physicalNoinforlist){
+			returnform=new PhysicalexamForm();
+			returnform.setUsername(physicalNoinfor.getUsername());
+			returnform.setUsernumber(physicalNoinfor.getUsernumber());
+			returnform.setPhysicaldate(dateFormat.format(physicalNoinfor.getPhysicaldate()));
+			returnform.setPhysicalplan(physical_planarray[Integer.valueOf(physicalNoinfor.getPhysicalplan())-1]);
+			returnform.setPhysicalposition(physical_positionarray[Integer.valueOf(physicalNoinfor.getPhysicalposition())-1]);
+			returnform.setRemark(physicalNoinfor.getRemark());
+			returnlist.add(returnform);
+		}
+		totalRows=pagerTool.getTotalRows();
+		pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
+		JSONObject result = new JSONObject();		
+		result.put("totalRows", totalRows);
+		result.put("totalPages", pagerTool.getTotalPages());
+		result.put("physicallist", returnlist);
+		result.put("physical_plan",physical_planarray );
+		result.put("physical_state", physical_statearray);
+		result.put("physical_position", physical_positionarray);
+		return result;
+	}
 	
 	
 	

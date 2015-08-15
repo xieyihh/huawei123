@@ -25,9 +25,9 @@
 		
 		
 		-->
-		<property name="hibernate.connection.url">jdbc:mysql://554afb8e4cf78.gz.cdb.myqcloud.com:8267/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
-		<property name="hibernate.connection.username">cdb_outerroot</property>
-		<property name="hibernate.connection.password">yan820127@</property>
+		<property name="hibernate.connection.url">jdbc:mysql://119.29.73.32:3306/mini?useUnicode=true&amp;characterEncoding=UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
 		
 		
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
