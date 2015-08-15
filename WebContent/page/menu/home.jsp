@@ -13,7 +13,7 @@
 <script src="bootstrap/jquery.min.js"></script>
 <script type="text/javascript">
 var books=["bookinfo.jsp","importbook.jsp","bookRanking.jsp"];
-var physicals=['physicalInfo.jsp','importPhysicalInfo.jsp','importHospitalInfo.jsp','hospitalInfo.jsp','hospitalReexamInfo.jsp','physicalReview.jsp','physicalInit.jsp'];
+var physicals=['physicalInfo.jsp','importPhysicalInfo.jsp','importHospitalInfo.jsp','physicalnoUserInfo.jsp','hospitalInfo.jsp','hospitalReexamInfo.jsp','physicalReview.jsp','physicalInit.jsp'];
 var activitys=['activityLaunch.jsp','activityInit.jsp','activityStatus.jsp'];
 var feeaback=['feedbackhome.action','showFeedBack.jsp'];
 var superAdmins=['authority.jsp','authorityPage.jsp','bookdictionary.action'];

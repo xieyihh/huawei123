@@ -7,7 +7,7 @@
 <link href="common/style.css" rel="stylesheet" type="text/css" />
 
    <script src="bootstrap/jquery.min.js"></script>
-  <script type="text/javascript" src="js/myJs/left.js?v1.2.3"></script>
+  <script type="text/javascript" src="js/myJs/left.js?v1.2.4"></script>
   
 
 </head>

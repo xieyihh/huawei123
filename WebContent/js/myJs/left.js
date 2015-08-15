@@ -1,10 +1,10 @@
 var books=["bookinfo.jsp","importbook.jsp","bookRanking.jsp"];
-var physicals=['physicalInfo.jsp','importPhysicalInfo.jsp','importHospitalInfo.jsp','hospitalInfo.jsp','hospitalReexamInfo.jsp','physicalReview.jsp','physicalInit.jsp'];
+var physicals=['physicalInfo.jsp','importPhysicalInfo.jsp','importHospitalInfo.jsp','physicalnoUserInfo.jsp','hospitalInfo.jsp','hospitalReexamInfo.jsp','physicalReview.jsp','physicalInit.jsp'];
 var activitys=['activityLaunch.jsp','activityInit.jsp','activityStatus.jsp'];
 var feeaback=['feedbackhome.action','showFeedBack.jsp'];
 var superAdmins=['authority.jsp','authorityPage.jsp','bookdictionary.action'];
 var bookch=["书籍信息查询","导入书籍","借阅排行榜"];
-var physicalch=['体检信息','体检安排导入','体检信息导入','医院体检信息','医院复查信息','复查信息','初始化信息'];
+var physicalch=['体检信息','体检安排导入','体检信息导入','新加员工信息','医院体检信息','医院复查信息','复查信息','初始化信息'];
 var activitych =['活动发布','活动初始化','活动状态'];
 var feeabackch=['图书反馈','信息反馈'];
 var superAdminch=['权限管理','权限分配','数据字典'];

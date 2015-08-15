@@ -138,16 +138,19 @@ padding: 4px 12px;}
 				  <input type="checkbox" name="physical" id="physical3" value="3"> 体检信息导入
 				</label>
 				<label class="checkbox-inline">
-				  <input type="checkbox" name="physical" id="physical4" value="4"> 医院体检信息
+				  <input type="checkbox" name="physical" id="physical4" value="4"> 新加员工信息
 				</label>
 				<label class="checkbox-inline">
-				  <input type="checkbox" name="physical" id="physical5" value="5"> 医院复查信息
+				  <input type="checkbox" name="physical" id="physical5" value="5"> 医院体检信息
 				</label>
 				<label class="checkbox-inline">
-				  <input type="checkbox" name="physical" id="physical6" value="6"> 复查信息
+				  <input type="checkbox" name="physical" id="physical6" value="6"> 医院复查信息
 				</label>
 				<label class="checkbox-inline">
-				  <input type="checkbox" name="physical" id="physical7" value="7"> 初始化信息
+				  <input type="checkbox" name="physical" id="physical7" value="7"> 复查信息
+				</label>
+				<label class="checkbox-inline">
+				  <input type="checkbox" name="physical" id="physical8" value="8"> 初始化信息
 				</label>
 				<br>
 				<div class="form-group" style="margin-right:0px">

@@ -72,7 +72,7 @@ margin-top:8px;
 					 
 					    <p class="form-control-static"  id="physicalPlan"  ></p>
 					  </div>
-					  <div class="form-group" style="margin-right:0px">
+					  <div class="form-group" style="margin-right:20px">
 					 
 					    <p class="form-control-static"  id="physicalPosition"  ></p>
 					  </div>
