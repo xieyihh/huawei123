@@ -83,6 +83,7 @@ $(function(){
 		$('#divImg'+listNum+'').remove();
 		deletePic[D]=listNum;
 	     D++;
+	    
 	     canAdd();
 		});
 	$(document).on("click","[id='addContent']",function(){
@@ -124,7 +125,7 @@ $(function(){
 		var files=[];
 		var picname=[];
 		var fileNum=0;
-		if(imgk===dataNum){
+		if((imgk-D)===dataNum){
 	  	for(var i=0;i<imgk;i++){
 	  		var unEqe=0;
 				for(var j=0;j<D;j++){
@@ -232,6 +233,73 @@ function PreviewImage(obj) {
 		} else if (obj.files) {
 			//兼容chrome、火狐等，HTML5获取路径
 			if ( typeof FileReader !== "undefined") {
+//				var reader = new FileReader();
+//				//alert(k+';'+D)
+//				reader.onload = function(e) {
+//						//document.getElementById(imgPreviewId).setAttribute("src", e.target.result);
+//						var div=document.createElement('div');     
+//						div.setAttribute('id','divImg'+imgk);  
+//						document.getElementById('divNewPreview').appendChild(div);
+//						var imgclose=document.createElement('img');     
+//						imgclose.setAttribute('class','closeimg'); 
+//						imgclose.setAttribute('id','closeimg'+imgk); 
+//						imgclose.setAttribute('src','./img/feedback/delete.png');  
+//						imgclose.setAttribute('title','删除图片');
+//						var img=document.createElement('img');     
+//		   	    		img.setAttribute('src',e.target.result);  
+//		   	    		img.setAttribute('class','uploadimg');    
+//		   	    		img.setAttribute('id','img'+imgk);  
+//		   	    		div.appendChild(imgclose);
+//		   	    		div.appendChild(img);
+//		   	    		
+//		   	    		
+//					
+//					
+//		   	    		var dataURL = e.target.result;
+//		   	    		var canvas = document.createElement("canvas"); 
+//		   	    	
+//		   	    		var img = new Image(); 
+//		   	    		img.onload = function() { 
+//		   	    			var square = 300; 
+//		   	    			
+//		   	    			
+//		   	    			var imageWidth;
+//		   	    			var imageHeight; 
+//		   	    			var offsetX = 0; 
+//		   	    			var offsetY = 0; 
+//		   	    			if (this.width > this.height) { 
+//		   	    				imageWidth = Math.round(square * this.width / this.height); 
+//		   	    				imageHeight = square; 
+//		   	    				offsetX = - Math.round((imageWidth - square) / 2); 
+//		   	    			} else {
+//		   	    				imageHeight = Math.round(square * this.height / this.width);
+//		   	    				imageWidth = square;  
+//		   	    				offsetY = - Math.round((imageHeight - square) / 2);  
+//		   	    				}	
+//		   	    			canvas.width = imageWidth;
+//		   	    			canvas.height = imageHeight;
+//		   	    			var context = canvas.getContext('2d');
+//		   	    			context.clearRect(0, 0, imageWidth, imageHeight); 
+//		   	    			context.drawImage(this, offsetX, offsetY, imageWidth, imageHeight);
+//		   	    			//context.drawImage(this,0,0);
+//		   	    			var dataurl = canvas.toDataURL("image/png");
+//		   	    			//console.log(dataurl);
+//		   	    			var imagedata= encodeURIComponent(dataurl);
+//		   	    			//console.log(imagedata);
+//		   	    			datas[dataNum++]=imagedata;
+//		   	    			
+//		   	    			//console.log(datas[imgk-1]);
+//		   	    			
+//		   	    			};
+//		   	    		img.src = dataURL;
+//		   	    		
+//		   	    		$('#file'+imgk).css('display','none');
+//		   	    		imgk++;
+//		   	    		var input='<input type="file" class="form-control"  id="file'+(imgk)+'" name="file" capture="camera" accept="image/gif, image/jpeg, image/png" onchange="PreviewImage(this)"/>';
+//		   	    		$('.file').append(input);
+//		   	    		canAdd();
+//		   	    	}
+//				reader.readAsDataURL(obj.files[0]);
 				var reader = new FileReader();
 				//alert(k+';'+D)
 				reader.onload = function(e) {
@@ -260,8 +328,7 @@ function PreviewImage(obj) {
 		   	    		var img = new Image(); 
 		   	    		img.onload = function() { 
 		   	    			var square = 300; 
-		   	    			
-		   	    			
+		   	    			 
 		   	    			var imageWidth;
 		   	    			var imageHeight; 
 		   	    			var offsetX = 0; 
@@ -279,13 +346,14 @@ function PreviewImage(obj) {
 		   	    			canvas.height = imageHeight;
 		   	    			var context = canvas.getContext('2d');
 		   	    			context.clearRect(0, 0, imageWidth, imageHeight); 
+		   	    			
 		   	    			context.drawImage(this, offsetX, offsetY, imageWidth, imageHeight);
 		   	    			//context.drawImage(this,0,0);
 		   	    			var dataurl = canvas.toDataURL("image/png");
 		   	    			//console.log(dataurl);
 		   	    			var imagedata= encodeURIComponent(dataurl);
 		   	    			//console.log(imagedata);
-		   	    			datas[dataNum++]=imagedata;
+		   	    			datas[imgk-1]=imagedata;
 		   	    			
 		   	    			//console.log(datas[imgk-1]);
 		   	    			
@@ -294,12 +362,11 @@ function PreviewImage(obj) {
 		   	    		
 		   	    		$('#file'+imgk).css('display','none');
 		   	    		imgk++;
-		   	    		var input='<input type="file" class="form-control"  id="file'+(imgk)+'" name="file" capture="camera" accept="image/gif, image/jpeg, image/png" onchange="PreviewImage(this)"/>';
+		   	    		var input='<input type="file" id="file'+(imgk)+'" name="file" capture="camera" accept="image/gif, image/jpeg, image/png" onchange="PreviewImage(this)"/>';
 		   	    		$('.file').append(input);
 		   	    		canAdd();
 		   	    	}
 				reader.readAsDataURL(obj.files[0]);
-				
 
 			} else if (browserVersion.indexOf("SAFARI") > -1) {
 				alert("暂时不支持Safari浏览器!");

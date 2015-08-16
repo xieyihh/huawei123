@@ -9,7 +9,7 @@
 		<script src="bootstrap/jquery.min.js"></script>
    		<script type="text/javascript" src="js/body.js"></script>
    		<script src="bootstrap/bootstrap.min.js"></script>
-	 	<script type="text/javascript" src="js/myJs/activityLaunch.js?v1.3.5"></script> 
+	 	<script type="text/javascript" src="js/myJs/activityLaunch.js?v1.4.2"></script> 
 	 	<link rel="stylesheet" type="text/css" href="css/body.css?1"> 	
 		<script type="text/javascript">
 		</script>

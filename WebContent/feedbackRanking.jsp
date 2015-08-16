@@ -61,11 +61,11 @@ line-height: 1;
 }
 thead tr th{
 text-align:center;
-color:#faa732;
+color:#f89406;
 font-weight:4}
 table{
 text-align:center;
-color:#faa732;}
+color:#51a351;}
 </style>
 
 </head>
@@ -106,9 +106,9 @@ color:#faa732;}
  <button id="LoadMore" class="btn btn-success" >
 		<span class="glyphicon glyphicon-search"></span>加载更多
 </button>
-
-
- 
+<div style="margin-top:20px;">
+<a href="http://www.weixinguanjia.cn/gzzh/artview-1.html?wxid=ogdP-jg6nhwczjOU6xdLvlyx40ec&wid=62293&rid=202572#mp.weixin.qq.com">活动介绍</a>
+ </div>
 </body>
 </html>
 
