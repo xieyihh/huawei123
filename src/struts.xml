@@ -136,6 +136,11 @@
 		</action>
 		<action name="feedBackSendSms" class="feedbackImageAction" method="feedBackSendSms">
 		</action>
+		<action name="feedbackRanking" class="feedbackImageAction" method="feedbackRanking">
+			<result name="success">/feedbackRanking.jsp</result>
+		</action>
+		
+		
 		<action name="exportFeedbackImage" class="feedbackImageAction" method="exportFeedbackImage">
 		</action>
 		<action name="addJifen" class="feedbackImageAction" method="addJifen">

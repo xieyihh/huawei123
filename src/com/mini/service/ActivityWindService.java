@@ -184,11 +184,16 @@ public class ActivityWindService {
 		String[] imagename=activityWindForm.getImagename();
 		String[] imagedata=activityWindForm.getImagedata();
 		String path="c:/image/activitystart/";
-		if(imagename.length!=imagedata.length){
+		if(imagename==null){
+			//说明不存在图片
+			return "success";
+		}
+		if((imagename.length!=imagedata.length)){
 			return "error";
 		}
+		//判断名字是否和数据中的相同		
 		if(imagedata!=null&&imagedata.length!=0){
-			for(int i=0;i<imagename.length;i++){
+			for(int i=0;i<imagename.length;i++){				
 				activityStartimage=new ActivityStart();
 				activityStartimage.setFlag(imageflag);
 				//image的保存位置				
@@ -202,8 +207,8 @@ public class ActivityWindService {
 	        	File newfile = new File(path+filename);	        	
 	        	if(!newfile.exists()){
 	        		newfile.createNewFile();
-	        	}
-	        	String imageData=imagedata[i];
+	        	}	        	
+				String imageData=imagedata[i];
 	        	imageData = imageData.substring(30);
 	        	imageData = URLDecoder.decode(imageData,"UTF-8");
 	        	byte[] data = decode(imageData);
@@ -211,7 +216,7 @@ public class ActivityWindService {
 	        	FileOutputStream  fo = new FileOutputStream(newfile);	 
 	        	fo.write(data);
 	        	fo.flush();
-	        	fo.close();
+	        	fo.close();		        	
 	        	filename="/activitystart/"+filename;
 	        	activityStartimage.setContent(filename);	        	
 	        	activityStartimage.setActivityid(Integer.valueOf(activityWindForm.getActivityName()));				

@@ -51,7 +51,10 @@ public class FileUploadService {
             
             useriamge.setJifen(0);
             useriamge.setFeedbacktime(new Date());
-            dao.save(useriamge);  
+            if(useriamge.getUsernumber()!=null){
+            	 dao.save(useriamge); 
+            }
+            
 			return "noUser";
 		}else{
 			UserImage useriamge=null;
@@ -63,7 +66,9 @@ public class FileUploadService {
 	            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
 	            useriamge.setFeedbacktime(new Date());
 	            useriamge.setJifen(0);
-	            dao.save(useriamge);  
+	            if(useriamge.getUsernumber()!=null){
+	            	 dao.save(useriamge); 
+	            }
 	        	return "success";			
 				
 			}else{
@@ -77,7 +82,9 @@ public class FileUploadService {
 		            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
 		            useriamge.setFeedbacktime(new Date());
 		            useriamge.setJifen(0);
-		            dao.save(useriamge);  
+		            if(useriamge.getUsernumber()!=null){
+		            	 dao.save(useriamge); 
+		            } 
 		        	return "success";
 				}
 				for(int i=0;i<imagename.length;i++){
@@ -113,7 +120,9 @@ public class FileUploadService {
 	            useriamge.setFeedbackcontent(fileUploadlForm.getFeedbackcontent());
 	            useriamge.setFeedbacktime(new Date());
 	            useriamge.setJifen(0);
-	            dao.save(useriamge);
+	            if(useriamge.getUsernumber()!=null){
+	            	 dao.save(useriamge); 
+	            }
 	            return "success";
 			}
 			

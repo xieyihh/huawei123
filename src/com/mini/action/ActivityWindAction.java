@@ -157,6 +157,9 @@ public class ActivityWindAction  extends BaseAction implements ModelDriven<Activ
 		}
 		
 	}
+	/**
+	 * 获取所有的活动状态
+	 */
 	public void getallActivityStatus(){
 		
 		JSONObject result=service.getallActivityStatus(activityWindForm);
@@ -167,6 +170,9 @@ public class ActivityWindAction  extends BaseAction implements ModelDriven<Activ
 		}
 		
 	}
+	/**
+	 * 更新活动的状态
+	 */
 	public void updateActivityStatus(){
 		
 		String result=service.updateActivityStatus(activityWindForm);

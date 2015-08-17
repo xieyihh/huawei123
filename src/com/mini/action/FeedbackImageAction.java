@@ -140,6 +140,10 @@ public class FeedbackImageAction extends BaseAction implements ModelDriven<Feedb
 		returnObject(result);
 		
 	}
+	public String  feedbackRanking(){
+		return "success";
+		
+	}
 	
 	
 	
