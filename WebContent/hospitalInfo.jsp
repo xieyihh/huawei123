@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/body.js?v1.1"></script>
-   	<script type="text/javascript" src="js/myJs/hospitalPhysical.js?v1.3.0"></script>
+   	<script type="text/javascript" src="js/myJs/hospitalPhysical.js?v1.3.1"></script>
 
    <script type="text/javascript">
   
@@ -117,7 +117,7 @@ margin-top:50px;}
   		
   		<div class=" nouser">
   			
-  			<form  class="form-inline" action="savePhysicalUserNoInfor.action " method="post"style="width: 95%;margin: 0 auto;margin-top:20px">
+  			<form id="nouserForm" class="form-inline" action="savePhysicalUserNoInfor.action " method="post"style="width: 95%;margin: 0 auto;margin-top:20px">
   				<div id="innerdiv"style="width:85%;margin:0 auto;">
 	  				<div class="form-group" style="color:#bbb;width:100%">
 					    <p class="form-control-static"  >此员工体检信息不在现有数据库中，请在下面手动添加并保存</p>

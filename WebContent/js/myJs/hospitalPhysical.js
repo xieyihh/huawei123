@@ -308,7 +308,9 @@ function checkData(workNumber){
 		async: false, 
 		success: function(msg) {
 			if(msg.message==="Nouser"){
-				$('table#userinfo').css('display','none')	;
+				
+				$('table#userinfo').css('display','none');
+				$("#nouserForm")[0].reset();
 				$('div.nouser').css('display','block');
 			}else if(msg.message==="success"){
 				$('div.nouser').css('display','none');
