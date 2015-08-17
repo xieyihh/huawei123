@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<form action="userAction!login.action" method="post" onsubmit="return check()">
 				<div class="input-group component">
 					<span class="input-group-addon">账号</span>
-					<input type="text" class="form-control" name="account" placeholder="请输入您的账号" autofocus="autofocus" required="required">
+					<input type="text" class="form-control" name="account" placeholder="请输入8位工号/帐号/手机" autofocus="autofocus" required="required">
 				</div>
 				<div class="input-group component">
 					<span class="input-group-addon">密码</span>

@@ -110,12 +110,12 @@
 	
 	//AJAX方法取得数据并显示到页面上 
 	function BindData() { 
-		//alert(pageSize+';'+pageIndex+';'+usernumber+';'+username+';'+physicalposition)
+		alert(pageSize+';'+pageIndex+';'+usernumber+';'+username+';'+physicalposition)
 			$.ajax({ 
 				type: "get", //使用get方法访问后台 
 				dataType: "json", //返回json格式的数据 
 				url: "searchPhysicalNoifor.action", //要访问的后台地址 
-				data: { "pageSize": pageSize ,"pageNum": pageIndex ,"usernumber":usernumber,"username":username,
+				data: { "pageSize": pageSize ,"currentPage": pageIndex ,"usernumber":usernumber,"username":username,
 					"physicalposition":physicalposition,
 					 "physicaldate": physicaldate ,"physicalplan":physicalplan}, //要发送的数据 
 			
