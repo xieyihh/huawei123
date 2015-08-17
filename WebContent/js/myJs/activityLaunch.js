@@ -125,7 +125,7 @@ $(function(){
 		var files=[];
 		var picname=[];
 		var fileNum=0;
-		if((imgk-D)===dataNum){
+		//if((imgk-D)===dataNum){
 	  	for(var i=0;i<imgk;i++){
 	  		var unEqe=0;
 				for(var j=0;j<D;j++){
@@ -153,14 +153,29 @@ $(function(){
 //					alert(files[i])
 //					alert(picname[i]);
 //			}
-	    var activityData={
+	  	 var activityData;
+//	  	if(picname.length!==0){
+//	  		alert("y有图片");
+	  		activityData={
 	    		"activityName":$("select#activityLists option:checked").val(),
 	    		"activityContent":activityContent,
 	    		"activityTitle" : title,
 	    		"imagename" :picname,
 				"imagedata" : files
-	    };
-	    var activityDatas=$.param(activityData,true);
+	  		};
+//	  		
+//	  	}else{
+//	  		alert("wu图片");
+//	  		activityData={
+//	    		"activityName":$("select#activityLists option:checked").val(),
+//	    		"activityContent":activityContent,
+//	    		"activityTitle" : title,
+//	    		"imagename" :null,
+//				"imagedata" : null
+//	  		};
+//	  	}
+	  	var activityDatas=$.param(activityData,true);
+	   
 	   // alert(activityDatas);
 	  
 
@@ -203,9 +218,9 @@ $(function(){
         }
 	});
 	  	
-		}else{
-			alert('图片名和图片数据个数不一致');
-		}		
+//		}else{
+//			alert('图片名和图片数据个数不一致');
+//		}		
 	 });
 })
 
@@ -327,7 +342,7 @@ function PreviewImage(obj) {
 		   	    	
 		   	    		var img = new Image(); 
 		   	    		img.onload = function() { 
-		   	    			var square = 300; 
+		   	    			var square = 100; 
 		   	    			 
 		   	    			var imageWidth;
 		   	    			var imageHeight; 
@@ -336,11 +351,11 @@ function PreviewImage(obj) {
 		   	    			if (this.width > this.height) { 
 		   	    				imageWidth = Math.round(square * this.width / this.height); 
 		   	    				imageHeight = square; 
-		   	    				offsetX = - Math.round((imageWidth - square) / 2); 
+		   	    				//offsetX = - Math.round((imageWidth - square) / 2); 
 		   	    			} else {
 		   	    				imageHeight = Math.round(square * this.height / this.width);
 		   	    				imageWidth = square;  
-		   	    				offsetY = - Math.round((imageHeight - square) / 2);  
+		   	    				//offsetY = - Math.round((imageHeight - square) / 2);  
 		   	    				}	
 		   	    			canvas.width = imageWidth;
 		   	    			canvas.height = imageHeight;
@@ -348,6 +363,17 @@ function PreviewImage(obj) {
 		   	    			context.clearRect(0, 0, imageWidth, imageHeight); 
 		   	    			
 		   	    			context.drawImage(this, offsetX, offsetY, imageWidth, imageHeight);
+//							var div=document.createElement('div');     
+//							div.setAttribute('id','divImg'+imgk);  
+//							document.getElementById('divNewPreview').appendChild(div);
+//							var imgclose=document.createElement('img');     
+//							imgclose.setAttribute('class','closeimg'); 
+//							imgclose.setAttribute('id','closeimg'+imgk); 
+//							imgclose.setAttribute('src','./img/feedback/delete.png');  
+//							imgclose.setAttribute('title','删除图片');
+//							
+//			   	    		div.appendChild(imgclose);
+//			   	    		div.appendChild(canvas);
 		   	    			//context.drawImage(this,0,0);
 		   	    			var dataurl = canvas.toDataURL("image/png");
 		   	    			//console.log(dataurl);
@@ -472,11 +498,11 @@ function dataInit(activityName){
 			   	    			if (this.width > this.height) { 
 			   	    				imageWidth = Math.round(square * this.width / this.height); 
 			   	    				imageHeight = square; 
-			   	    				offsetX = - Math.round((imageWidth - square) / 2); 
+			   	    				//offsetX = - Math.round((imageWidth - square) / 2); 
 			   	    			} else {
 			   	    				imageHeight = Math.round(square * this.height / this.width);
 			   	    				imageWidth = square;  
-			   	    				offsetY = - Math.round((imageHeight - square) / 2);  
+			   	    				//offsetY = - Math.round((imageHeight - square) / 2);  
 			   	    				}	
 			   	    			canvas.width = imageWidth;
 			   	    			canvas.height = imageHeight;

@@ -14,8 +14,8 @@ $(function() {
 					$('#user_association_panel').css('display','none');
 					var userTips='<div class="panel-body" style="margin-top:30px">' +
 									'<div class="input-group">'+
-										'<span class="input-group-addon " >'+msg.context.physicalinit.physicalplan+'</span>'+
-									//'<span class="input-group-addon " >如您未查阅到体检安排时间（含家属），请确认注册时，个人信息（微信号和工号）输入正确，谢谢！如您未查阅到体检安排时间（含家属），请确认注册时，个人信息（微信号和工号）输入正确，谢谢！</span>'+
+										'<span class="input-group-addon tips" >'+msg.context.physicalinit.physicalplan+'</span>'+
+									//'<span class="input-group-addon tips" >如您未查阅到体检安排时间（含家属），请确认注册时，个人信息（微信号和工号）输入正确，谢谢！如您未查阅到体检安排时间（含家属），请确认注册时，个人信息（微信号和工号）输入正确，谢谢！</span>'+
 									'</div>'+
 								'</div>';
 					$('#user_info_panel').append(userTips);
@@ -27,21 +27,17 @@ $(function() {
 						$('#user_association_panel').css('display','none');
 						var userTips='<div class="panel-body" style="margin-top:30px">' +
 										'<div class="input-group">'+
-											'<span class="input-group-addon " >在此批次体检中，您已参与体检</span>'+
+											'<span class="input-group-addon tips" >在此批次体检中，您已参与体检</span>'+
 										'</div>'+
 									'</div>';
 						$('#user_info_panel').append(userTips);
 						return false;
 					}else if(form.physicalstate==="体检过期"){
-						$('#user_info_panel').empty();
-						$('#user_association_panel').css('display','none');
-						var userTips='<div class="panel-body" style="margin-top:30px">' +
-										'<div class="input-group">'+
-											'<span class="input-group-addon " >在此批次体检中，您的体检信息已过期</span>'+
-										'</div>'+
-									'</div>';
-						$('#user_info_panel').append(userTips);
+
+						$('p.smalltips').html('您的体检时间已过期，请尽快前往医院体检');
 						return false;
+					}else{
+						$('.name').css('width',$(".time").outerWidth());
 					}
 			 }
 		}, 

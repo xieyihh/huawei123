@@ -1,37 +1,19 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@page import="com.mini.util.PageBean"%>
 
-<!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<html>
 <head>
 		<title>活动状态</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
 	
-		<!--<script type="text/javascript" src="js/myJs/jquery-2.0.2.min.js"></script> 
-		<link href="css/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-		<link href="css/css/progress.css" rel="stylesheet" type="text/css"/>
-		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		 <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
-		 <script type="javascript" src="script/function.js"></script>
-		<script type="javascript" src="script/page.js"></script>
-		<script type="javascript" src="script/validate.js"></script>
-		<script type="javascript" src="script/pub.js"></script>
-		<script type="javascript" src="js/myJs/jquery.min.js"></script>	
-		
-		
-		
-		 <script type="text/javascript" src="js/myJs/jquery.form.js"></script>
-		-->
 		
 	<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="bootstrap/bootstrap.min.js"></script>
    <script src="bootstrap/jquery.min.js"></script>
-   <script type="text/javascript" src="js/myJs/activityStatus.js?v1.2.4"></script>
+ <script type="text/javascript" src="js/myJs/activityStatus.js?v1.3.2"></script>
  
-   <script type="text/javascript">
   
-  
-   </script>
 <style type="text/css">
 	.tableone{background:#eee}
 	.tableone tr{line-height:30px;}
@@ -153,7 +135,7 @@ padding: 4px 12px;}
 					
 			 	</div>
 			</form>
-		<script type="text/javascript"> $("td").addClass("bookList");</script>
+		<!-- <script type="text/javascript">$("td").addClass("bookList"); </script> -->
 	</body>
 </html>
 

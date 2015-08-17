@@ -1,6 +1,6 @@
 var books=["bookinfo.jsp","importbook.jsp","bookRanking.jsp"];
 var physicals=['physicalInfo.jsp','importPhysicalInfo.jsp','importHospitalInfo.jsp','physicalnoUserInfo.jsp','hospitalInfo.jsp','hospitalReexamInfo.jsp','physicalReview.jsp','physicalInit.jsp'];
-var activitys=['activityLaunch.jsp','activityInit.jsp','activityStatus.jsp'];
+var activitys=['activityLaunch.jsp','activityInit.jsp','activityStatus.jsp'];//activityStatus
 var feeaback=['feedbackhome.action','showFeedBack.jsp'];
 var superAdmins=['authority.jsp','authorityPage.jsp','bookdictionary.action'];
 var bookch=["书籍信息查询","导入书籍","借阅排行榜"];

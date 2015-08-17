@@ -1,8 +1,84 @@
 	var pageIndex = 1; //页索引 
 	var pageSize=10;
-	var name="";
+	var activityName="";
 	var status="";
-
+	function BindData() { 		
+		$.ajax({ 
+			type: "get", 
+			dataType: "json", 
+			url: "getallActivityStatus.action", 
+			data: {'pageSize':pageSize,"currentPage": pageIndex ,"activityName":activityName,"activityStatus":status}, //"wherePageCount" + where,个人建议不用这种方式 
+			async: false, 
+			success: function(msg) { 
+				if(msg.context==="fail"){//无数据
+					var t = document.getElementById("tb_body"); //获取展示数据的表格 
+					while (t.rows.length != 0) { 
+						t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除 
+					} 
+					$("#lblPageCount").text(msg.context.totalPages); 
+					$("#lblToatl").text(msg.context.totalRows);
+					bindPager();
+				}
+				else{
+					
+						var t = document.getElementById("tb_body"); //获取展示数据的表格 
+						while (t.rows.length != 0) { 
+							t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除 
+						} 
+					 
+					$("#lblPageCount").text(msg.context.totalPages); 
+					$("#lblToatl").text(msg.context.totalRows); 
+					
+					$.each(msg.context.activitydictionary, function(i, item) {
+						
+						var bodyContent='<tr>'+
+											'<td width="30%"  >' + item.activityname + '</td>' +
+											'<td width="40%" id="status'+item.activityid+'">' + item.statusName + '</td>' +		
+											'<td width="30%"><a id="edit'+item.activityid+'" > <img src="img/edit.gif" border="0" title="修改权限"></a> </td></tr>'
+						
+						
+						$("#tb_body").append(bodyContent); 
+						
+					});
+					
+					 $(".tableone tr:nth-child(even)").addClass("trOdd");
+					 $("td").addClass("bookList");
+					
+						bindPager();
+				}
+				
+			}, 
+			error: function() { 
+				var t = document.getElementById("tb_body"); //获取展示数据的表格 
+				while (t.rows.length != 0) { 
+					t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除   
+				} 
+				alert("加载数据失败"); 
+			} 
+		}); 	
+			
+		
+	} 
+//// 页脚属性设置 
+function bindPager() { 
+	//填充分布控件信息 
+	var pageCount = parseInt($("#lblPageCount").text()); //总页数 
+	if (pageCount == 0) { 
+		document.getElementById("lblCurent").innerHTML = "0"; 
+	} 
+	else { 
+	if (pageIndex > pageCount) { 
+		$("#lblCurent").text(1); 
+	} 
+	else { 
+		$("#lblCurent").text(pageIndex); //当前页 
+	} 
+	} 
+	document.getElementById("first").disabled = (pageIndex == 1 || $("#lblCurent").text() == "0") ? true : false; 
+	document.getElementById("previous").disabled = (pageIndex <= 1 || $("#lblCurent").text() == "0") ? true : false; 
+	document.getElementById("next").disabled = (pageIndex >= pageCount) ? true : false; 
+	document.getElementById("last").disabled = (pageIndex == pageCount || $("#lblCurent").text() == "0") ? true : false; 
+} 
 	$(function() { 
 		$('#pagesize').val(pageSize);
 		statusData();
@@ -70,22 +146,16 @@
 				//alert(pageIndex);
 			} 
 			});
-	//查询 
+//	//查询 
 		$("button#btnSearch").click(function() { 
-			name = $("input#name").val();
+			activityName = $("input#name").val();
 			status =$("select#status option:selected").val(); 
 			
 			pageIndex = 1; 
 			BindData(); 
 		});  
-		
-		
-		
-	
 
-		
-
-		//修改权限
+//		//修改权限
 		$(document).on("click","[id^='edit']",function(){//修改成这样的写法
 				
 				var listNum=$(this).attr("id").toString().slice(4);
@@ -204,81 +274,4 @@
 			}); 
 	}
 	//AJAX方法取得数据并显示到页面上 
-	function BindData() { 
-		
-		$.ajax({ 
-			type: "get", 
-			dataType: "json", 
-			url: "getallActivityStatus.action", 
-			data: {'pageSize':pageSize,"currentPage": pageIndex ,"activityName":name,"activityStatus":status}, //"wherePageCount" + where,个人建议不用这种方式 
-			async: false, 
-			success: function(msg) { 
-				if(msg.context==="fail"){//无数据
-					var t = document.getElementById("tb_body"); //获取展示数据的表格 
-					while (t.rows.length != 0) { 
-						t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除 
-					} 
-					$("#lblPageCount").text(msg.context.totalPages); 
-					$("#lblToatl").text(msg.context.totalRows);
-					bindPager();
-				}
-				else{
-					
-						var t = document.getElementById("tb_body"); //获取展示数据的表格 
-						while (t.rows.length != 0) { 
-							t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除 
-						} 
-					 
-					$("#lblPageCount").text(msg.context.totalPages); 
-					$("#lblToatl").text(msg.context.totalRows); 
-					
-					$.each(msg.context.activitydictionary, function(i, item) {
-						
-						var bodyContent='<tr>'+
-											'<td width="30%"  >' + item.activityname + '</td>' +
-											'<td width="40%" id="status'+item.activityid+'">' + item.statusName + '</td>' +		
-											'<td width="30%"><a id="edit'+item.activityid+'" > <img src="img/edit.gif" border="0" title="修改权限"></a> </td></tr>'
-						
-						
-						$("#tb_body").append(bodyContent); 
-						
-					});
-					
-					 $(".tableone tr:nth-child(even)").addClass("trOdd");
-					 $("td").addClass("bookList");
-					
-						bindPager();
-				}
-				
-			}, 
-			error: function() { 
-				var t = document.getElementById("tb_body"); //获取展示数据的表格 
-				while (t.rows.length != 0) { 
-					t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除   
-				} 
-				alert("加载数据失败"); 
-			} 
-		}); 	
-			
-		
-	} 
-// 页脚属性设置 
-function bindPager() { 
-	//填充分布控件信息 
-	var pageCount = parseInt($("#lblPageCount").text()); //总页数 
-	if (pageCount == 0) { 
-		document.getElementById("lblCurent").innerHTML = "0"; 
-	} 
-	else { 
-	if (pageIndex > pageCount) { 
-		$("#lblCurent").text(1); 
-	} 
-	else { 
-		$("#lblCurent").text(pageIndex); //当前页 
-	} 
-	} 
-	document.getElementById("first").disabled = (pageIndex == 1 || $("#lblCurent").text() == "0") ? true : false; 
-	document.getElementById("previous").disabled = (pageIndex <= 1 || $("#lblCurent").text() == "0") ? true : false; 
-	document.getElementById("next").disabled = (pageIndex >= pageCount) ? true : false; 
-	document.getElementById("last").disabled = (pageIndex == pageCount || $("#lblCurent").text() == "0") ? true : false; 
-} 
+	

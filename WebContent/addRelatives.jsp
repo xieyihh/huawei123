@@ -18,7 +18,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<meta name="author" content="雷晓冰">
 		<jsp:include page="base.jsp" flush="true"></jsp:include>
-		<script  src="js/wchat/addRelatives.js?v1.2.2"></script>
+		<script  src="js/wchat/addRelatives.js?v1.2.6"></script>
 		<style type="text/css">
 			.panel .panel-heading .panel-title .glyphicon {
 				float: right;
@@ -36,11 +36,15 @@
 			#administrator_detail_dialog .modal-body .input-group {
 				margin-bottom: 10px;
 			}
-			.input-group-addon{
+			.tips{
 			line-height: 2em;
 			white-space: normal;
 			display: inline;
 			}
+			.smalltips{
+			float:right;
+			color:red;
+			font-size:12px;}
 		</style>
 	</head>
   
@@ -61,6 +65,7 @@
 					<div class="panel-title">
 						添加家属信息
 						<span class="glyphicon glyphicon-chevron-up"></span>
+						<p class="smalltips"></p>
 					</div>
 				</div>
 				<!-- 添加家属信息 -->
