@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="input-group component">
 					<span class="input-group-addon">密码</span>
-					<input type="password" class="form-control" name="password" placeholder="请输入您的密码" required="required">
+					<input type="password" class="form-control" name="password" placeholder="请输入您的密码(非war3密码)" required="required">
 				</div>
 				<div class="input-group component">
 					<label class="checkbox-inline">
