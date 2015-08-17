@@ -110,7 +110,7 @@
 	
 	//AJAX方法取得数据并显示到页面上 
 	function BindData() { 
-		alert(pageSize+';'+pageIndex+';'+usernumber+';'+username+';'+physicalposition)
+		//alert(pageSize+';'+pageIndex+';'+usernumber+';'+username+';'+physicalposition)
 			$.ajax({ 
 				type: "get", //使用get方法访问后台 
 				dataType: "json", //返回json格式的数据 
