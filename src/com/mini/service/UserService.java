@@ -231,4 +231,22 @@ public class UserService {
 		}
 		
 	}
+	public User findByUsernumber(String number) {
+		String hql = "From User u where u.number=?";
+		@SuppressWarnings("unchecked")
+		List<User> list = dao.find(hql, number);
+		if(list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+	public User findBytelphone(String phone) {
+		String hql = "From User u where u.phone=?";
+		@SuppressWarnings("unchecked")
+		List<User> list = dao.find(hql, phone);
+		if(list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
 }

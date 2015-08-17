@@ -1350,10 +1350,10 @@ public class PhysicalexamService {
 		physicalNoinfor.setPhysicalplan(physicalinit.getPhysicalplan());
 		physicalNoinfor.setRemark(physicalexamForm.getRemark());
 		String position="中南";
-		if(user.getAccount().equals("yiyuan")){
-			position="中南";
-		}else{
+		if(user.getAccount().equals("tongji")){
 			position="同济";
+		}else{			
+			position="中南";
 		}
 		String[] physical_positionarray=findddlname(physical_position);
 		String positionresult=this.getpositonnumber(physical_positionarray, position);

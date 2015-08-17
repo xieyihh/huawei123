@@ -170,7 +170,15 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 	 */
 	public String login() {
 		User tempUser = service.findByAccount(this.user.getAccount());
-//		User tempUser = service.findByUsernumber(this.user.);	
+		//工号验证
+		if(tempUser==null){
+			tempUser=service.findByUsernumber(this.user.getAccount());
+		}
+		//电话验证
+		if(tempUser==null){
+			tempUser=service.findBytelphone(this.user.getAccount());
+		}
+//		User tempUser = ;	
 		//System.out.println(this.user.getPassword()+";"+tempUser.getSalt());
 		//System.out.println(PswUtil.str2Sha1(this.user.getPassword(), tempUser.getSalt()));
 		if(tempUser == null || 
