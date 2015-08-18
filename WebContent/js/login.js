@@ -10,7 +10,14 @@ $(function() {
 			$(".main_content .alert").hide();
 		}, 2000);
 	}
-	
+	/**
+	 * 注册
+	 */
+	$("#register_button").click(function() { 
+
+		document.forms[0].action =  "register.jsp";
+        document.forms[0].submit();
+	});
 	
 });
 /**

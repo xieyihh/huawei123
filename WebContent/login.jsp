@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/body.js?1"></script>
-		<script type="text/javascript" src="js/login.js?3"></script>
+		<script type="text/javascript" src="js/login.js?v1.3"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/body.css?2">
 		<style type="text/css">
@@ -37,33 +37,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 			}
 			.main_content .submit_div .btn {
-				width: 80%;
-				margin:0 auto;
+				width: 30%;
+				margin-left:10%;
+				margin-right:8%;
 			}
-			.main_content .footer #register_button {
-			float:right	;
-			margin-right:0px;
-			}
-			.main_content .footer #reset_button {
+			.remerberPass{
 				float:left;
-			}
-			.main_content .footer .btn {
-				border:0px;
-				background-color:transparent;
+				margin-left:0px;
+				color:#fff;
 				font-size:15px;
 				}
+			.main_content .footer #register_button {
+				float:right	;
+				margin-right:0px;
+				
+			}
+			.btn-inverse{
+			background:#999;
+			color:#fff;}
+			.btn-inverse:hover{
+			border-color: #555;
+			background:#999;
+			color:#fff;
+			}
+			#reset_button {
+				float:right	;
+				margin-right:0px;
+				color:#fff;
+				font-size:15px;
+			}
+			
 			.main_content .alert {
 				margin-top: 30px;
 				display: none;
 			}
-			.main_content .footer{
-			position:fixed; 
-			bottom:30px;
-			height:30px;
-			margin-left:0px;
-			max-width:800px;
-			width:100%;
-			}
+			
 		</style>
 	</head>
 	
@@ -84,14 +92,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span class="input-group-addon">密码</span>
 					<input type="password" class="form-control" name="password" placeholder="请输入您的密码(非W3密码)" required="required">
 				</div>
-				<div class="input-group component">
-					<label class="checkbox-inline">
-	 					 <input type="checkbox" id="RemmeberPassword"  style="height:20px;width:20px;margin-right:5px;margin-top: 0px;"> 记住密码
-					</label>
+				<div class="submit_div component">
+					
+	 					 <button id="login_button" type="submit" class="btn btn-success">登&nbsp;&nbsp;录</button>
+						 <button id="register_button" type="button" class="btn btn-inverse">注&nbsp;&nbsp;册</button>
+					
+					
 				</div>
 				<div class="submit_div component">
-					<button id="login_button" type="submit" class="btn btn-success">登&nbsp;&nbsp;录</button>
+					<label class="checkbox-inline remerberPass">
+	 					 <input type="checkbox" id="RemmeberPassword"  style="height:20px;width:20px;margin-right:5px;margin-top: 0px;"> 记住密码
+					</label>
+					<div class="forgetPass">
+	 					 <a id="reset_button"  href="forgetPassword.jsp">忘记密码/用户名?</a>
+					</div>
 				</div>
+				
 				<div class="alert alert-success alert-dismissible fade in" role="alert">
 					<button type="button" class="close" data-dismiss="alert">
 						<span aria-hidden="true">×</span>
@@ -99,10 +115,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</button>
 					<span class="message">${message }</span>
 				</div>
-				<div class="footer">
+			<!-- 	<div class="footer">
 					<a id="reset_button" class="btn btn-success" href="forgetPassword.jsp">忘记密码/用户名?</a>
 					<a id="register_button" class="btn btn-success" href="register.jsp">注册</a>
-				</div>
+				</div> -->
 			</form>
 		</div>
 	</body>
