@@ -143,7 +143,7 @@ public class SmsService {
 		dao.updateByQuery(hql,feedbackImageForm.getSmsContent(),Integer.valueOf(feedbackImageForm.getId()) );
 		String result;
 		try {			
-			result = smsServer.SendSms(feedbackImageForm.getPhonenumber(),"感谢您对吾爱吾家建议平台的支持,您的反馈建议处理如下："+ feedbackImageForm.getSmsContent());
+			result = smsServer.SendSms(feedbackImageForm.getPhonenumber(),"感谢您对吾爱武家建议平台的支持,您的反馈建议处理如下："+ feedbackImageForm.getSmsContent());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			return "error";
