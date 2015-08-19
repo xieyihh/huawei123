@@ -341,6 +341,9 @@ public class FeedbackService {
 			if(backcontent!=null&&backcontent.contains(",")){
 				backcontent=userImage.getFeedbackcontent().replace(",", "，");
 			}
+			if(backcontent!=null&&backcontent.contains("\n")){
+				backcontent=userImage.getFeedbackcontent().replace("\n", " ");
+			}
 			if(backcontent==null){
 				backcontent="";
 			}

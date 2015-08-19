@@ -556,7 +556,7 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 	 * @throws Exception
 	 */
 	public void exportPhysicalNoifor() throws Exception{
-		String titles="工号,姓名,体检日期,体检批次,体检地点,备注";	
+		String titles="姓名,工号,体检日期,体检批次,体检地点,备注";	
 		ArrayList<String> filedData =service.exportPhysicalNoifor(physicalexamForm,getRequest());
 		if(filedData==null){
 			filedData=new ArrayList<String>();
