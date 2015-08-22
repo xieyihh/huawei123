@@ -215,36 +215,100 @@
 		$("input#goPage").blur(function(){
 			var page = $(this).val(); 
 			var pageCount = parseInt($("#lblPageCount").text());
-			//alert(page+"   "+pageCount);
+			// alert(page+" "+pageCount);
 			if (page !== null &&   page !== "") { 
-				if(isNaN(page)){
-					alert('页码必须为数字')
-				}else if(page>pageCount||page<1){
-					alert("不存在这一页");
+				var reg=/^\d+$/g;
+				if (reg.test(page)) {
+					if(page>pageCount||page<1){
+						alert("不存在这一页");
+					}else{
+						pageIndex = page; 
+						bindData();
+					}
 				}else{
-					pageIndex = page; 
-					//alert(pageIndex);
-					bindData();
+					alert('页码必须为正整数');
 				}
-				//alert(pageIndex);
-			} 
+			}
 			});
-		$("input#pagesize").blur(function(){
-			var pagesize = $(this).val(); 
-			
-			//alert(page+"   "+pageCount);
-			if (pagesize !== null &&   pagesize !== "") { 
-				if(isNaN(pagesize)){
-					alert('每行显示列数必须为数字')
-				}else{
-					pageSize = pagesize; 
-					//alert(pageSize);
-					bindData();
+		$("input#goPage").keypress(function() {
+			var page = $(this).val(); 
+			var pageCount = parseInt($("#lblPageCount").text());
+			if (event.keyCode == 13) {// 13 回车键
+				if (page !== null &&   page !== "") { 
+					var reg=/^\d+$/g;
+					if (reg.test(page)) {
+						if(page>pageCount||page<1){
+							alert("不存在这一页");
+						}else{
+							pageIndex = page; 
+							bindData();
+						}
+					}else{
+						alert('页码必须为正整数');
+					}
 				}
-				//alert(pageIndex);
-			} 
-			});
-		
+			}
+		});
+//		$("input#goPage").blur(function(){
+//			var page = $(this).val(); 
+//			var pageCount = parseInt($("#lblPageCount").text());
+//			//alert(page+"   "+pageCount);
+//			if (page !== null &&   page !== "") { 
+//				if(isNaN(page)){
+//					alert('页码必须为数字')
+//				}else if(page>pageCount||page<1){
+//					alert("不存在这一页");
+//				}else{
+//					pageIndex = page; 
+//					//alert(pageIndex);
+//					bindData();
+//				}
+//				//alert(pageIndex);
+//			} 
+//			});
+//		$("input#pagesize").blur(function(){
+//			var pagesize = $(this).val(); 
+//			
+//			//alert(page+"   "+pageCount);
+//			if (pagesize !== null &&   pagesize !== "") { 
+//				if(isNaN(pagesize)){
+//					alert('每行显示列数必须为数字')
+//				}else{
+//					pageSize = pagesize; 
+//					//alert(pageSize);
+//					bindData();
+//				}
+//				//alert(pageIndex);
+//			} 
+//			});
+		$("input#pagesize").blur(function() {
+			var pagesize = $(this).val();
+			if (pagesize !== null && pagesize !== "") {
+				var reg=/^\d+$/g
+				if (reg.test(pagesize)) {
+					pageSize = pagesize;
+					bindData();
+				} else {
+					alert('每行显示行数必须为正整数')
+					return false;
+				}
+			}
+		});
+		$("input#pagesize").keypress(function() {
+			var pagesize = $(this).val();
+			if (event.keyCode == 13) {// 13 回车键
+				if (pagesize !== null && pagesize !== "") {
+					var reg=/^\d+$/g
+					if (reg.test(pagesize)) {
+						pageSize = pagesize;
+						bindData();
+					} else {
+						alert('每行显示行数必须为正整数')
+						return false;
+					}
+				}
+			}
+		});
 		//查询 
 		$("button#btnSearch").click(function() { 
 		

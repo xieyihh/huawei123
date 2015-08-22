@@ -1,4 +1,4 @@
-	var pageIndex = 1; //页索引 
+	var pageIndex = 1; // 页索引
 	var pageSize=10;
 	var activityName="";
 	var status="";
@@ -7,13 +7,15 @@
 			type: "get", 
 			dataType: "json", 
 			url: "getallActivityStatus.action", 
-			data: {'pageSize':pageSize,"currentPage": pageIndex ,"activityName":activityName,"activityStatus":status}, //"wherePageCount" + where,个人建议不用这种方式 
+			data: {'pageSize':pageSize,"currentPage": pageIndex ,"activityName":activityName,"activityStatus":status}, // "wherePageCount"
+																														// +
+																														// where,个人建议不用这种方式
 			async: false, 
 			success: function(msg) { 
-				if(msg.context==="fail"){//无数据
-					var t = document.getElementById("tb_body"); //获取展示数据的表格 
+				if(msg.context==="fail"){// 无数据
+					var t = document.getElementById("tb_body"); // 获取展示数据的表格
 					while (t.rows.length != 0) { 
-						t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除 
+						t.removeChild(t.rows[0]); // 在读取数据时如果表格已存在行．一律删除
 					} 
 					$("#lblPageCount").text(msg.context.totalPages); 
 					$("#lblToatl").text(msg.context.totalRows);
@@ -21,9 +23,9 @@
 				}
 				else{
 					
-						var t = document.getElementById("tb_body"); //获取展示数据的表格 
+						var t = document.getElementById("tb_body"); // 获取展示数据的表格
 						while (t.rows.length != 0) { 
-							t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除 
+							t.removeChild(t.rows[0]); // 在读取数据时如果表格已存在行．一律删除
 						} 
 					 
 					$("#lblPageCount").text(msg.context.totalPages); 
@@ -49,9 +51,9 @@
 				
 			}, 
 			error: function() { 
-				var t = document.getElementById("tb_body"); //获取展示数据的表格 
+				var t = document.getElementById("tb_body"); // 获取展示数据的表格
 				while (t.rows.length != 0) { 
-					t.removeChild(t.rows[0]); //在读取数据时如果表格已存在行．一律删除   
+					t.removeChild(t.rows[0]); // 在读取数据时如果表格已存在行．一律删除
 				} 
 				alert("加载数据失败"); 
 			} 
@@ -59,10 +61,10 @@
 			
 		
 	} 
-//// 页脚属性设置 
+// // 页脚属性设置
 function bindPager() { 
-	//填充分布控件信息 
-	var pageCount = parseInt($("#lblPageCount").text()); //总页数 
+	// 填充分布控件信息
+	var pageCount = parseInt($("#lblPageCount").text()); // 总页数
 	if (pageCount == 0) { 
 		document.getElementById("lblCurent").innerHTML = "0"; 
 	} 
@@ -71,7 +73,7 @@ function bindPager() {
 		$("#lblCurent").text(1); 
 	} 
 	else { 
-		$("#lblCurent").text(pageIndex); //当前页 
+		$("#lblCurent").text(pageIndex); // 当前页
 	} 
 	} 
 	document.getElementById("first").disabled = (pageIndex == 1 || $("#lblCurent").text() == "0") ? true : false; 
@@ -85,12 +87,12 @@ function bindPager() {
 		BindData(); 
 		
 		$("#first").click(function() {
-			//alert('first');
+			// alert('first');
 			pageIndex = 1; 
 			$("#lblCurent").text(1); 
 			BindData(); 
 		}); 
-//上一页按钮click事件 
+// 上一页按钮click事件
 		$("#previous").click(function() { 
 			if (pageIndex != 1) { 
 				pageIndex--; 
@@ -98,17 +100,17 @@ function bindPager() {
 			} 
 			BindData(); 
 		}); 
-//下一页按钮click事件 
+// 下一页按钮click事件
 		$("#next").click(function() { 
 			var pageCount = parseInt($("#lblPageCount").text()); 
 			if (pageIndex != pageCount) { 
 				pageIndex++; 
 				$("#lblCurent").text(pageIndex); 
 			} 
-			//alert(pageIndex);
+			// alert(pageIndex);
 			BindData(); 
 		}); 
-	//最后一页按钮click事件 
+	// 最后一页按钮click事件
 		$("#last").click(function() { 
 			var pageCount = parseInt($("#lblPageCount").text()); 
 			pageIndex = pageCount; 
@@ -117,36 +119,69 @@ function bindPager() {
 		$("input#goPage").blur(function(){
 			var page = $(this).val(); 
 			var pageCount = parseInt($("#lblPageCount").text());
-			//alert(page+"   "+pageCount);
+			// alert(page+" "+pageCount);
 			if (page !== null &&   page !== "") { 
-				if(isNaN(page)){
-					alert('页码必须为数字')
-				}else if(page>pageCount||page<1){
-					alert("不存在这一页");
+				var reg=/^\d+$/g;
+				if (reg.test(page)) {
+					if(page>pageCount||page<1){
+						alert("不存在这一页");
+					}else{
+						pageIndex = page; 
+						BindData();
+					}
 				}else{
-					pageIndex = page; 
-					//alert(pageIndex);
-					BindData();
+					alert('页码必须为正整数');
 				}
-				//alert(pageIndex);
-			} 
+			}
 			});
-		$("input#pagesize").blur(function(){
-			var pagesize = $(this).val(); 
-			
-			//alert(page+"   "+pageCount);
-			if (pagesize !== null &&   pagesize !== "") { 
-				if(isNaN(pagesize)){
-					alert('每行显示列数必须为数字')
-				}else{
-					pageSize = pagesize; 
-					//alert(pageSize);
-					BindData();
+		$("input#goPage").keypress(function() {
+			var page = $(this).val(); 
+			var pageCount = parseInt($("#lblPageCount").text());
+			if (event.keyCode == 13) {// 13 回车键
+				if (page !== null &&   page !== "") { 
+					var reg=/^\d+$/g;
+					if (reg.test(page)) {
+						if(page>pageCount||page<1){
+							alert("不存在这一页");
+						}else{
+							pageIndex = page; 
+							BindData();
+						}
+					}else{
+						alert('页码必须为正整数');
+					}
 				}
-				//alert(pageIndex);
-			} 
-			});
-//	//查询 
+			}
+		});
+		$("input#pagesize").blur(function() {
+			var pagesize = $(this).val();
+			if (pagesize !== null && pagesize !== "") {
+				var reg=/^\d+$/g
+				if (reg.test(pagesize)) {
+					pageSize = pagesize;
+					BindData();
+				} else {
+					alert('每行显示行数必须为正整数')
+					return false;
+				}
+			}
+		});
+		$("input#pagesize").keypress(function() {
+			var pagesize = $(this).val();
+			if (event.keyCode == 13) {// 13 回车键
+				if (pagesize !== null && pagesize !== "") {
+					var reg=/^\d+$/g
+					if (reg.test(pagesize)) {
+						pageSize = pagesize;
+						BindData();
+					} else {
+						alert('每行显示行数必须为正整数')
+						return false;
+					}
+				}
+			}
+		});
+// //查询
 		$("button#btnSearch").click(function() { 
 			activityName = $("input#name").val();
 			status =$("select#status option:selected").val(); 
@@ -155,13 +190,13 @@ function bindPager() {
 			BindData(); 
 		});  
 
-//		//修改权限
-		$(document).on("click","[id^='edit']",function(){//修改成这样的写法
+// //修改权限
+		$(document).on("click","[id^='edit']",function(){// 修改成这样的写法
 				
 				var listNum=$(this).attr("id").toString().slice(4);
 				$(this).attr({id:"save"+listNum });
 				var old = $('#status'+listNum+'').text(); 
-				//alert(old);
+				// alert(old);
 				
 				$(this).html('<img src="img/save.gif" border="0" title="保存">');
 				$('#status'+listNum+'').text('');
@@ -173,16 +208,16 @@ function bindPager() {
 					type: "get", 
 					dataType: "json", 
 					url: "getActivityStatusDictionary.action", 
-					data: {}, //"wherePageCount" + where,个人建议不用这种方式 
+					data: {}, // "wherePageCount" + where,个人建议不用这种方式
 					async: false, 
 					success: function(msg) { 
 
 						 $.each(msg.context.activitystatus, function(i, item) {
 							 var count=0;
 							 var sel = document.getElementById("activity");
-							 $("#activity option").each(function(){ //遍历全部option
-							        var txt = $(this).text(); //获取option的内容
-							        //alert(txt);
+							 $("#activity option").each(function(){ // 遍历全部option
+							        var txt = $(this).text(); // 获取option的内容
+							        // alert(txt);
 							         if(item!=txt){
 										count++;
 									}
@@ -191,13 +226,13 @@ function bindPager() {
 							 if(count==sel.options.length){
 								 $("select#activity").append(' <option value='+(i+1)+'>'+item+'</option>');
 							 }
-							 $('#activity option:contains(' + old + ')').each(function(){ //遍历全部option
-									//alert(";"+$(this).text()+";");
+							 $('#activity option:contains(' + old + ')').each(function(){ // 遍历全部option
+									// alert(";"+$(this).text()+";");
 									if ($(this).text() == old) {
 								     $(this).attr('selected', true);
 								  }
 							 });
-							// $("select#authority").find("option[text="+old+"]").attr("selected",true);	
+							// $("select#authority").find("option[text="+old+"]").attr("selected",true);
 							});
 						
 					}, 
@@ -209,15 +244,15 @@ function bindPager() {
 			 
 		});
 		
-		//保存修改
-		$(document).on("click","[id^='save']",function(){//修改成这样的写法
+		// 保存修改
+		$(document).on("click","[id^='save']",function(){// 修改成这样的写法
 			
 			var listNum=$(this).attr("id").toString().slice(4);
 			$(this).attr({id:"edit"+listNum });
 			$(this).html('<img src="img/edit.gif" border="0" title="修改权限">');
 			var old = $("#activity").find("option:selected").text();
 			var statusid= $("#activity").find("option:selected").val();
-			//alert(listNum+';'+statusid);
+			// alert(listNum+';'+statusid);
 			$('#activity').remove();
 			
 			$('#status'+listNum+'').text(old);
@@ -226,7 +261,9 @@ function bindPager() {
 				type: "get", 
 				dataType: "json", 
 				url: "updateActivityStatus.action", 
-				data: {"activityid":listNum,"activityStatus":statusid}, //"wherePageCount" + where,个人建议不用这种方式 
+				data: {"activityid":listNum,"activityStatus":statusid}, // "wherePageCount"
+																		// +
+																		// where,个人建议不用这种方式
 				async: false, 
 				success: function(msg) { 
 					if(msg.message=="success"){
@@ -247,16 +284,16 @@ function bindPager() {
 			type: "get", 
 			dataType: "json", 
 			url: "getActivityStatusDictionary.action", 
-			data: {}, //"wherePageCount" + where,个人建议不用这种方式 
+			data: {}, // "wherePageCount" + where,个人建议不用这种方式
 			async: false, 
 			success: function(msg) { 
 
 				$.each(msg.context.activitystatus, function(i, item) {
 					 var count=0;
 					 var sel = document.getElementById("status");
-					 $("#status option").each(function(){ //遍历全部option
-					        var txt = $(this).text(); //获取option的内容
-					        //alert(txt);
+					 $("#status option").each(function(){ // 遍历全部option
+					        var txt = $(this).text(); // 获取option的内容
+					        // alert(txt);
 					         if(item!=txt){
 								count++;
 							}
@@ -273,5 +310,5 @@ function bindPager() {
 			}
 			}); 
 	}
-	//AJAX方法取得数据并显示到页面上 
+	// AJAX方法取得数据并显示到页面上
 	
