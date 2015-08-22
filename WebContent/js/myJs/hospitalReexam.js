@@ -30,14 +30,16 @@
 				async: false, 
 				success: function(msg) {
 					if(msg.message!="success"){
-						if($("#addMessage").length >0){
-							$('#addMessage').remove();
-						}
+//						if($("#addMessage").length >0){
+//							$('#addMessage').remove();
+//						}
+						$('#addMessage').css("display",'none');
 						alert(msg.message); 
 					}else{
-						if($("#addMessage").length >0){
-							$('#addMessage').remove();
-						}
+//						if($("#addMessage").length >0){
+//							$('#addMessage').remove();
+//						}
+						$('#addMessage').empty();
 						physicalstate=msg.context.physicalexamForm.physicalstate;
 					
 					id=msg.context.physicalexamForm.id;
@@ -45,8 +47,7 @@
 					
 					physicalnumber=msg.context.physicalexamForm.physicalnumber;
 					usernumber=workNumber;
-					var name='<br><div  id="addMessage">'+
-								'<div class="form-group" style="margin-right:0px">'+
+					var name='<div class="form-group" style="margin-right:0px">'+
 									'<p class="form-control-static"  >姓名：' +username+'&nbsp;&nbsp;</p>'+
 								'</div>'+
 								'<div class="form-group" style="margin-right:0px">'+
@@ -54,9 +55,8 @@
 								'</div>'+
 								'<div class="form-group" style="margin-right:0px">'+
 									'<p class="form-control-static"  >体检地点：' +msg.context.physicalexamForm.physicalposition+'&nbsp;&nbsp;</p>'+
-								'</div>'+
-							 '</div>';
-					$('#groups').append(name);
+								'</div>';
+					$('#addMessage').append(name);
 					}
 				}, 
 				error:function(msg){

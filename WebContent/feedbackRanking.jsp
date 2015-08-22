@@ -5,7 +5,7 @@
 <head>
 
 
-<title>图书信息</title>	
+<title>积分排行</title>	
   <meta name="viewport" content="width=device-width, initial-scale=1" />
  
   	<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -66,11 +66,17 @@ font-weight:4}
 table{
 text-align:center;
 color:#51a351;}
+.img-item{
+width:99%;
+margin:0 auto;
+}
 </style>
 
 </head>
 <body>    
-
+<div class="img-item">
+	<img src="img/feedback/feedRank.jpg" style="width:100%">
+</div>
 <form class=" form-search">
             <input type="text" class="input-medium search-query" name="nickname" id="nickname" placeholder="昵称查询">
             <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>

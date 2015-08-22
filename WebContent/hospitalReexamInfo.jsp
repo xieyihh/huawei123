@@ -11,7 +11,7 @@
 	<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="bootstrap/bootstrap.min.js"></script>
    <script src="bootstrap/jquery.min.js"></script>
-   <script type="text/javascript" src="js/myJs/hospitalReexam.js?v1.2.4"></script>
+   <script type="text/javascript" src="js/myJs/hospitalReexam.js?v1.2.5"></script>
  
    <script type="text/javascript">
   
@@ -82,6 +82,7 @@ margin-top:8px;
 				    <input type="text" class="form-control" id="workNumber" placeholder="工号"/>
 				 </div>
 				 <button type="button" class="btn btn-primary " id="checkData" >核对信息</button>
+				 <br><div  id="addMessage"></div>
 			</div>
 			<div style="width:100%;margin-top:10px">
 			<textarea style="width:70%;"class="form-control" rows="6" id="reviewReport"></textarea>

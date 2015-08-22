@@ -23,14 +23,15 @@ $(function() {
 			 }else if(msg.message==="success"){
 					var form=msg.context.physicalexamForm;
 					if(form.physicalstate==="已体检"){
-						$('#user_info_panel').empty();
-						$('#user_association_panel').css('display','none');
-						var userTips='<div class="panel-body" style="margin-top:30px">' +
-										'<div class="input-group">'+
-											'<span class="input-group-addon tips" >在此批次体检中，您已参与体检</span>'+
-										'</div>'+
-									'</div>';
-						$('#user_info_panel').append(userTips);
+//						$('#user_info_panel').empty();
+//						$('#user_association_panel').css('display','none');
+//						var userTips='<div class="panel-body" style="margin-top:30px">' +
+//										'<div class="input-group">'+
+//											'<span class="input-group-addon tips" >在此批次体检中，您已参与体检</span>'+
+//										'</div>'+
+//									'</div>';
+//						$('#user_info_panel').append(userTips);
+						$('p.smalltips').html('您已参与此次体检，家属请尽快前往医院体检');
 						return false;
 					}else if(form.physicalstate==="体检过期"){
 
@@ -172,7 +173,7 @@ function saveRelatives() {
 		var identifyNumber=$("#user_info_panel .panel-body input[name='identifyNumber']").val();
 		var phonenumber=$("#user_info_panel .panel-body input[name='phone']").val();
 		if(validateResult){
-			if(!identifyNumber.match(/\d{18}/g)){
+			if(!identifyNumber.match(/\d{17}[\dX]{1}/g)){
 				var msg='身份证号码有误，请重新输入'
 				inputPopover($("#user_info_panel .panel-body input[name='identifyNumber']"), msg, 1);
 				return false;
