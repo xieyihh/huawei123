@@ -128,13 +128,14 @@ public class UserlevelService {
 		//当前页数
 		int pageNum=0;
 		int totalRows=0;
-		pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
+		
 		if(StringUtils.isNotBlank(userlevelForm.getCurrentPage())){
 			pageNum=Integer.valueOf(userlevelForm.getCurrentPage());
 		}
 		if(StringUtils.isNotBlank(userlevelForm.getPageSize())){
 			pageSize=Integer.valueOf(userlevelForm.getPageSize());
 		}		
+		pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
 		if(StringUtils.isNotBlank(userlevelForm.getUserlevel())&&(!userlevelForm.getUserlevel().equals("0"))){
 			//说明不是查询所有
 			String sql="select a.user_id,a.user_name,a.user_number,s.user_level from table_user a,user_level s where ";
@@ -196,7 +197,13 @@ public class UserlevelService {
 			Object [] params = paramsList.toArray();
 			List<User> userlist=dao.findPage(User.class, hqlWhere, params, orderby, pagerTool);
 			if(userlist==null||userlist.size()==0){
-				return null;
+				totalRows=pagerTool.getTotalRows();
+				pagerTool.init(Integer.valueOf(totalRows), pageSize, pageNum, hasPrevious, hasNext);
+				JSONObject result = new JSONObject();		
+				result.put("UserFormlist", "");
+				result.put("totalRows", totalRows);
+				result.put("totalPages", pagerTool.getTotalPages());
+				return result;
 			}
 			List<UserForm> returnlist=new ArrayList<UserForm>();
 			UserForm userform=null;
