@@ -103,6 +103,45 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 		
 	}
 	/**
+	 * 导入体检的复查信息
+	 * @throws Exception 
+	 * @throws FileNotFoundException 
+	 */
+	public String importphysicalreview() throws FileNotFoundException, Exception{
+		File excel=physicalexamForm.getFile();
+		if(excel==null){
+		};
+		//保存excel的信息
+		ArrayList<String> errline=new ArrayList<String>();
+		String result=service.savephysicalreview(excel,physicalexamForm,errline);		
+		if(result.equals("firstnotmatch")){
+			getRequest().setAttribute("errormsg", "第一行格式不匹配");
+			return "error";
+		}
+		if(errline.size()!=0){
+			HttpServletResponse response=getResponse();
+			OutputStream out = response.getOutputStream();
+			//重置输出流
+			response.reset();
+			response.setHeader("Content-disposition", "attachment;filename=\""+ new String(("复查信息导入失败项.csv").getBytes("GBK"),"ISO-8859-1") + "\"");    
+			//设置导出Excel报表的导出形式
+			response.setContentType("text/plain; charset=utf-8");
+			CsvExport csvout=new CsvExport(InitString.PHYSICAL_information_head, errline);
+
+			csvout.createCsv(out);
+			System.setOut(new PrintStream(out));
+			out.flush();
+			//关闭输出流
+			if(out!=null){
+				out.close();
+			}			
+		}else{
+			
+		}
+		return "success";
+		
+	}
+	/**
 	 * 获取体检批次
 	 * @return
 	 */
@@ -133,7 +172,7 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 		
 	}
 	/**
-	 * 医院输入工号，返回员工姓名，体检批次、工号
+	 * 医院输入工号，返回员工姓名，体检批次、工号，复查信息
 	 * @throws ParseException 
 	 */
 	public void getUsernameByusernumber() throws ParseException{
@@ -181,8 +220,11 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 			getRequest().setAttribute("errormsg", "请采用正确的excel格式");
 		}
 		String result;
+		ActionContext context = ActionContext.getContext();
+		SessionMap<String, Object> session = (SessionMap<String, Object>) context.getSession();
+		User user = (User) session.get("user");
 		try {
-			result = service.savePhysicaldateByimport(physicalexamForm,errline);
+			result = service.savePhysicaldateByimport(physicalexamForm,errline, user);
 			if(result.equals("firstnotmatch")){
 				getRequest().setAttribute("errormsg", "第一行格式不匹配");
 				return "error";
@@ -386,7 +428,7 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 	 * @throws Exception
 	 */
 	public void exportphysicalinfo() throws Exception{
-		String titles="工号(必须为8位，不足8为在前面补0),姓名,体检地点,安排体检时间,实际体检日期,体检状态,体检批次,是否有家属体检";	
+		String titles="工号(必须为8位，不足8为在前面补0),姓名,体检地点,安排体检时间,实际体检日期,体检状态,体检批次,是否有家属体检,复查内容";	
 		ArrayList<String> filedData =service.getExcelFiledDataList(physicalexamForm,getRequest());
 		if(filedData==null){
 			filedData=new ArrayList<String>();

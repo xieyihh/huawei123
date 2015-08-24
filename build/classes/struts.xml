@@ -289,6 +289,8 @@
 		<result name="error">/error.jsp</result>	
 		<result name="success">/physicalInfo.jsp</result>		
 	</action>
+	<action name="importphysicalreview" class="phsicalexamAction" method="importphysicalreview">				
+	</action>	
 	<action name="getphysicalplan" class="phsicalexamAction" method="getphysicalplan">				
 	</action>
 	<action name="savephysicalreservedate" class="phsicalexamAction" method="savephysicalreservedate">				

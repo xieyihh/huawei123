@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -422,14 +424,30 @@ public class PhysicalexamService {
 		physicalexamForm.setPhysicalplan(physicalinit.getPhysicalplan());
 		String hql="From Physicalexam a Where a.usernumber = ? and state='0' and a.physicalplan=? ";
 		Physicalexam physicalexam=(Physicalexam) dao.get(hql,physicalexamForm.getUsernumber(),physicalexamForm.getPhysicalplan());
-		if(physicalexam==null){
-			//用户不存在
-			return null;
-		}
-	
 		String[] physical_planarray=findddlname(physical_plan);
 		String[] physical_statearray=findddlname(physical_state);
 		String[] physical_positionarray=findddlname(physical_position);	
+		if(physicalexam==null){
+			//用户不存在
+			hql="From PhysicalNoinfor a Where a.usernumber = ? and state='0' and a.physicalplan=?"; 
+			PhysicalNoinfor physicalNoinfor=(PhysicalNoinfor) dao.get(hql,physicalexamForm.getUsernumber(),physicalexamForm.getPhysicalplan());
+			if(physicalNoinfor==null){
+				return null;
+			}else{
+				JSONObject result = new JSONObject();		
+				PhysicalexamForm	returnForm=new PhysicalexamForm();
+				returnForm.setUsername(physicalNoinfor.getUsername());	
+				returnForm.setUsernumber(physicalNoinfor.getUsernumber());
+				returnForm.setPhysicaldate(physicalNoinfor.getPhysicaldate().toString());
+				returnForm.setPhysicalposition(physical_positionarray[Integer.valueOf(physicalNoinfor.getPhysicalposition())-1]);
+				result.put("physicalexamForm",returnForm );
+				return result;
+				
+			}
+			
+		}
+	
+		
 		
 		PhysicalexamForm	returnForm=this.findPhysicalexamPOTOVO(physicalexam,physical_planarray,physical_statearray,physical_positionarray);
 		JSONObject result = new JSONObject();		
@@ -477,13 +495,10 @@ public class PhysicalexamService {
 	 * @throws Exception 
 	 * 
 	 */
-	public String savePhysicaldateByimport(PhysicalexamForm physicalexamForm,List<String> errline) throws  Exception {
-			
+	public String savePhysicaldateByimport(PhysicalexamForm physicalexamForm,List<String> errline,User user) throws  Exception {
 		File excel=physicalexamForm.getFile();	
-		BufferedReader filedata = new BufferedReader(new InputStreamReader(new FileInputStream(excel)));
-		
-		String line="";
-		
+		BufferedReader filedata = new BufferedReader(new InputStreamReader(new FileInputStream(excel)));		
+		String line="";		
 		if((line=filedata.readLine())==null){
 			return "firstnotmatch";	
 		}
@@ -498,7 +513,10 @@ public class PhysicalexamService {
         		errline.add(line);
         		break;        		
         	}
-        	String usernumber=data[0].trim();
+        	//殷鸿Y115075
+        	String usernumber=data[0].trim();        	
+        	usernumber = usernumber.replaceAll("\\D+", "");  
+        	usernumber = String.format("%08d",Integer.valueOf(usernumber) );
         	if(StringUtils.isBlank(usernumber)){
         		//数据信息有错误
         		errline.add(line);
@@ -513,12 +531,38 @@ public class PhysicalexamService {
         	SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         	if(physicalreservedate.contains("/")){
         		physicalreservedate=physicalreservedate.replace("/", "-"); 
-        	}
-        	
+        	}        	
 			String date=bartDateFormat.format(bartDateFormat.parse(physicalreservedate));
         	String hql="Update Physicalexam a Set a.physicaldate=DATE_FORMAT(?,'%Y-%m-%d') , a.physicalstate='1'"
 					+ " where a.usernumber = ? and state='0' and a.physicalplan=?  ";
-			dao.updateByQuery(hql,date,usernumber,physicalexamForm.getPhysicalplan());
+			int i=dao.updateByQuery(hql,date,usernumber,physicalexamForm.getPhysicalplan());
+			if(i==0){
+				//代表更新失败，将数据保存到无信息的表
+				String inithql="From Physicalinit a Where a.id=?";
+				Physicalinit physicalinit=(Physicalinit) dao.get(inithql, 1);				
+				PhysicalNoinfor physicalNoinfor=new PhysicalNoinfor();
+				String username=data[0].trim().replaceAll("\\w", "").trim();
+				if(username.contains("\"")){
+					username=username.replace("\"", "").trim();
+				}
+				physicalNoinfor.setUsername(username);
+				physicalNoinfor.setUsernumber(usernumber);
+				physicalNoinfor.setPhysicalplan(physicalinit.getPhysicalplan());
+				physicalNoinfor.setRemark(physicalexamForm.getRemark());
+				String position="中南";
+				if(user.getAccount().equals("tongji")){
+					position="同济";
+				}else{			
+					position="中南";
+				}
+				String[] physical_positionarray=findddlname(physical_position);
+				String positionresult=this.getpositonnumber(physical_positionarray, position);
+				physicalNoinfor.setPhysicalposition(positionresult);
+				physicalNoinfor.setPhysicaldate(bartDateFormat.parse(physicalreservedate));
+				physicalNoinfor.setState("0");
+				dao.save(physicalNoinfor);
+//				return "success";
+			}
 
 		}		
 			
@@ -1032,8 +1076,7 @@ public class PhysicalexamService {
 				line=line+physical_statearray[Integer.valueOf(physicalexam.getPhysicalstate())-1]+",";	
 			}
 			//"体检批次"	
-			line=line+physical_planarray[Integer.valueOf(physicalexam.getPhysicalplan())-1]+",";		
-		
+			line=line+physical_planarray[Integer.valueOf(physicalexam.getPhysicalplan())-1]+",";	
 			//"家属体检"
 			//判断是否有亲属
 			if(physicalexam.getHasRelatives().equals("0")){
@@ -1045,6 +1088,19 @@ public class PhysicalexamService {
 				line=line+"有"+",";	
 
 			}
+			//复查内容
+			String reviewhql="From Physicalreview a where a.usernumber=? and a.physicalplan=?  ";
+			Physicalreview physicalreview=(Physicalreview)dao.get(reviewhql, physicalexam.getUsernumber(),physicalexam.getPhysicalplan());
+			if(physicalreview!=null){
+				String reviewcontent=physicalreview.getReviewcontent();
+				if(reviewcontent!=null&&reviewcontent.contains(",")){
+					reviewcontent=physicalreview.getReviewcontent().replace(",", "，");
+				}
+				if(reviewcontent!=null&&reviewcontent.contains("\n")){
+					reviewcontent=physicalreview.getReviewcontent().replace("\n", " ");
+				}	
+				line+=reviewcontent;
+			}				
 			filedData.add(line);
 			
 		}
@@ -1056,7 +1112,7 @@ public class PhysicalexamService {
 		ArrayList<String> filedData = new ArrayList<String>();
 		//工号
 		String[] physical_positionarray=findddlname(physical_position);	
-		String line="12345678"+","+"张三"+","+physical_positionarray[1]+","+"2015-6-6";
+		String line="张三Y123456"+","+physical_positionarray[1]+","+"2015-6-6";
 		filedData.add(line);
 		return filedData;
 	}
@@ -1064,7 +1120,7 @@ public class PhysicalexamService {
 			PhysicalexamForm physicalexamForm, HttpServletRequest request) {
 		ArrayList<String> filedData = new ArrayList<String>();
 		//工号
-		String line="12345678,2015-6-6";
+		String line="张三Y123456,2015-6-6";
 		filedData.add(line);
 		return filedData;
 	}
@@ -1153,10 +1209,17 @@ public class PhysicalexamService {
 		}
 		for(int i=0;i<physicalexamlist.size();i++){
 			String line="";
-			Physicalreview Physicalreview=physicalexamlist.get(i);	
-			line=line+Physicalreview.getUsernumber()+","+Physicalreview.getUsername()+","+
-					physical_planarray[Integer.valueOf(Physicalreview.getPhysicalplan())-1]+","+
-					Physicalreview.getReviewcontent();			
+			Physicalreview physicalreview=physicalexamlist.get(i);	
+			line=line+physicalreview.getUsernumber()+","+physicalreview.getUsername()+","+
+					physical_planarray[Integer.valueOf(physicalreview.getPhysicalplan())-1]+",";
+			String reviewcontent=physicalreview.getReviewcontent();
+			if(reviewcontent!=null&&reviewcontent.contains(",")){
+				reviewcontent=physicalreview.getReviewcontent().replace(",", "，");
+			}
+			if(reviewcontent!=null&&reviewcontent.contains("\n")){
+				reviewcontent=physicalreview.getReviewcontent().replace("\n", " ");
+			}					
+			line=line+reviewcontent;				
 			filedData.add(line);
 		}		
 		return filedData;
@@ -1484,6 +1547,67 @@ public class PhysicalexamService {
 
 		}
 		return filedData;
+	}
+	public String savephysicalreview(File excel,
+			PhysicalexamForm physicalexamForm, ArrayList<String> errline) throws Exception {
+		BufferedReader filedata = new BufferedReader(new InputStreamReader(new FileInputStream(excel)));		
+		String line="";		
+		if((line=filedata.readLine())==null){
+			return "firstnotmatch";	
+		}
+		line=line.trim();
+		if(!(line.equals(InitString.PHYSICAL_review_head)||line.equals(InitString.PHYSICAL_review_head+","))){
+			return "firstnotmatch";
+		}
+		while ((line = filedata.readLine()) != null) { 
+			String[] data=line.split(",");
+        	if(data.length<2){
+        		//数据长度不对，导入失败的信息
+        		errline.add(line);
+        		break;        		
+        	}
+        	//殷鸿Y115075
+        	String usernumber=data[0].trim();        	
+        	usernumber = usernumber.replaceAll("\\D+", "");  
+        	usernumber = String.format("%08d",Integer.valueOf(usernumber) );
+        	if(StringUtils.isBlank(usernumber)){
+        		//数据信息有错误
+        		errline.add(line);
+        		break;
+        	}
+        	//查找此工号是否存在
+    		String hql="From Physicalexam a Where a.usernumber = ? and state='0' and a.physicalplan=? ";
+    		Physicalexam physicalexam=(Physicalexam) dao.get(hql,usernumber,physicalexamForm.getPhysicalplan());
+    		if(physicalexam==null){
+    			//用户不存在
+    			hql="From PhysicalNoinfor a Where a.usernumber = ? and state='0' and a.physicalplan=?"; 
+    			PhysicalNoinfor physicalNoinfor=(PhysicalNoinfor) dao.get(hql,physicalexamForm.getUsernumber(),physicalexamForm.getPhysicalplan());
+    			if(physicalNoinfor==null){
+    				errline.add(line);
+    				break;
+    			}    			
+    		}
+    		String username=data[0].trim().replaceAll("\\w", "").trim();
+			if(username.contains("\"")){
+				username=username.replace("\"", "").trim();
+			}
+			String physicalreservedate=data[1].trim();
+        	if(StringUtils.isBlank(physicalreservedate)){
+        		//数据信息有错误
+        		errline.add(line);
+        		break;
+        	}
+    		Physicalreview physicalreview=new Physicalreview();
+    		physicalreview.setUsernumber(usernumber);
+    		physicalreview.setReviewcontent(data[1].trim());
+    		physicalreview.setUsername(username);
+    		physicalreview.setPhysicalplan(physicalexamForm.getPhysicalplan());
+    		physicalreview.setImportdate(new Date());
+    		physicalreview.setState("0");
+    		dao.save(physicalreview);
+		}		
+			
+		return "success";		
 	}
 	
 	
