@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/body.js"></script>
-   	<script type="text/javascript" src="js/myJs/importHospitalInfo.js?v1.1.3"></script>
+   	<script type="text/javascript" src="js/myJs/importHospitalInfo.js?v1.1.4"></script>
 
    <script type="text/javascript">
   

@@ -166,7 +166,7 @@
 			form.attr("style","display:none");
 			form.attr("target","");
 			form.attr("method","post");
-			form.attr("action","downloadReviewTemplates.action");
+			form.attr("action","downloadphysicalreviewtemplates.action");
 			$("body").append(form);//将表单放置在web中
 			
 			form.submit();//表单提交 
