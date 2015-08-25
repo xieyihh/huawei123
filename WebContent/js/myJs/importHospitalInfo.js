@@ -119,6 +119,7 @@
 				 return false;
 			 }
 		});
+		
 		$("button#downloadPhysicaldateTemplates").click(function() { 
 			
 			var form=$("<form>");//定义一个form表单
@@ -126,6 +127,46 @@
 			form.attr("target","");
 			form.attr("method","post");
 			form.attr("action","downloadphysicaldatetemplates.action");
+			$("body").append(form);//将表单放置在web中
+			
+			form.submit();//表单提交 
+			form.remove();
+			});  
+
+		
+		//批量增加复查信息
+		$("#batchReview").click(function() { 
+			if($("#file2").val()==""){
+				alert("请选择上传文件!");
+				return false;
+			}
+			
+			if($("#physicalPlanBat2").val()==""){
+				alert("请选择次体检批次");
+				return false;
+			}
+			var form = document.getElementById("ReviewForm");
+			   form.submit();
+			
+		});
+		
+
+		$("#file2").change(function() {
+			 var objtype=$("#file2").val().substring($("#file2").val().lastIndexOf(".")).toLowerCase();
+			 if(objtype!=".csv"){
+				 alert("请选择.csv文件");
+				 $("#file2").val("");
+				 return false;
+			 }
+		});
+		
+		$("button#downloadReviewTemplates").click(function() { 
+			
+			var form=$("<form>");//定义一个form表单
+			form.attr("style","display:none");
+			form.attr("target","");
+			form.attr("method","post");
+			form.attr("action","downloadReviewTemplates.action");
 			$("body").append(form);//将表单放置在web中
 			
 			form.submit();//表单提交 
@@ -155,6 +196,23 @@ function bindData(){
 				 
 				 if(count==sel.options.length){
 					 $("select#physicalPlanBat").append(' <option value='+(i+1)+'>'+item+'</option>');
+					
+				 }
+					
+				});
+			$.each(msg.context.physical_plan, function(i, item) {
+				 var count=0;
+				 var sel = document.getElementById("physicalPlanBat2");
+				$("#physicalPlanBat2 option").each(function(){ //遍历全部option
+				        var txt = $(this).text(); //获取option的内容
+				        //alert(txt);
+				         if(item!=txt){
+							count++;
+						}
+				     });
+				 
+				 if(count==sel.options.length){
+					 $("select#physicalPlanBat2").append(' <option value='+(i+1)+'>'+item+'</option>');
 					
 				 }
 					

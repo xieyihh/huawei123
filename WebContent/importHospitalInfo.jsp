@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/body.js"></script>
-   	<script type="text/javascript" src="js/myJs/importHospitalInfo.js?v1.1.2"></script>
+   	<script type="text/javascript" src="js/myJs/importHospitalInfo.js?v1.1.3"></script>
 
    <script type="text/javascript">
   
@@ -92,8 +92,30 @@ width:100%;height:100px}
 				  <div class="form-group">	
 				 <input type="file" id="file" name="file" accept=".csv">
 				 </div>
-				 <button type="button" class="btn btn-primary " id="batchData" >批量导入</button>
+				 <button type="button" class="btn btn-primary " id="batchData" >导入体检信息</button>
 				  <button type="button" class="btn btn-success " id="downloadPhysicaldateTemplates" title="导入前请先下载模板核对格式要求" >下载模版</button>
+			</div> 
+				
+			</form>
+			
+			<form id="ReviewForm" name="ReviewForm" action="importphysicalreview.action" method="post" enctype="multipart/form-data" class="form-inline"style="width:95%;margin:0 auto;">	
+			<div style="width:85%;margin:0 auto;margin-top:60px;">
+				
+				<div class="form-group" style="color:#bbb;width:100%">
+				    <p class="form-control-static"  >选择体检批次以及医院提供的复查信息csv文件，批量导入复查信息</p>
+				 </div>
+				 <div class="form-group" style="margin-right:0px">
+				    <p class="form-control-static"  >体检批次：</p>
+				  </div>
+				 <div class="form-group">	
+				    <select   id="physicalPlanBat2" name="physicalplan" class="form-control">
+					 </select>
+				</div>
+				  <div class="form-group">	
+				 <input type="file" id="file2" name="file" accept=".csv">
+				 </div>
+				 <button type="button" class="btn btn-primary " id="batchReview" >导入复查信息</button>
+				  <button type="button" class="btn btn-success " id="downloadReviewTemplates" title="导入前请先下载模板核对格式要求" >下载模版</button>
 			</div> 
 				
 			</form>
