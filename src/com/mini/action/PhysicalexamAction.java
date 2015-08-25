@@ -84,7 +84,8 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 			OutputStream out = response.getOutputStream();
 			//重置输出流
 			response.reset();
-			response.setHeader("Content-disposition", "attachment;filename=\""+ new String(("体检信息导入失败信息.csv").getBytes("GBK"),"ISO-8859-1") + "\"");    
+			response.setHeader("Content-disposition", "attachment;filename=\""+
+			new String(("体检信息导入失败信息.csv").getBytes("GBK"),"ISO-8859-1") + "\"");    
 			//设置导出Excel报表的导出形式
 			response.setContentType("text/plain; charset=utf-8");
 			CsvExport csvout=new CsvExport(InitString.PHYSICAL_information_head, errline);
