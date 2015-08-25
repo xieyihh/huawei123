@@ -291,6 +291,8 @@
 	</action>
 	<action name="importphysicalreview" class="phsicalexamAction" method="importphysicalreview">				
 	</action>	
+	<action name="downloadphysicalreviewtemplates" class="phsicalexamAction" method="downloadphysicalreviewtemplates">				
+	</action>
 	<action name="getphysicalplan" class="phsicalexamAction" method="getphysicalplan">				
 	</action>
 	<action name="savephysicalreservedate" class="phsicalexamAction" method="savephysicalreservedate">				

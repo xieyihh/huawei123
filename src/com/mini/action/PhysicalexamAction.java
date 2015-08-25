@@ -84,7 +84,8 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 			OutputStream out = response.getOutputStream();
 			//重置输出流
 			response.reset();
-			response.setHeader("Content-disposition", "attachment;filename=\""+ new String(("体检信息导入失败信息.csv").getBytes("GBK"),"ISO-8859-1") + "\"");    
+			response.setHeader("Content-disposition", "attachment;filename=\""+
+			new String(("体检信息导入失败信息.csv").getBytes("GBK"),"ISO-8859-1") + "\"");    
 			//设置导出Excel报表的导出形式
 			response.setContentType("text/plain; charset=utf-8");
 			CsvExport csvout=new CsvExport(InitString.PHYSICAL_information_head, errline);
@@ -623,5 +624,31 @@ public class PhysicalexamAction extends BaseAction implements ModelDriven<Physic
 		}
 		
 	}
-	
+	/**
+	 * 体检信息导出为excel模式
+	 * @return
+	 * @throws Exception
+	 */
+	public void downloadphysicalreviewtemplates() throws Exception{
+		
+		ArrayList<String> filedData =new ArrayList<String>();
+		String line="张三Y123456"+","+"正常";
+		filedData.add(line);
+		HttpServletResponse response=getResponse();
+		OutputStream out = response.getOutputStream();
+		//重置输出流
+		response.reset();
+		response.setHeader("Content-disposition", "attachment;filename=\""+ new String(("复查信息导入模版.csv").getBytes("GBK"),"ISO-8859-1") + "\"");   
+		response.setContentType("text/plain; charset=utf-8;");
+		CsvExport csvout=new CsvExport(InitString.PHYSICAL_review_head, filedData);
+		//out.write(new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF});
+		csvout.createCsv(out);
+		System.setOut(new PrintStream(out));
+		out.flush();
+		//关闭输出流
+		if(out!=null){
+			out.close();
+		}
+		
+	}
 }
